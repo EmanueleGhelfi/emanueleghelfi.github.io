@@ -1,24 +1,26 @@
 ---
 layout: page
 title: About me
-subtitle: The essentials
+subtitle: Learning to Present Myself
 ---
 
-**Work**: Since October 2017, I have been working as a data scientist at [Nightingale Health]. Prior to that, I have worked as a data scientist at [Reaktor] (2014-2017), and as a researcher in Aalto Universty and its predecessor, the Helsinki University of Technology.
+**Work**: Since November 2018, I have been working as a Machine Learning and Computer Vision Engineer at [Zuru Tech Italy]. 
+I'm involved in the following topics:
+- Anomaly detection
+- Generative Adversarial Models (GANs) applied to various problems
+- Computer Vision applied to industrial processes
+- Sequence Modelling through Recurrent Models (LSTM)
+- Machine Learning models deployment on Google Cloud Platform
+For all these tasks I cover the steps of solution design, algorithm implementation, algorithm evaluation, solution deployment.
 
-**Education**: I finished my PhD in the [Statistical Machine Learning and Bioinformatics][smlb] group at Aalto University in 2014. In my thesis I developed and applied probabilistic machine learning methods to biomedical applications. See more about my research in the [Projects][proj-research] page.
+**Education**: I finished my M.Sc in Computer Science and Engineering at [Politecnico di Milano] in December 2018. In my thesis I developed a new Reinforcement Learning algorithm in order to optimize jointly the environment and the agent policy. Currently the paper from my thesis is under review at ICML 2019. See more about my research in the [Projects][proj-research] page.
 
-**Open knowledge**: On my spare time I have been creating open source tools for handling open data in the [Louhos][] and [rOpenGov][] projects. See more at the [Projects][proj-opentools] page.
+**Open knowledge**: On my spare time I love reading RL papers, playing football with friends and visiting new places.
 
-**Hobbies**: Ultimate frisbee, freeskiing, kiteskiing, photography, cycling. 
+**Hobbies**: Football, Studying, Beer 
 
 
-[Nightingale Health]: https://nightingalehealth.com/
-[Reaktor]: http://reaktor.fi/
-[smlb]: http://research.ics.aalto.fi/mi/
+[Zuru Tech Italy]: https://zuru.tech
+[Politecnico di Milano]: http://polimi.it/
 [Projects]: /projects.html
 [proj-research]: /projects.html#research
-[Louhos]: http://louhos.github.io/
-[rOpenGov]: http://ropengov.github.io/
-[proj-opentools]: /projects.html#opentools
-[proj-openknow]: /projects.html#openknow
