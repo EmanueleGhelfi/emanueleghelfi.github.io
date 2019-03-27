@@ -48,6 +48,7 @@ The project is implemented in MATLAB.
 I took part to the annual Kaggle competition on Recommender Systems held by Politecnico di Milano in 2017. That year topic was music recommendation, so we implemented and trained several Machine Learning algorithms to suggest songs to users based on their tastes.
 We placed among the best teams in the competition and we were invited to present our approach and solutions to the recommendation problem[1].
 We used Python, Numpy/Scipy, Jupyter Notebooks and C++ as technology tools to efficiently implement our ideas.
+
 - [Slides](https://www.slideshare.net/EmanueleGhelfi/recommender-system-challenge)
 - [Github](https://github.com/MultiBeerBandits/recsys\_challenge\_2017)
 
