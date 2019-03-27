@@ -21,13 +21,10 @@ Politecnico di Milano, Computer Science and Engineering, December 2018
 
 ### Learning To Run
 Project for the Deep Learning Course @ Polimi.
-
 Topics: Deep Learning, Reinforcement Learning.
-
-The project takes inspiration from the 2017 NIPS Competition: ([CrowdAI](https://www.crowdai.org/challenges/nips-2017-learning-to-run}{https://www.crowdai.org/challenges/nips-2017-learning-to-run)).
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HVOrhxypOGg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+The project takes inspiration from the 2017 NIPS Competition: ([CrowdAI](https://www.crowdai.org/challenges/nips-2017-learning-to-run}{https://www.crowdai.org/challenges/nips-2017-learning-to-run)).
 In this competition, you are tasked with developing a controller to enable a physiologically-based human model to navigate a complex obstacle course as quickly as possible. You are provided with a human musculoskeletal model and a physics-based simulation environment where you can synthesize physically and physiologically accurate motion. Potential obstacles include external obstacles like steps, or a slippery floor, along with internal obstacles like muscle weakness or motor noise. You are scored based on the distance you travel through the obstacle course in a set amount of time.
 The aim of the project is to study the problem and try to apply Deep Reinforcement Learning algorithms to replicate results of the top teams.
 
