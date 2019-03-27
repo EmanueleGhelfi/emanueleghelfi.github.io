@@ -11,6 +11,7 @@ I'm involved in the following topics:
 - Computer Vision applied to industrial processes
 - Sequence Modelling through Recurrent Models (LSTM)
 - Machine Learning models deployment on Google Cloud Platform
+
 For all these tasks I cover the steps of solution design, algorithm implementation, algorithm evaluation, solution deployment.
 
 **Education**: I finished my M.Sc in Computer Science and Engineering at [Politecnico di Milano] in December 2018. In my thesis I developed a new Reinforcement Learning algorithm in order to optimize jointly the environment and the agent policy. Currently the paper from my thesis is under review at ICML 2019. See more about my research in the [Projects][proj-research] page.
@@ -23,4 +24,4 @@ For all these tasks I cover the steps of solution design, algorithm implementati
 [Zuru Tech Italy]: https://zuru.tech
 [Politecnico di Milano]: http://polimi.it/
 [Projects]: /projects.html
-[proj-research]: /projects.html#research
+[proj-research]: /projects.html
