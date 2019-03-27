@@ -52,10 +52,8 @@ We used Python, Numpy/Scipy, Jupyter Notebooks and C++ as technology tools to ef
 - ([Github](https://github.com/MultiBeerBandits/recsys\_challenge\_2017))
 
 ### CNN Quantization - Performance Evaluation
-Advanced Computer Architecture Project.
-
+Project for the Advanced Computer Architecture Course @ Polimi.
 Topics: Convolutional Neural Networks, Quantization, Performance, Cache, Tensorflow, Caffe. 
-
 For real world application, convolutional neural network(CNN) model can take more than 100MB of space and can be computationally too expensive. Therefore, there are multiple methods to reduce this complexity in the state of art. Ristretto is a plug-in to Caffe framework that employs several model approximation methods. For this project, first a CNN model is trained for Cifar-10 dataset with Caffe, then Ristretto will be used to generate multiple approximated versions of the trained model using different schemes. The goal of this project is the comparison of the models in terms of execution performance, model size and cache efficiency in the test and inference phase. The same steps are done with Tensorflow and Quantisation tool. The quantisation schemes of Tensorflow and Ristretto are then compared.
 
 - ([Slides](https://www.slideshare.net/EmanueleGhelfi/cnn-quantization))
