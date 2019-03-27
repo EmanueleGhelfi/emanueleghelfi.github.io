@@ -14,7 +14,7 @@ description: "How to manage Machine Learning experiments and make them reproduci
 Managing Machine Learning experiments is usually painful.
 
 <center>
-<img src="/blog/figs/sacred3.jpg" style="width: 80%;" alt="Figure 1 - Experiments">
+<img src="/blog/figs/sacred/sacred3.jpg" style="width: 80%;" alt="Figure 1 - Experiments">
 </center>
 
 
@@ -115,7 +115,7 @@ Sacred dumps and saves **everything** into MongoDB including:
 To visualize and interact with your experiments a nice visualization board for this tool is [Omniboard](https://github.com/vivekratnavel/omniboard).
 
 <center>
-<img src="/blog/figs//omniboard4.png" style="width: 80%;"
+<img src="/blog/figs/sacred/omniboard4.png" style="width: 80%;"
  alt="Figure 1 - Omniboard">
 </center>
 *Figure 1 - Omniboard*
@@ -127,7 +127,7 @@ To visualize and interact with your experiments a nice visualization board for t
 ![Figure 2 - Omniboard - Experiment details](/blog/figs//omniboard5.png "Figure 2 - Omniboard - Experiment details"){:class="blog-image"}
 </div> -->
 <center>
-<img src="/blog/figs//omniboard5.png" style="width: 80%;"
+<img src="/blog/figs/sacred/omniboard5.png" style="width: 80%;"
  alt="Figure 2 - Omniboard - Experiment Details">
 </center>
 *Figure 2 - Omniboard - Experiment details*
