@@ -24,11 +24,11 @@ Project for the Deep Learning Course @ Polimi.
 Topics: Deep Learning, Reinforcement Learning.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HVOrhxypOGg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-The project takes inspiration from the 2017 NIPS Competition: ([CrowdAI](https://www.crowdai.org/challenges/nips-2017-learning-to-run}{https://www.crowdai.org/challenges/nips-2017-learning-to-run)).
+The project takes inspiration from the 2017 NIPS Competition: ([CrowdAI](https://www.crowdai.org/challenges/nips-2017-learning-to-run)).
 In this competition, you are tasked with developing a controller to enable a physiologically-based human model to navigate a complex obstacle course as quickly as possible. You are provided with a human musculoskeletal model and a physics-based simulation environment where you can synthesize physically and physiologically accurate motion. Potential obstacles include external obstacles like steps, or a slippery floor, along with internal obstacles like muscle weakness or motor noise. You are scored based on the distance you travel through the obstacle course in a set amount of time.
 The aim of the project is to study the problem and try to apply Deep Reinforcement Learning algorithms to replicate results of the top teams.
 
-- ([Github](https://github.com/MultiBeerBandits/learning-to-run}{https://github.com/MultiBeerBandits/learning-to-run))
+- ([Github](https://github.com/MultiBeerBandits/learning-to-run))
 - ([Slides])(tobe))
 
 ### Computer Vision for Computer Art. A pencil writing on a virtual plane
@@ -41,15 +41,15 @@ Wouldn't be great to write or draw on any surface, without the need of ink, and 
 Given that, it is possible to reconstruct the drawing, by simply keeping the part of the trajectory near the writing surface. 
 The project is implemented in MATLAB.
 
-- ([Github](https://github.com/EmilianoGagliardiEmanueleGhelfi/inkless-painting}{https://github.com/EmilianoGagliardiEmanueleGhelfi/inkless-painting))
-- ([Youtube]({https://www.youtube.com/watch?v=U7XAzXeBx-U}{https://www.youtube.com/watch?v=U7XAzXeBx-U)).
+- ([Github](https://github.com/EmilianoGagliardiEmanueleGhelfi/inkless-painting))
+- ([Youtube](https://www.youtube.com/watch?v=U7XAzXeBx-U)
 
 ### Recommender System Challenge @ Polimi: Music Recommendation
 I took part to the annual Kaggle competition on Recommender Systems held by Politecnico di Milano in 2017. That year topic was music recommendation, so we implemented and trained several Machine Learning algorithms to suggest songs to users based on their tastes.
 We placed among the best teams in the competition and we were invited to present our approach and solutions to the recommendation problem[1].
 We used Python, Numpy/Scipy, Jupyter Notebooks and C++ as technology tools to efficiently implement our ideas.
-- ([Slides] (https://www.slideshare.net/EmanueleGhelfi/recommender-system-challenge))
-- ([Github] (https://github.com/MultiBeerBandits/recsys\_challenge\_2017}{https://github.com/MultiBeerBandits/recsys\_challenge\_2017))
+- ([Slides](https://www.slideshare.net/EmanueleGhelfi/recommender-system-challenge))
+- ([Github](https://github.com/MultiBeerBandits/recsys\_challenge\_2017))
 
 ### CNN Quantization - Performance Evaluation
 Advanced Computer Architecture Project.
