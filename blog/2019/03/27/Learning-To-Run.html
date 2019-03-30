@@ -57,11 +57,11 @@
   
 
   
-  <meta property="og:url" content="http://localhost:4000/blog/2019/03/27/Learning-To-Run.html" />
+  <meta property="og:url" content="http://emanueleghelfi.github.io/blog/2019/03/27/Learning-To-Run.html" />
   
 
   
-  <meta property="og:image" content="http://localhost:4000/images/manughelfi_200.jpeg" />
+  <meta property="og:image" content="http://emanueleghelfi.github.io/images/manughelfi_200.jpeg" />
   
 
   <!-- Twitter tags -->
@@ -96,7 +96,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="http://localhost:4000">Emanuele Ghelfi</a>
+      <a class="navbar-brand" href="http://emanueleghelfi.github.io">Emanuele Ghelfi</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -120,7 +120,7 @@
 	
 	<div class="avatar-container">
 	  <div class="avatar-img-border">
-	    <a href="http://localhost:4000 ">
+	    <a href="http://emanueleghelfi.github.io ">
 	      <img class="avatar-img" src="/images/manughelfi_200.jpeg" />
 		</a>
 	  </div>
@@ -248,10 +248,10 @@ Evaluation threads are spawned every fixed number of training steps.
 Having multiple sampling threads running policies with different weights improves exploration and results in a substantial performance improvement. We used 20 sampling threads, 1 training thread and 5 evaluation threads in our implementation. We found out in our experiments that \( m=1 \) is a good trade-off between sampling and training.</p>
 
 <h3 id="exploration">Exploration</h3>
-<p>To explore we used action noise and parameter noise \cite{param_noise} in an alternated way. At the beginning of an episode we selected between action noise and parameter noise with 0.7 and 0.3 probability respectively.
+<p>To explore we used action noise and parameter noise <a class="citation" href="#param_noise">(Plappert et al., 2017)</a>  in an alternated way. At the beginning of an episode we selected between action noise and parameter noise with 0.7 and 0.3 probability respectively.
 Action noise is directly applied to the action selected by the actor network.
-We used an Ornstein-Uhlenbeck (OU) \cite{ou_noise} process to generate correlated noise for efficient exploration in physics based environments.
-Parameter noise perturbs actor network weights to obtain a state dependent exploration, thus more coherent with respect to action noise. The noise used in parameter noise is sampled at the beginning of an episode and it’s kept fixed for all the episode. Parameter noise works well with layer normalization \cite{layer_normalization}. 
+We used an Ornstein-Uhlenbeck (OU) <a class="citation" href="#ou_noise">(Uhlenbeck &amp; Ornstein, 1930)</a> process to generate correlated noise for efficient exploration in physics based environments.
+Parameter noise perturbs actor network weights to obtain a state dependent exploration, thus more coherent with respect to action noise. The noise used in parameter noise is sampled at the beginning of an episode and it’s kept fixed for all the episode. Parameter noise works well with layer normalization <a class="citation" href="#layer_normalization">(Ba, Kiros, &amp; Hinton, 2016)</a>. 
 Layer normalization, as the name says, normalizes the output of a selected layer.
 This technique, besides stabilizing training, makes possible to use the same perturbation scale across all network layers. We used layer normalization both for actor and critic networks applying it to all layer except the last one before the non linearity.</p>
 
@@ -330,7 +330,10 @@ shows that, as expected, the experiment with 20 sampling threads outperformed th
 <ol class="bibliography"><li><span id="Williams1992">Williams, R. J. (1992). Simple statistical gradient-following algorithms for connectionist reinforcement learning. <i>Machine Learning</i>, <i>8</i>(3), 229–256. https://doi.org/10.1007/BF00992696</span></li>
 <li><span id="dpg">Silver et al., D. (2014). Deterministic Policy Gradient Algorithms. <i>ICML</i>.</span></li>
 <li><span id="dqn">Mnih, V., Kavukcuoglu, K., Silver, D., Graves, A., Antonoglou, I., Wierstra, D., &amp; Riedmiller, M. (2013). Playing Atari with Deep Reinforcement Learning. <i>ArXiv:1312.5602 [Cs]</i>. Retrieved from http://arxiv.org/abs/1312.5602</span></li>
-<li><span id="ddpg">Lillicrap et al., T. P. (2016). Continuous control with deep reinforcement learning. Retrieved from https://arxiv.org/abs/1509.02971</span></li></ol>
+<li><span id="ddpg">Lillicrap et al., T. P. (2016). Continuous control with deep reinforcement learning. Retrieved from https://arxiv.org/abs/1509.02971</span></li>
+<li><span id="param_noise">Plappert, M., Houthooft, R., Dhariwal, P., Sidor, S., Chen, R. Y., Chen, X., … Andrychowicz, M. (2017). Parameter Space Noise for Exploration. <i>CoRR</i>, <i>abs/1706.01905</i>. Retrieved from http://arxiv.org/abs/1706.01905</span></li>
+<li><span id="ou_noise">Uhlenbeck, G. E., &amp; Ornstein, L. S. (1930). On the Theory of the Brownian Motion. <i>Phys. Rev.</i>, <i>36</i>(5), 823–841. https://doi.org/10.1103/PhysRev.36.823</span></li>
+<li><span id="layer_normalization">Ba, J. L., Kiros, J. R., &amp; Hinton, G. E. (2016). Layer Normalization. <i>ArXiv:1607.06450 [Cs, Stat]</i>. Retrieved from http://arxiv.org/abs/1607.06450</span></li></ol>
 
 	</div>
   </div>
