@@ -3,8 +3,8 @@
   <channel>
     <title>Emanuele Ghelfi</title>
     <description>Emanuele Ghelfi's personal web page</description>
-    <link>http://localhost:4000</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://emanueleghelfi.github.io</link>
+    <atom:link href="http://emanueleghelfi.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
         <title>Learning To Run</title>
@@ -13,8 +13,8 @@
           In this article we present our approach for the NIPS 2017 ”Learning To Run” challenge. The goal of the challenge is to develop a controller able to run in a complex environment, by training a model with Deep Reinforcement Learning methods. We follow the approach of the team Reason8 (3rd...
         </description>
         <pubDate>Wed, 27 Mar 2019 08:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/2019/03/27/Learning-To-Run.html</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2019/03/27/Learning-To-Run.html</guid>
+        <link>http://emanueleghelfi.github.io/blog/2019/03/27/Learning-To-Run.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/03/27/Learning-To-Run.html</guid>
       </item>
     
       <item>
@@ -24,8 +24,8 @@
           Managing Machine Learning experiments is usually painful. The usual workflow when approaching a problem using Machine Learning tools is the following. You study the problem, define a possible solution, then you implement that solution and measure its quality. Often the solution depends on some parameters, and we refer to the...
         </description>
         <pubDate>Tue, 12 Feb 2019 08:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/2019/02/12/Every-Experiment-is-sacred.html</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2019/02/12/Every-Experiment-is-sacred.html</guid>
+        <link>http://emanueleghelfi.github.io/blog/2019/02/12/Every-Experiment-is-sacred.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/02/12/Every-Experiment-is-sacred.html</guid>
       </item>
     
   </channel>
