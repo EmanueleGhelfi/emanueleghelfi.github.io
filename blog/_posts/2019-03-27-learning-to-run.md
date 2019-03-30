@@ -48,7 +48,7 @@ $$
 $$
 
 Where the update of the policy parameters \\( \theta \\)  follows the gradient of the objective function \\( \nabla J). 
-A straightforward approach to accomplish this is presented in {% cite Williams1992 %} with REINFORCE algorithm, that uses Monte Carlo sampling to estimate the performance gradient considering a stochastic policy. Deterministic Policy Gradient (DPG) [2] expands on this by considering deterministic policies only, for continuous action spaces. To ensure adequate exploration, an off-policy actor-critic algorithm is introduced to learn a deterministic target policy from an exploratory behavior policy. However, directly using neural networks as function approximators leads to unsatisfactory results due to two problems:
+A straightforward approach to accomplish this is presented in {% cite Williams1992 %} with REINFORCE algorithm, that uses Monte Carlo sampling to estimate the performance gradient considering a stochastic policy. Deterministic Policy Gradient (DPG) {% cite dpg %} expands on this by considering deterministic policies only, for continuous action spaces. To ensure adequate exploration, an off-policy actor-critic algorithm is introduced to learn a deterministic target policy from an exploratory behavior policy. However, directly using neural networks as function approximators leads to unsatisfactory results due to two problems:
 
 1. most optimization algorithms for neural networks assume that samples are independently and identically distributed, which is not true when samples are generated from exploring sequentially in an environment;
 2. since the network Q, part of Q-learning algorithms, being updated is also used in calculating the target value, the Q update is prone to divergence.
