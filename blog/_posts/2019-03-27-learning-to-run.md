@@ -120,10 +120,10 @@ Evaluation threads are spawned every fixed number of training steps.
 Having multiple sampling threads running policies with different weights improves exploration and results in a substantial performance improvement. We used 20 sampling threads, 1 training thread and 5 evaluation threads in our implementation. We found out in our experiments that \\( m=1 \\) is a good trade-off between sampling and training.
 
 ### Exploration
-To explore we used action noise and parameter noise \cite{param_noise} in an alternated way. At the beginning of an episode we selected between action noise and parameter noise with 0.7 and 0.3 probability respectively.
+To explore we used action noise and parameter noise {% cite param_noise %}  in an alternated way. At the beginning of an episode we selected between action noise and parameter noise with 0.7 and 0.3 probability respectively.
 Action noise is directly applied to the action selected by the actor network.
-We used an Ornstein-Uhlenbeck (OU) \cite{ou_noise} process to generate correlated noise for efficient exploration in physics based environments.
-Parameter noise perturbs actor network weights to obtain a state dependent exploration, thus more coherent with respect to action noise. The noise used in parameter noise is sampled at the beginning of an episode and it's kept fixed for all the episode. Parameter noise works well with layer normalization \cite{layer_normalization}. 
+We used an Ornstein-Uhlenbeck (OU) {% cite ou_noise %} process to generate correlated noise for efficient exploration in physics based environments.
+Parameter noise perturbs actor network weights to obtain a state dependent exploration, thus more coherent with respect to action noise. The noise used in parameter noise is sampled at the beginning of an episode and it's kept fixed for all the episode. Parameter noise works well with layer normalization {% cite layer_normalization %}. 
 Layer normalization, as the name says, normalizes the output of a selected layer.
 This technique, besides stabilizing training, makes possible to use the same perturbation scale across all network layers. We used layer normalization both for actor and critic networks applying it to all layer except the last one before the non linearity.
 
