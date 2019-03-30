@@ -109,4 +109,22 @@ prose:
     - /js
 
 # plugins    
-plugins: [jekyll-paginate]
+plugins: [jekyll-paginate, jekyll-scholar]
+
+scholar:
+  style: apa
+  locale: en
+
+  sort_by: none
+  order: ascending
+
+  source: ./_bibliography
+  bibliography: references.bib
+  bibliography_template: "{{reference}}"
+
+  replace_strings: true
+  join_strings:    true
+
+  details_dir:    bibliography
+
+  query: "@*"
