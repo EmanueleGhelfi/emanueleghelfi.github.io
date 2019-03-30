@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Learning To Run</title>
+
+  <meta name="author" content="Emanuele Ghelfi" />
+
+  
+
+  <link rel="alternate" type="application/rss+xml" title="Emanuele Ghelfi - Emanuele Ghelfi's personal web page" href="/feed.xml" />
+
+<!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+  
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    
+  
+
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+
+  
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  <!-- Facebook OpenGraph tags -->
+  <meta property="og:title" content="Learning To Run" />
+  <meta property="og:type" content="website" />
+
+  
+
+  
+  <meta property="og:url" content="http://localhost:4000/blog/2019/03/27/Learning-To-Run.html" />
+  
+
+  
+  <meta property="og:image" content="http://localhost:4000/images/manughelfi_200.jpeg" />
+  
+
+  <!-- Twitter tags -->
+  <meta name="twitter:card" content="summary" />
+
+      <!-- Scripts for ggvis from http://ggvis.rstudio.com/0.1/interactivity.html-->
+  <!-- ggvis stuff -->
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/jquery-1.11.0.min.js"></script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/jquery-ui/js/jquery-ui-1.10.4.custom.min.js"></script>
+  <script charset="utf-8" src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/d3.min.js"></script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/vega.min.js"></script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/QuadTree.js"></script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/lodash.min.js"></script>
+  <script>var lodash = _.noConflict();</script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/js/ggvis.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css"/>
+  <link rel="stylesheet" type="text/css" href="http://ggvis.rstudio.com/0.1/libs/ggvis/css/ggvis.css"/>
+  <!-- end of ggvis scripts-->
+
+
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://localhost:4000">Emanuele Ghelfi</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+	    
+        <li>
+		  <a href="/">Home</a>
+		</li>
+		
+        <li>
+		  <a href="/projects.html">Projects</a>
+		</li>
+		
+        <li>
+		  <a href="/aboutme.html">About Me</a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://localhost:4000 ">
+	      <img class="avatar-img" src="/images/manughelfi_200.jpeg" />
+		</a>
+	  </div>
+	</div>
+	
+	
+  </div>
+</nav>  
+
+    <div role="main" class="container main-content">
+      <header class="header-post">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post-heading">
+        <h1>Learning To Run</h1>
+        
+        <span class="post-meta">Posted on March 27, 2019</span>
+      </div>
+     </div>
+  </div>
+</header>
+
+
+<script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+
+<article>
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+	  <p>In this article we present our approach for the NIPS 2017 ”Learning To Run” challenge. The goal of the challenge is to develop a controller able to run in a complex environment, by training a model with Deep Reinforcement Learning methods. We follow the approach of the team Reason8 (3rd place). We begin from the algorithm that performed better on the task, Deep Deterministic Policy Gradient (DDPG). We implement and benchmark several improvements over vanilla DDPG, including parallel sampling, parameter noise, layer normalization and domain specific changes. We were able to reproduce results of the Reason8 team, obtaining a model able to run for more than 30m.</p>
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HVOrhxypOGg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</center>
+
+<h2 id="background">Background</h2>
+<p>Reinforcement Learning (RL) deals with sequential descision making problems. At each time step the agent observes the world state, selects an action and receives a reward.</p>
+
+<center>
+<img src="/blog/figs/l2run/high_level.png" style="width: 80%;" alt="Figure 1 - RL" />
+</center>
+
+<p>The figure above represents the Reinforcement Learning framework. The agent receives, at each time step a representation \( s \) of the state of the system. The agent takes an action a, according to its policy \( \pi \). The action has an effect on the world. The effect is a transition to the state \( s’ \), according to the world dynamic \( P \). At the same time the agent receives a reward \( r \), based on the action and on the state.
+The policy \( \pi \) is often encoded in a neural network.</p>
+
+<center>
+<img src="/blog/figs/l2run/high_level2.png" style="width: 80%;" alt="Figure 2 - RL" />
+</center>
+
+<p>The RL goal is to maximize the expected discounted sum of rewards:</p>
+
+<script type="math/tex; mode=display">J_\pi = \mathbb{E}\left[\sum_{t=0}^H \gamma^t r(s_t,a_t) \right] \, .</script>
+
+<p>Where \( J \) represents the objective function, \( \gamma \) is the discount factor, \( r \) is the reward and \( H \) is the horizon length.</p>
+
+<h3 id="how-can-we-achieve-this-goal">How can we achieve this goal?</h3>
+<p>Gradient ascent over policy parameters:</p>
+
+<script type="math/tex; mode=display">\theta' = \theta + \eta \nabla_\theta J_\pi .</script>
+
+<p>Where the update of the policy parameters \( \theta \)  follows the gradient of the objective function \( \nabla J). 
+A straightforward approach to accomplish this is presented in <a class="citation" href="#Williams1992">(Williams, 1992)</a> with REINFORCE algorithm, that uses Monte Carlo sampling to estimate the performance gradient considering a stochastic policy. Deterministic Policy Gradient (DPG) <a class="citation" href="#dpg">(Silver et al., 2014)</a> expands on this by considering deterministic policies only, for continuous action spaces. To ensure adequate exploration, an off-policy actor-critic algorithm is introduced to learn a deterministic target policy from an exploratory behavior policy. However, directly using neural networks as function approximators leads to unsatisfactory results due to two problems:</p>
+
+<ol>
+  <li>most optimization algorithms for neural networks assume that samples are independently and identically distributed, which is not true when samples are generated from exploring sequentially in an environment;</li>
+  <li>since the network Q, part of Q-learning algorithms, being updated is also used in calculating the target value, the Q update is prone to divergence.</li>
+</ol>
+
+<p>DQN [3] implements Q-learning using a deep neural network to approximate the Q function. To address the problem (1.) DQN introduces a replay buffer which stores transitions generated by the environment. During training, a batch of transitions is drawn from the buffer to restore the i.i.d. property. Although, since a maximization over the action space is required, DQN does not scale with high-dimensional and continuous action spaces.
+Deep Deterministic Policy Gradient (DDPG) [4] solves all the these problems by using:</p>
+<ul>
+  <li>A deterministic parametrization of the actor \( \pi \), updated in the direction of the gradient of \( Q(s, \pi(s)) \). This is a scalable alternative to global maximization, that is infeasible in  high-dimensional continuous action spaces;</li>
+  <li>A replay buffer;</li>
+  <li>Separated target networks with soft-updates to improve convergence stability.</li>
+</ul>
+
+<h2 id="deep-deterministic-policy-gradient">Deep Deterministic Policy Gradient</h2>
+
+<p>DDPG is a state of the art algorithm in Deep Reinforcement Learning.</p>
+<h3 id="off-policy">Off policy</h3>
+<p>DDPG is an off-policy method, which means that the optimized policy is different from the behavioral policy. Off-policy algorithm usually allow re-usage of all the samples, whereas on-policy approaches would require to throw them away at each update.</p>
+<h3 id="actor-critic">Actor Critic</h3>
+<p>Actor critic algorithm uses two networks. The actor network represents the agent policy and outputs an action given a state. The critic network takes as input the pair state action and outputs an estimates of the quality of the action in that state. The two networks used in our project are the following:</p>
+
+<center>
+<img src="/blog/figs/l2run/actor_critic.png" style="width: 80%;" alt="Figure 2 - RL" />
+</center>
+
+<p>Critic is trained using off-policy data coming from the replay buffer, that is a FIFO queue containing tuples(st, at, rt, st+1). Critic’s task is to minimize the Bellman error (notice that the policy is deterministic, so we can avoid the expectation over actions):</p>
+
+<script type="math/tex; mode=display">Q(s_t,a_t \mid \theta^Q ) = r(s_t,a_t) + \gamma Q(s_{t+1}, \pi (s_{t+1}  \mid \theta^\pi ) \mid \theta^Q )</script>
+
+<p>where \( \theta^Q \) are parameters of the critic network and \( \theta^\pi \) are actor’s parameters.
+It is evident in the equation above that the update step of the weights \( \theta^Q \) comprises \( Q(s_t, a_t \mid \theta^Q) \) in the target, resulting in an iterative update prone to divergence. DDPG solves this problem using target networks. Target networks are copies of the actor and critic networks that are only used for computing target values, and softly updated for improving stability:
+<script type="math/tex">\theta' = \tau \theta + (1-\tau)\theta' \qquad \tau \ll 1,</script>
+where \( \theta \) are the weights of the original network and \( \theta’ \) the weights of the target networks.</p>
+
+<p>The resulting error for the critic network is:
+<script type="math/tex">L = \frac{1}{N} \sum_{i=1}^N (y_i - Q(s_i, a_i \mid \theta^Q))^2 \, ,</script>
+with target
+<script type="math/tex">y_i = r_i + \gamma Q(s_i, \pi(s_i \mid \theta'^\pi) \mid \theta'^{Q}).</script></p>
+
+<p>The actor is updated using the estimated deterministic policy gradient, here reported for the sake of completeness:</p>
+
+<script type="math/tex; mode=display">\nabla_{\theta^\pi}J \approx \frac{1}{N} \sum_{i=1}^N \nabla_a Q(s, a \mid \theta^Q) \mid_{s = s_i, a = \pi(s_i)} \nabla_{\theta^\pi} \pi(s \mid \theta^\pi)\mid_{s_i}.</script>
+
+<p>Applying the vanilla DDPG algorithm to the learning to run task leads to unsatisfactory results as we can see from the initial video.</p>
+
+<h2 id="ddpg-improvements">DDPG Improvements</h2>
+
+<h3 id="parallel-sampling">Parallel Sampling</h3>
+<p>A key step in any reinforcement learning algorithm is the generation of \( (s_t, a_t, r_t, s_{t+1}) \) transitions to gather information from the environment. Since our simulator is very slow, making this step as fast as possible is desirable. Parallelization in our algorithm is implemented through three types of threads: sampling threads, training thread and evaluation threads.
+Each sampling thread is tasked with collecting trajectories using the provided policy, pushing them in a common queue and waiting for a new policy.</p>
+
+<center>
+<img src="/blog/figs/l2run/ddpg.png" style="width: 80%;" alt="Figure 2 - RL" />
+</center>
+
+<center>
+<img src="/blog/figs/l2run/ddpg_focus_1.png" style="width: 80%;" alt="Figure 2 - RL" />
+</center>
+
+<p>The training thread waits samples from \( m \) sampling threads, stores them in the replay buffer and trains the actor and critic networks for a fixed number of training steps. The new actor network is then sent to the waiting sampling threads that can now restart the sampling process.
+Evaluation threads are spawned every fixed number of training steps.
+Having multiple sampling threads running policies with different weights improves exploration and results in a substantial performance improvement. We used 20 sampling threads, 1 training thread and 5 evaluation threads in our implementation. We found out in our experiments that \( m=1 \) is a good trade-off between sampling and training.</p>
+
+<h3 id="exploration">Exploration</h3>
+<p>To explore we used action noise and parameter noise \cite{param_noise} in an alternated way. At the beginning of an episode we selected between action noise and parameter noise with 0.7 and 0.3 probability respectively.
+Action noise is directly applied to the action selected by the actor network.
+We used an Ornstein-Uhlenbeck (OU) \cite{ou_noise} process to generate correlated noise for efficient exploration in physics based environments.
+Parameter noise perturbs actor network weights to obtain a state dependent exploration, thus more coherent with respect to action noise. The noise used in parameter noise is sampled at the beginning of an episode and it’s kept fixed for all the episode. Parameter noise works well with layer normalization \cite{layer_normalization}. 
+Layer normalization, as the name says, normalizes the output of a selected layer.
+This technique, besides stabilizing training, makes possible to use the same perturbation scale across all network layers. We used layer normalization both for actor and critic networks applying it to all layer except the last one before the non linearity.</p>
+
+<h3 id="states-and-actions-flip">States and actions flip</h3>
+<p>The model has a symmetric body, thus it’s easy to increase the sample size by flipping states and actions. Flipping a state means to swap left and right parts of the body, flipping an action means to swap actuations of left and right legs.
+States and actions flip is implemented in this way: we sample transitions  \( (s_t, a_t, r_t, s_{t+1}) \) from the replay buffer, flip state components of \( s_t \) and \( s_{t+1} \), flip the action  \( a_t \) and add to the batch original as well as flipped transition. This has an easy interpretation: we know that if action \( a_t \)  in state \( s_t \) , results in state  \( s_{t+1} \)  and in a reward signal \( r_t \), doing the symmetric action with respect to \( a_t\) in the symmetric state with respect to \( s_t \) results in the symmetric state with respect to \( s_{t+1} \) and in the <em>same</em> reward signal \( r_t \). 
+Flipping transitions helps in obtaining symmetric policies, that is desirable since running is a symmetric task.</p>
+
+<h2 id="environment">Environment</h2>
+
+<center>
+<img src="/blog/figs/l2run/our_problem.png" style="width: 80%;" alt="Figure 2 - RL" />
+</center>
+
+<p>The agent is a musculoskeletal model including information about muscles, joints and links moving in a 2D environment (no movement is possible along Z axis).
+Kinematic quantities are provided for body parts and joints, while activation, fiber length and fiber velocity are provided for muscles.<br />
+The total amount of variables describing the state of the agent is 146.
+The agent can actuate 9 muscles for each leg, thus \( a \in [0,1]^{18} \). 
+In our version of the environment we removed obstacles, obtaining a slightly easier version of the task. 
+Reward is defined as the change in the x coordinate of the pelvis for each step plus a small penalty for using ligament forces.
+An episode terminates when the agent falls (pelvis \( y &lt; 0.65 \)) or after 1000 steps.
+Simulation is based on the OpenSim library that relies on the SimBody physics engine. Due to a complex physics engine the environment is quite slow compared to standard RL environments (Roboschool, Mojoco, etc.) and a step can take seconds, thus it is crucial to use the most sample-efficient method.</p>
+
+<h3 id="environment-modifications">Environment modifications</h3>
+<p>We used several modifications of the environment during training to improve efficiency and to help the learning algorithm.</p>
+
+<h4 id="reward">Reward</h4>
+<p>We added a small bonus to the reward for each time-step survived. We did not study the contribution of this change thoroughly, but we expect it to add some greediness to the initial training steps to favor policies that keeps the model standing.</p>
+
+<h4 id="environment-accuracy">Environment accuracy</h4>
+<p>We used a lower integrator accuracy with respect to the standard one of the simulator obtaining 5x speedup. After some episodes the environment becomes slower with respect to initial episodes, probably for a memory leak. We solved this problem doing a reset of the environment after 100 episodes.</p>
+
+<h4 id="relative-positions">Relative positions</h4>
+<p>As mentioned above, position vectors of the model body parts are exposed by the simulator as absolute. For the purpose of learning, keeping an absolute reference frame is undesirable. In fact, being running an approximately periodic task, having the skeleton in some position at a given distance from the origin, should make no difference from having it in the same position at another distance. Therefore, we modified the observation vector by centering the \( x \) coordinates of the body parts around the <strong>pelvis</strong> \( x \). Exploiting such symmetry of the model enables shorter learning time and, most importantly, higher generalization.</p>
+
+<h4 id="state-variables">State variables</h4>
+<p>OpenSim exposes a number of variables for a musculoskeletal model. Even though to preserve the Markovian property we should consider them all, many of them are in practice useless for the task to learn. In training our model, two subsets of them were considered and we refer to them as <strong>full-state</strong> and <strong>reduced-state</strong>.
+<strong>Reduced-state</strong> comprises the \( x \), \( y\) position of body parts, the rotation and rotational speed of joints, the speed and position of the center of mass, resulting in \( s \in \mathbb{R}^{34}\). Namely body parts are <strong>head, torso, right and left toes and talus</strong> and joints are <strong>ground pelvis and left and right ankles, hips and knees</strong>. 
+<strong>Full-state</strong> takes into account all the variables from <strong>reduced-state</strong>, together with the speed and acceleration of body parts and acceleration of joints, resulting in \( s \in \mathbb{R}^{67} \).</p>
+
+<h2 id="results">Results</h2>
+<p>For all the experiments we ran DDPG algorithm with the modifications we describe in sections \ref{sec:proposed} and \ref{sec:environment}. We performed an <strong>ablation study</strong> to test the relevance of our main changes to vanilla implementation. We compared the performance of a model trained on the <strong>reduced-state</strong> space with respect to the <strong>full-state</strong> space. Moreover we compared the quality of the models learned with or without state-action-flip and parameter noise, in terms of performance and required training steps.
+All the models running on the <strong>reduced-state</strong> configuration share the same architecture for actor and critic networks, with Xavier initialization \cite{pmlr-v9-glorot10a} for the neurons.</p>
+
+<h3 id="state-action-flip-and-parameter-noise">State action flip and parameter noise</h3>
+<p>In this experiment we investigated on the importance of <strong>state-action flip</strong> and <strong>parameter noise</strong> (PN) for the learning process. We trained four models for approximately $10^6$ training steps with all the combinations of the two improvements, i.e. with and without state-action flip and parameter noise. Performance statistics are reported in figure \ref{fig:flip-pn}. From our experimental results, introducing both modifications leads to both better performance, in terms of longer run distance, and a significant speed-up in terms of training steps to reach same distance. 
+It is also worth highlighting that the learned model with state-action flip achieved higher performance than the one with PN only. This possibly remarks the importance of domain-specific additions in the context of RL which outperformed an uninformed exploration.</p>
+<center>
+<img src="/blog/figs/l2run/learning_curves.png" style="width: 80%;" alt="Figure 2 - RL" />
+</center>
+
+<h3 id="sampling-threads">Sampling threads</h3>
+<p>In this experiment we analyzed the impact of the number of sampling threads. We trained two models with 10 and 20 sampling threads respectively. We used the same sampling-training strategy: wait for samples from 1 thread, check the state of the other threads (collecting samples if available), train for 300 steps, send the updated policies to waiting threads that restart the sampling process. Figure \ref{fig:thread-number}
+shows that, as expected, the experiment with 20 sampling threads outperformed the experiment with 10  sampling threads. This shows the importance of exploration in this task, as well as the importance of parallelization.</p>
+
+<center>
+<img src="/blog/figs/l2run/thread_number.png" style="width: 80%;" alt="Figure 2 - RL" />
+</center>
+
+<h3 id="full-vs-reduces-state">Full vs Reduces state</h3>
+<p>In this experiment we compared the performance of two learned models, the first trained over <strong>full-state</strong> space and the second over <strong>reduced-state</strong> space. The former was trained using a \( [150, 64] \) <strong>elu</strong> actor network and a \( [150, 50]\) <strong>tanh</strong> critic network. The latter was trained with a \( [64, 64] \) <strong>elu</strong> actor network and a \( [64, 32] \) <strong>tanh</strong> critic network. Performance statistics are reported in figure \ref{fig:full-reduced}. From our experiments, models trained with a \textit{reduce-state} space outperformed those trained with the bigger state space. \textit{Full-state} space introduces several variables that could help in learning a controller for our task, but they also increase the complexity of the model. We did not test thoroughly the networks architecture for the \textit{full-state} space and incrementing the number of neurons might lead to better performance.</p>
+<center>
+<img src="/blog/figs/l2run/reduced_vs_full.png" style="width: 80%;" alt="Figure 2 - RL" />
+</center>
+
+<h2 id="authors">Authors</h2>
+
+<ul>
+  <li>Emanuele Ghelfi</li>
+  <li>Leonardo Arcari</li>
+  <li>Emiliano Gagliardi</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><span id="Williams1992">Williams, R. J. (1992). Simple statistical gradient-following algorithms for connectionist reinforcement learning. <i>Machine Learning</i>, <i>8</i>(3), 229–256. https://doi.org/10.1007/BF00992696</span></li>
+<li><span id="dpg">Silver et al., D. (2014). Deterministic Policy Gradient Algorithms. <i>ICML</i>.</span></li></ol>
+
+	</div>
+  </div>
+</article>
+
+<!-- tags do not look great like this
+
+  <div class="blog-tags">
+	  Tags: machine-learning
+  </div>
+
+-->
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <ul class="pager blog-pager">
+      
+      <li class="previous">
+        <a href="/blog/2019/02/12/Every-Experiment-is-sacred.html" data-toggle="tooltip" data-placement="top" title="Every Experiment is Sacred">&larr; Previous Post</a>
+      </li>
+      
+      
+    </ul>
+  </div>
+</div>
+
+
+<div class="row disqus-comments">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    
+
+  </div>
+</div>
+
+
+    </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          <li>
+            <a href="https://github.com/EmanueleGhelfi" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://twitter.com/manughelfi" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="mailto:manughelfi1994@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://linkedin.com/pub/emanuele-ghelfi-9a408396" title="LinkedIn">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+		  
+		  <li>
+			<a href="/feed.xml" title="RSS">
+			  <span class="fa-stack fa-lg">
+				<i class="fa fa-circle fa-stack-2x"></i>
+				<i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+			  </span>
+			</a>
+		  </li>		
+          		  
+        </ul>
+        <p class="copyright text-muted">
+		  Emanuele Ghelfi
+		  &nbsp;&bull;&nbsp;
+		  2019
+		  
+		  
+	    </p>
+		<p class="theme-by text-muted">
+		  Theme by
+		  <a href="https://github.com/daattali/beautiful-jekyll">beautiful-jekyll</a>
+		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-67791526-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+  
+  </body>
+</html>
