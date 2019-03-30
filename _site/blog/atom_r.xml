@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>Juuso's blog on Open Data Science and R</title>
+ <link href="http://ouzor.github.io/blog/atom_r.xml" rel="self"/>
+ <link href="http://ouzor.github.io/"/>
+ <updated>2019-03-30T10:21:51+00:00</updated>
+ <id>http://ouzor.github.io/blog</id>
+ <author>
+   <name>Juuso Parkkinen</name>
+   <email>juuso.parkkinen@iki.fi</email>
+ </author>
+ 
+ 
+ 
+</feed>

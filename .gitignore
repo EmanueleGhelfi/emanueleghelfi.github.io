@@ -1,9 +1,7 @@
 .DS_Store
 _layouts/.Rhistory
-site/*
 .Rproj.user
 ouzor.github.com.Rproj
 .Rhistory
 blog/keys/
 
-_site/
