@@ -150,7 +150,11 @@
 <article>
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-	  <p>In this article we present our approach for the NIPS 2017 ”Learning To Run” challenge. The goal of the challenge is to develop a controller able to run in a complex environment, by training a model with Deep Reinforcement Learning methods. We follow the approach of the team Reason8 (3rd place). We begin from the algorithm that performed better on the task, Deep Deterministic Policy Gradient (DDPG). We implement and benchmark several improvements over vanilla DDPG, including parallel sampling, parameter noise, layer normalization and domain specific changes. We were able to reproduce results of the Reason8 team, obtaining a model able to run for more than 30m.</p>
+	  <center>
+<a href="/files/data/l2run_final.pdf"><button name="button" class="btn btn-primary" href="/files/data/l2run_final.pdf">Paper</button></a> <a href="https://www.slideshare.net/EmanueleGhelfi/learning-to-run-138950609"><button name="button" class="btn btn-primary">Slides</button></a>
+</center>
+
+<p>In this article we present our approach for the NIPS 2017 ”Learning To Run” challenge. The goal of the challenge is to develop a controller able to run in a complex environment, by training a model with Deep Reinforcement Learning methods. We follow the approach of the team Reason8 (3rd place). We begin from the algorithm that performed better on the task, Deep Deterministic Policy Gradient (DDPG). We implement and benchmark several improvements over vanilla DDPG, including parallel sampling, parameter noise, layer normalization and domain specific changes. We were able to reproduce results of the Reason8 team, obtaining a model able to run for more than 30m.</p>
 
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HVOrhxypOGg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
@@ -181,7 +185,7 @@ The policy \( \pi \) is often encoded in a neural network.</p>
 
 <script type="math/tex; mode=display">\theta' = \theta + \eta \nabla_\theta J_\pi .</script>
 
-<p>Where the update of the policy parameters \( \theta \)  follows the gradient of the objective function \( \nabla J). 
+<p>Where the update of the policy parameters \( \theta \)  follows the gradient of the objective function \( \nabla J \). 
 A straightforward approach to accomplish this is presented in <a class="citation" href="#Williams1992">(Williams, 1992)</a> with REINFORCE algorithm, that uses Monte Carlo sampling to estimate the performance gradient considering a stochastic policy. Deterministic Policy Gradient (DPG) <a class="citation" href="#dpg">(Silver et al., 2014)</a> expands on this by considering deterministic policies only, for continuous action spaces. To ensure adequate exploration, an off-policy actor-critic algorithm is introduced to learn a deterministic target policy from an exploratory behavior policy. However, directly using neural networks as function approximators leads to unsatisfactory results due to two problems:</p>
 
 <ol>
@@ -203,25 +207,30 @@ Deep Deterministic Policy Gradient (DDPG) <a class="citation" href="#ddpg">(Lill
 <h3 id="off-policy">Off policy</h3>
 <p>DDPG is an off-policy method, which means that the optimized policy is different from the behavioral policy. Off-policy algorithm usually allow re-usage of all the samples, whereas on-policy approaches would require to throw them away at each update.</p>
 <h3 id="actor-critic">Actor Critic</h3>
-<p>Actor critic algorithm uses two networks. The actor network represents the agent policy and outputs an action given a state. The critic network takes as input the pair state action and outputs an estimates of the quality of the action in that state. The two networks used in our project are the following:</p>
+<p>Actor critic algorithm uses two networks. The actor network represents the agent policy and outputs an action given a state. The critic network takes as input the pair state action and outputs an estimates of the quality of the action in that state. The two networks used in our project are the followings:</p>
 
 <center>
 <img src="/blog/figs/l2run/actor_critic.png" style="width: 80%;" alt="Figure 2 - RL" />
 </center>
 
-<p>Critic is trained using off-policy data coming from the replay buffer, that is a FIFO queue containing tuples(st, at, rt, st+1). Critic’s task is to minimize the Bellman error (notice that the policy is deterministic, so we can avoid the expectation over actions):</p>
+<p>Critic is trained using off-policy data coming from the replay buffer, that is a FIFO queue containing tuples \( (s_t, a_t, r_t, s_{t+1}) \). Critic’s task is to minimize the Bellman error (notice that the policy is deterministic, so we can avoid the expectation over actions):</p>
 
 <script type="math/tex; mode=display">Q(s_t,a_t \mid \theta^Q ) = r(s_t,a_t) + \gamma Q(s_{t+1}, \pi (s_{t+1}  \mid \theta^\pi ) \mid \theta^Q )</script>
 
 <p>where \( \theta^Q \) are parameters of the critic network and \( \theta^\pi \) are actor’s parameters.
-It is evident in the equation above that the update step of the weights \( \theta^Q \) comprises \( Q(s_t, a_t \mid \theta^Q) \) in the target, resulting in an iterative update prone to divergence. DDPG solves this problem using target networks. Target networks are copies of the actor and critic networks that are only used for computing target values, and softly updated for improving stability:
-<script type="math/tex">\theta' = \tau \theta + (1-\tau)\theta' \qquad \tau \ll 1,</script>
-where \( \theta \) are the weights of the original network and \( \theta’ \) the weights of the target networks.</p>
+It is evident in the equation above that the update step of the weights \( \theta^Q \) comprises \( Q(s_t, a_t \mid \theta^Q) \) in the target, resulting in an iterative update prone to divergence. DDPG solves this problem using <strong>target networks</strong>. Target networks are copies of the actor and critic networks that are only used for computing target values, and softly updated for improving stability:</p>
 
-<p>The resulting error for the critic network is:
-<script type="math/tex">L = \frac{1}{N} \sum_{i=1}^N (y_i - Q(s_i, a_i \mid \theta^Q))^2 \, ,</script>
-with target
-<script type="math/tex">y_i = r_i + \gamma Q(s_i, \pi(s_i \mid \theta'^\pi) \mid \theta'^{Q}).</script></p>
+<script type="math/tex; mode=display">\theta' = \tau \theta + (1-\tau)\theta' \qquad \tau \ll 1,</script>
+
+<p>where \( \theta \) are the weights of the original network and \( \theta’ \) the weights of the target networks.</p>
+
+<p>The resulting error for the critic network is:</p>
+
+<script type="math/tex; mode=display">L = \frac{1}{N} \sum_{i=1}^N (y_i - Q(s_i, a_i \mid \theta^Q))^2 \, ,</script>
+
+<p>with target:</p>
+
+<script type="math/tex; mode=display">y_i = r_i + \gamma Q(s_i, \pi(s_i \mid \theta'^\pi) \mid \theta'^{Q}).</script>
 
 <p>The actor is updated using the estimated deterministic policy gradient, here reported for the sake of completeness:</p>
 
@@ -293,26 +302,26 @@ Simulation is based on the OpenSim library that relies on the SimBody physics en
 <strong>Full-state</strong> takes into account all the variables from <strong>reduced-state</strong>, together with the speed and acceleration of body parts and acceleration of joints, resulting in \( s \in \mathbb{R}^{67} \).</p>
 
 <h2 id="results">Results</h2>
-<p>For all the experiments we ran DDPG algorithm with the modifications we describe in sections \ref{sec:proposed} and \ref{sec:environment}. We performed an <strong>ablation study</strong> to test the relevance of our main changes to vanilla implementation. We compared the performance of a model trained on the <strong>reduced-state</strong> space with respect to the <strong>full-state</strong> space. Moreover we compared the quality of the models learned with or without state-action-flip and parameter noise, in terms of performance and required training steps.
-All the models running on the <strong>reduced-state</strong> configuration share the same architecture for actor and critic networks, with Xavier initialization \cite{pmlr-v9-glorot10a} for the neurons.</p>
+<p>For all the experiments we ran DDPG algorithm with the modifications we describe in sections <a href="#ddpg-improvements">DDPG improvements</a> and <a href="#environment-modifications">Environment modifications</a>. We performed an <strong>ablation study</strong> to test the relevance of our main changes to vanilla implementation. We compared the performance of a model trained on the <strong>reduced-state</strong> space with respect to the <strong>full-state</strong> space. Moreover we compared the quality of the models learned with or without state-action-flip and parameter noise, in terms of performance and required training steps.
+All the models running on the <strong>reduced-state</strong> configuration share the same architecture for actor and critic networks, with Xavier initialization <a class="citation" href="#pmlr-v9-glorot10a">(Glorot &amp; Bengio, 2010)</a> for the neurons.</p>
 
 <h3 id="state-action-flip-and-parameter-noise">State action flip and parameter noise</h3>
-<p>In this experiment we investigated on the importance of <strong>state-action flip</strong> and <strong>parameter noise</strong> (PN) for the learning process. We trained four models for approximately $10^6$ training steps with all the combinations of the two improvements, i.e. with and without state-action flip and parameter noise. Performance statistics are reported in figure \ref{fig:flip-pn}. From our experimental results, introducing both modifications leads to both better performance, in terms of longer run distance, and a significant speed-up in terms of training steps to reach same distance. 
+<p>In this experiment we investigated on the importance of <strong>state-action flip</strong> and <strong>parameter noise</strong> (PN) for the learning process. We trained four models for approximately \( 10^6 \) training steps with all the combinations of the two improvements, i.e. with and without state-action flip and parameter noise. From our experimental results, introducing both modifications leads to both better performance, in terms of longer run distance, and a significant speed-up in terms of training steps to reach same distance. 
 It is also worth highlighting that the learned model with state-action flip achieved higher performance than the one with PN only. This possibly remarks the importance of domain-specific additions in the context of RL which outperformed an uninformed exploration.</p>
 <center>
 <img src="/blog/figs/l2run/learning_curves.png" style="width: 80%;" alt="Figure 2 - RL" />
 </center>
 
 <h3 id="sampling-threads">Sampling threads</h3>
-<p>In this experiment we analyzed the impact of the number of sampling threads. We trained two models with 10 and 20 sampling threads respectively. We used the same sampling-training strategy: wait for samples from 1 thread, check the state of the other threads (collecting samples if available), train for 300 steps, send the updated policies to waiting threads that restart the sampling process. Figure \ref{fig:thread-number}
-shows that, as expected, the experiment with 20 sampling threads outperformed the experiment with 10  sampling threads. This shows the importance of exploration in this task, as well as the importance of parallelization.</p>
+<p>In this experiment we analyzed the impact of the number of sampling threads. We trained two models with 10 and 20 sampling threads respectively. We used the same sampling-training strategy: wait for samples from 1 thread, check the state of the other threads (collecting samples if available), train for 300 steps, send the updated policies to waiting threads that restart the sampling process. The experiment with 20 sampling threads outperformed the experiment with 10  sampling threads. This shows the importance of exploration in this task, as well as the importance of parallelization.</p>
 
 <center>
-<img src="/blog/figs/l2run/thread_number.png" style="width: 80%;" alt="Figure 2 - RL" />
+<img name="fig:thread-number" src="/blog/figs/l2run/thread_number.png" style="width: 80%;" alt="Figure 2 - RL" />
 </center>
 
-<h3 id="full-vs-reduces-state">Full vs Reduces state</h3>
-<p>In this experiment we compared the performance of two learned models, the first trained over <strong>full-state</strong> space and the second over <strong>reduced-state</strong> space. The former was trained using a \( [150, 64] \) <strong>elu</strong> actor network and a \( [150, 50]\) <strong>tanh</strong> critic network. The latter was trained with a \( [64, 64] \) <strong>elu</strong> actor network and a \( [64, 32] \) <strong>tanh</strong> critic network. Performance statistics are reported in figure \ref{fig:full-reduced}. From our experiments, models trained with a \textit{reduce-state} space outperformed those trained with the bigger state space. \textit{Full-state} space introduces several variables that could help in learning a controller for our task, but they also increase the complexity of the model. We did not test thoroughly the networks architecture for the \textit{full-state} space and incrementing the number of neurons might lead to better performance.</p>
+<h3 id="full-vs-reduced-state">Full vs Reduced state</h3>
+<p>In this experiment we compared the performance of two learned models, the first trained over <strong>full-state</strong> space and the second over <strong>reduced-state</strong> space. The former was trained using a \( [150, 64] \) <strong>elu</strong> actor network and a \( [150, 50]\) <strong>tanh</strong> critic network. The latter was trained with a \( [64, 64] \) <strong>elu</strong> actor network and a \( [64, 32] \) <strong>tanh</strong> critic network. From our experiments, models trained with a <strong>reduce-state</strong> space outperformed those trained with the bigger state space. <strong>Full-state</strong> space introduces several variables that could help in learning a controller for our task, but they also increase the complexity of the model. We did not test thoroughly the networks architecture for the <strong>full-state</strong> space and incrementing the number of neurons might lead to better performance.</p>
+
 <center>
 <img src="/blog/figs/l2run/reduced_vs_full.png" style="width: 80%;" alt="Figure 2 - RL" />
 </center>
@@ -327,13 +336,14 @@ shows that, as expected, the experiment with 20 sampling threads outperformed th
 
 <h2 id="references">References</h2>
 
-<ol class="bibliography"><li><span id="Williams1992">Williams, R. J. (1992). Simple statistical gradient-following algorithms for connectionist reinforcement learning. <i>Machine Learning</i>, <i>8</i>(3), 229–256. https://doi.org/10.1007/BF00992696</span></li>
-<li><span id="dpg">Silver et al., D. (2014). Deterministic Policy Gradient Algorithms. <i>ICML</i>.</span></li>
-<li><span id="dqn">Mnih, V., Kavukcuoglu, K., Silver, D., Graves, A., Antonoglou, I., Wierstra, D., &amp; Riedmiller, M. (2013). Playing Atari with Deep Reinforcement Learning. <i>ArXiv:1312.5602 [Cs]</i>. Retrieved from http://arxiv.org/abs/1312.5602</span></li>
-<li><span id="ddpg">Lillicrap et al., T. P. (2016). Continuous control with deep reinforcement learning. Retrieved from https://arxiv.org/abs/1509.02971</span></li>
-<li><span id="param_noise">Plappert, M., Houthooft, R., Dhariwal, P., Sidor, S., Chen, R. Y., Chen, X., … Andrychowicz, M. (2017). Parameter Space Noise for Exploration. <i>CoRR</i>, <i>abs/1706.01905</i>. Retrieved from http://arxiv.org/abs/1706.01905</span></li>
-<li><span id="ou_noise">Uhlenbeck, G. E., &amp; Ornstein, L. S. (1930). On the Theory of the Brownian Motion. <i>Phys. Rev.</i>, <i>36</i>(5), 823–841. https://doi.org/10.1103/PhysRev.36.823</span></li>
-<li><span id="layer_normalization">Ba, J. L., Kiros, J. R., &amp; Hinton, G. E. (2016). Layer Normalization. <i>ArXiv:1607.06450 [Cs, Stat]</i>. Retrieved from http://arxiv.org/abs/1607.06450</span></li></ol>
+<ol class="bibliography"><li><abbr>[Williams1992]</abbr> <span id="Williams1992">Williams, R. J. (1992). Simple statistical gradient-following algorithms for connectionist reinforcement learning. <i>Machine Learning</i>, <i>8</i>(3), 229–256. https://doi.org/10.1007/BF00992696</span></li>
+<li><abbr>[dpg]</abbr> <span id="dpg">Silver et al., D. (2014). Deterministic Policy Gradient Algorithms. <i>ICML</i>.</span></li>
+<li><abbr>[dqn]</abbr> <span id="dqn">Mnih, V., Kavukcuoglu, K., Silver, D., Graves, A., Antonoglou, I., Wierstra, D., &amp; Riedmiller, M. (2013). Playing Atari with Deep Reinforcement Learning. <i>ArXiv:1312.5602 [Cs]</i>. Retrieved from http://arxiv.org/abs/1312.5602</span></li>
+<li><abbr>[ddpg]</abbr> <span id="ddpg">Lillicrap et al., T. P. (2016). Continuous control with deep reinforcement learning. Retrieved from https://arxiv.org/abs/1509.02971</span></li>
+<li><abbr>[param_noise]</abbr> <span id="param_noise">Plappert, M., Houthooft, R., Dhariwal, P., Sidor, S., Chen, R. Y., Chen, X., … Andrychowicz, M. (2017). Parameter Space Noise for Exploration. <i>CoRR</i>, <i>abs/1706.01905</i>. Retrieved from http://arxiv.org/abs/1706.01905</span></li>
+<li><abbr>[ou_noise]</abbr> <span id="ou_noise">Uhlenbeck, G. E., &amp; Ornstein, L. S. (1930). On the Theory of the Brownian Motion. <i>Phys. Rev.</i>, <i>36</i>(5), 823–841. https://doi.org/10.1103/PhysRev.36.823</span></li>
+<li><abbr>[layer_normalization]</abbr> <span id="layer_normalization">Ba, J. L., Kiros, J. R., &amp; Hinton, G. E. (2016). Layer Normalization. <i>ArXiv:1607.06450 [Cs, Stat]</i>. Retrieved from http://arxiv.org/abs/1607.06450</span></li>
+<li><abbr>[pmlr-v9-glorot10a]</abbr> <span id="pmlr-v9-glorot10a">Glorot, X., &amp; Bengio, Y. (2010). Understanding the difficulty of training deep feedforward neural networks. In Y. W. Teh &amp; M. Titterington (Eds.), <i>Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics</i> (Vol. 9, pp. 249–256). Chia Laguna Resort, Sardinia, Italy: PMLR. Retrieved from http://proceedings.mlr.press/v9/glorot10a.html</span></li></ol>
 
 	</div>
   </div>

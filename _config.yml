@@ -120,7 +120,7 @@ scholar:
 
   source: ./_bibliography
   bibliography: references.bib
-  bibliography_template: "{{reference}}"
+  bibliography_template: <abbr>[{{key}}]</abbr> {{reference}}
 
   replace_strings: true
   join_strings:    true
