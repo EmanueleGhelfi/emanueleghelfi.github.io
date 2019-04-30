@@ -3,12 +3,15 @@ author: "manughelfi"
 layout: post
 did: "blog6"
 title:  "Learning To Run"
-slug:  Learning To Run"
+slug:  Learning To Run
 date:   2019-03-27 8:00:00
 categories: machine-learning
 tags: machine-learning
 description: "In this article we present our approach for the NIPS 2017 ”Learning To Run” challenge."
 mathjax: true
+gh-repo: MultiBeerBandits/learning-to-run
+gh-badge: star
+social-share: true
 ---
 
 <center>
@@ -33,7 +36,7 @@ The figure above represents the Reinforcement Learning framework. The agent rece
 The policy \\( \pi \\) is often encoded in a neural network.
 
 <center>
-<img src="/blog/figs/l2run/high_level2.png" style="width: 80%;" alt="Figure 2 - RL">
+<img src="/blog/figs/l2run/with_nn.png" style="width: 80%;" alt="Figure 2 - RL">
 </center>
 
 The RL goal is to maximize the expected discounted sum of rewards:
