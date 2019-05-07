@@ -22,6 +22,8 @@ For all these tasks I cover the steps of solution design, algorithm implementati
 
 **Accounts**: [Google Scholar](https://scholar.google.it/citations?user=JJqNoGQAAAAJ&hl=it)
 
+**Curriculum Vitae**: <a href="/files/data/cv_7.pdf">Download</a>
+
 
 [Zuru Tech Italy]: https://zuru.tech
 [Politecnico di Milano]: http://polimi.it/

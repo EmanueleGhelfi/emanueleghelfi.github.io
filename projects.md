@@ -22,20 +22,25 @@ Politecnico di Milano, Computer Science and Engineering, December 2018
 ### Learning To Run
 Project for the Deep Learning Course @ Polimi.
 Topics: Deep Learning, Reinforcement Learning.
+
+<center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HVOrhxypOGg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 The project takes inspiration from the 2017 NIPS Competition: ([CrowdAI](https://www.crowdai.org/challenges/nips-2017-learning-to-run)).
 In this competition, you are tasked with developing a controller to enable a physiologically-based human model to navigate a complex obstacle course as quickly as possible. You are provided with a human musculoskeletal model and a physics-based simulation environment where you can synthesize physically and physiologically accurate motion. Potential obstacles include external obstacles like steps, or a slippery floor, along with internal obstacles like muscle weakness or motor noise. You are scored based on the distance you travel through the obstacle course in a set amount of time.
 The aim of the project is to study the problem and try to apply Deep Reinforcement Learning algorithms to replicate results of the top teams.
 
 - [Github](https://github.com/MultiBeerBandits/learning-to-run)
-- [Slides])(tobe)
+- [Slides](https://www.slideshare.net/EmanueleGhelfi/learning-to-run-138950609)
 
 ### Computer Vision for Computer Art. A pencil writing on a virtual plane
 Project for the Image Analysis and Computer Vision Course @ Polimi.
 Topics: Image Analysis, Feature Extraction, Tracking, Camera Calibration, 3D reconstruction.
 
+<center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/U7XAzXeBx-U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 Wouldn't be great to write or draw on any surface, without the need of ink, and obtain the result in digitalized format? The task of this project is to develop an algorithm that, given a video of someone drawing using a pen without ink, recovers the 3D trajectory of the pencil tip.
 Given that, it is possible to reconstruct the drawing, by simply keeping the part of the trajectory near the writing surface. 
