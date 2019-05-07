@@ -3,8 +3,30 @@
   <channel>
     <title>Emanuele Ghelfi</title>
     <description>Emanuele Ghelfi's personal web page</description>
-    <link>http://localhost:4000</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://emanueleghelfi.github.io</link>
+    <atom:link href="http://emanueleghelfi.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>PyConX - GANs: From Theory to Production</title>
+        <description>
+          
+          Me and my colleagues (Federico Di Mattia, Paolo Galeone, Michele De Simoni) held the training: “Deep Diving into GANs: From Theory To Production” at PyConX in Florence. GANs are the new hottest topic in the ML arena; however, they present a challenge for the researchers and the engineers alike. Their...
+        </description>
+        <pubDate>Mon, 06 May 2019 08:00:00 +0000</pubDate>
+        <link>http://emanueleghelfi.github.io/blog/2019/05/06/GANs-From-Theory-to-Production.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/05/06/GANs-From-Theory-to-Production.html</guid>
+      </item>
+    
+      <item>
+        <title>PyConX - GANs: From Theory to Production</title>
+        <description>
+          
+          Me and my colleagues (Federico Di Mattia, Paolo Galeone, Michele De Simoni) held the training: “Deep Diving into GANs: From Theory To Production” at PyConX in Florence. GANs are the new hottest topic in the ML arena; however, they present a challenge for the researchers and the engineers alike. Their...
+        </description>
+        <pubDate>Mon, 06 May 2019 08:00:00 +0000</pubDate>
+        <link>http://emanueleghelfi.github.io/blog/2019/05/06/GANs-From-Theory-to-Production.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/05/06/GANs-From-Theory-to-Production.html</guid>
+      </item>
     
       <item>
         <title>Learning To Run</title>
@@ -13,8 +35,8 @@
           Paper Slides In this article we present our approach for the NIPS 2017 ”Learning To Run” challenge. The goal of the challenge is to develop a controller able to run in a complex environment, by training a model with Deep Reinforcement Learning methods. We follow the approach of the team...
         </description>
         <pubDate>Wed, 27 Mar 2019 08:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/2019/03/27/Learning-To-Run.html</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2019/03/27/Learning-To-Run.html</guid>
+        <link>http://emanueleghelfi.github.io/blog/2019/03/27/Learning-To-Run.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/03/27/Learning-To-Run.html</guid>
       </item>
     
       <item>
@@ -24,8 +46,25 @@
           Managing Machine Learning experiments is usually painful. The usual workflow when approaching a problem using Machine Learning tools is the following. You study the problem, define a possible solution, then you implement that solution and measure its quality. Often the solution depends on some parameters, and we refer to the...
         </description>
         <pubDate>Tue, 12 Feb 2019 08:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/2019/02/12/Every-Experiment-is-sacred.html</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2019/02/12/Every-Experiment-is-sacred.html</guid>
+        <link>http://emanueleghelfi.github.io/blog/2019/02/12/Every-Experiment-is-sacred.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/02/12/Every-Experiment-is-sacred.html</guid>
+      </item>
+    
+      <item>
+        <title>Title</title>
+        <description>
+          Longer title - 
+          Text
+
+
+
+Link, more text
+
+
+        </description>
+        <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
+        <link>http://emanueleghelfi.github.io/blog/2015/01/01/template.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2015/01/01/template.html</guid>
       </item>
     
   </channel>

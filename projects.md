@@ -7,8 +7,8 @@ subtitle: Presentations, Projects, Research, Blogs.
 
 ## Public presentations
 
-* Deep Diving into GANs: from theory to production @ PyConX 2019, Florence. ([PyConX](https://www.pycon.it/conference/talks/deep-diving-into-gans-form-theory-to-production)), ([Github](https://github.com/zurutech/gans-from-theory-to-production))
-* Reinforcement Learning in Configurable Environments: an Information Theoretic approach, Thesis discussion, 20.12.2018 ([slideshare](https://www.slideshare.net/EmanueleGhelfi/reinforcement-learning-in-configurable-environments))
+* Deep Diving into GANs: from theory to production @ PyConX 2019, Florence. ([PyConX](https://www.pycon.it/conference/talks/deep-diving-into-gans-form-theory-to-production)), ([Github](https://github.com/zurutech/gans-from-theory-to-production)), ([SlideShare](https://www.slideshare.net/EmanueleGhelfi/gan-theory-and-applications-143737572))
+* Reinforcement Learning in Configurable Environments: an Information Theoretic approach, Thesis discussion, 20.12.2018 ([SlideShare](https://www.slideshare.net/EmanueleGhelfi/reinforcement-learning-in-configurable-environments))
 
 ## Thesis
 
