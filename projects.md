@@ -12,7 +12,7 @@ subtitle: Presentations, Projects, Research, Blogs.
 
 ## Thesis
 
-### Reinforcement Learning in Configurable Environments: and Information Theoretic Approach
+### Reinforcement Learning in Configurable Environments: an Information Theoretic Approach
 Master's thesis
 Politecnico di Milano, Computer Science and Engineering, December 2018
 [Online](https://www.politesi.polimi.it/handle/10589/144736)
