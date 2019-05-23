@@ -6,12 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Welcome!</title>
+  <title>Reinforcement Learning in Configurable Continuous Environments</title>
 
   <meta name="author" content="Emanuele Ghelfi" />
 
-  
-  <meta name="description" content="Emanuele Ghelfi's personal web page and blog"/>
   
 
   <link rel="alternate" type="application/rss+xml" title="Emanuele Ghelfi - Emanuele Ghelfi's personal web page" href="/feed.xml" />
@@ -53,15 +51,13 @@
   
 
   <!-- Facebook OpenGraph tags -->
-  <meta property="og:title" content="Welcome!" />
+  <meta property="og:title" content="Reinforcement Learning in Configurable Continuous Environments" />
   <meta property="og:type" content="website" />
 
   
-  <meta property="og:description" content="Emanuele Ghelfi's personal web page and blog" />
-  
 
   
-  <meta property="og:url" content="http://localhost:4000/" />
+  <meta property="og:url" content="http://localhost:4000/blog/2019/05/22/RL-in-Conf-MDP.html" />
   
 
   
@@ -135,143 +131,75 @@
 </nav>  
 
     <div role="main" class="container main-content">
-      
-<header class="header-page">
+      <header class="header-post">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-	  <div class="page-heading">
-	    <h1>Welcome!</h1>
-	    
-	    <hr class="small">
-	    <span class="page-subheading">Emanuele Ghelfi's personal web page and blog</span>
-	    
-	  </div>
-    </div>
+      <div class="post-heading">
+        <h1>Reinforcement Learning in Configurable Continuous Environments</h1>
+        
+        <span class="post-meta">Posted on May 22, 2019</span>
+      </div>
+     </div>
   </div>
 </header>
 
 
+
+<article>
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+	  <p>Most of the problems tackled by Reinforcement Learning are typically modeled as Markov Decision Processes in which the environment is considered a <strong>fixed</strong> entity and cannot be controlled. Nevertheless, there exist several real-world examples in which a <strong>partial control</strong> on the environment can be exercised by the agent itself or by an external <strong>supervisor</strong>. For instance, in a car race the driver can set up his/her vehicle to better suit his/her needs. With the phrase <strong>environment configuration</strong> we refer to the activity of altering some environmental parameters to improve the performance of the agent’s policy. This scenario has been recently formalized as a <strong>Configurable Markov Decision Process</strong> (<strong>CMDP</strong>).
+Formula One engineers have to configure their cars (e.g. wings, tyres, engine, brakes) to minimize lap time. In industry, machines have to be configured to maximize the production rate. These are cases in which the goal of the configuration is to improve performance, however in the case of car race it is possible for the supervisor to improve the learning speed of the pilot by presenting tracks of different difficulty.</p>
+
+<center>
+<img src="/blog/figs/remps/conf-env.jpg" style="width: 50%; float: left;" alt="Figure 1 - REMPS" />
+<img src="/blog/figs/remps/conf-env2.png" style="width: 50%; float: left;" alt="Figure 2 - REMPS" />
+</center>
+
+<p>In our paper “Reinforcement Learning in Continuous Configurable Environments”, accepted at ICML 2019, we propose a trust-region method, <strong>Relative Entropy Model Policy Search</strong> (<strong>REMPS</strong>), able to learn both the policy and the MDP configuration in continuous domains without requiring the knowledge of the true model of the environment.</p>
+
+<h2 id="optimization-and-projection">Optimization and Projection</h2>
+<p>Relative Entropy Model Policy Search (REMPS), imports several ideas from the classic REPS (Peters et al., 2010); in particular, the use of a constraint to ensure that the resulting new stationary distribution is sufficiently close to the current one. REMPS consists of two subsequent phases: optimization and projection. 
+In the optimization phase we look for the stationary distribution that optimizes the performance. This search is limited to the space of distributions that are not too dissimilar from the current stationary distribution. The notion of dissimilarity is formalized in terms of a threshold κ &gt; 0 on the KL-divergence.
+The resulting distribution may not fall within the space of the representable stationary distributions given our parametrization. Therefore, similarly to Daniel et al. (2012), in the projection phase we need to retrieve a policy and a configuration inducing a stationary distribution as close as possible to the optimized distribution</p>
+
+<h2 id="model-approximation">Model Approximation</h2>
+
+<h2 id="results">Results</h2>
+
+	</div>
+  </div>
+</article>
+
+<!-- tags do not look great like this
+
+  <div class="blog-tags">
+	  Tags: machine-learning,, reinforcement-learning
+  </div>
+
+-->
+
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    <!--
-<div class="main-explain-area jumbotron">
-  <p>Check out my blog on Open Data science!</p>
-</div>
--->
-
-<!-- 
-<h1> Blog posts on Open Data Science: </h1> 
--->
-
-<div class="posts-list">
-  
-  <article class="post-preview">
-    <a href="/blog/2019/05/22/RL-in-Conf-MDP.html">
-	  <h2 class="post-title">Reinforcement Learning in Configurable Continuous Environments</h2>
-	
-	    
-    </a>
-
-    <p class="post-meta">
-      Posted on May 22, 2019
-    </p>
-  
-    <div class="post-entry">
-      Most of the problems tackled by Reinforcement Learning are typically modeled as Markov Decision Processes in which the environment is considered a fixed entity and cannot be controlled. Nevertheless, there exist several real-world examples in which a partial control on the environment can be exercised by the agent itself or...
-	  <a href="/blog/2019/05/22/RL-in-Conf-MDP.html" class="post-read-more">[Read&nbsp;More]</a>
-    </div>
-  
-   </article>
-  
-  <article class="post-preview">
-    <a href="/blog/2019/05/06/GANs-From-Theory-to-Production.html">
-	  <h2 class="post-title">PyCon X - GANs: From Theory to Production</h2>
-	
-	    
-    </a>
-
-    <p class="post-meta">
-      Posted on May 6, 2019
-    </p>
-  
-    <div class="post-entry">
-      Me and my colleagues (Federico Di Mattia, Paolo Galeone, Michele De Simoni) held the training: “Deep Diving into GANs: From Theory To Production” at PyConX in Florence.    GANs are the new hottest topic in the ML arena; however,...
-	  <a href="/blog/2019/05/06/GANs-From-Theory-to-Production.html" class="post-read-more">[Read&nbsp;More]</a>
-    </div>
-  
-   </article>
-  
-  <article class="post-preview">
-    <a href="/blog/2019/03/27/Learning-To-Run.html">
-	  <h2 class="post-title">Learning To Run</h2>
-	
-	    
-    </a>
-
-    <p class="post-meta">
-      Posted on March 27, 2019
-    </p>
-  
-    <div class="post-entry">
-       Paper Slides  In this article we present our approach for the NIPS 2017 ”Learning To Run” challenge. The goal of the challenge is to develop a controller able to run in a complex environment, by training a model with...
-	  <a href="/blog/2019/03/27/Learning-To-Run.html" class="post-read-more">[Read&nbsp;More]</a>
-    </div>
-  
-   </article>
-  
-  <article class="post-preview">
-    <a href="/blog/2019/02/12/Every-Experiment-is-sacred.html">
-	  <h2 class="post-title">Every Experiment is Sacred</h2>
-	
-	    
-    </a>
-
-    <p class="post-meta">
-      Posted on February 12, 2019
-    </p>
-  
-    <div class="post-entry">
-      Managing Machine Learning experiments is usually painful.    The usual workflow when approaching a problem using Machine Learning tools is the following. You study the problem, define a possible solution, then you implement that solution and measure its quality. Often...
-	  <a href="/blog/2019/02/12/Every-Experiment-is-sacred.html" class="post-read-more">[Read&nbsp;More]</a>
-    </div>
-  
-   </article>
-  
-  <article class="post-preview">
-    <a href="/blog/2015/01/01/template.html">
-	  <h2 class="post-title">Title</h2>
-	
-	  
-	  <h3 class="post-subtitle">
-	    Longer title
-	  </h3>
-	    
-    </a>
-
-    <p class="post-meta">
-      Posted on January 1, 2015
-    </p>
-  
-    <div class="post-entry">
-      Text
-
-
-
-Link, more text
-
-
-	  <a href="/blog/2015/01/01/template.html" class="post-read-more">[Read&nbsp;More]</a>
-    </div>
-  
-   </article>
-  
-</div>
-
-
-
-	
+    <ul class="pager blog-pager">
+      
+      <li class="previous">
+        <a href="/blog/2019/05/06/GANs-From-Theory-to-Production.html" data-toggle="tooltip" data-placement="top" title="PyCon X - GANs: From Theory to Production">&larr; Previous Post</a>
+      </li>
+      
+      
+    </ul>
   </div>
 </div>
+
+
+<div class="row disqus-comments">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    
+
+  </div>
+</div>
+
 
     </div>
 
