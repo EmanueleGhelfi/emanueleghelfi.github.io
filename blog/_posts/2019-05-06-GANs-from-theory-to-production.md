@@ -2,7 +2,7 @@
 author: "manughelfi"
 layout: post
 did: "blog6"
-title:  "PyConX - GANs: From Theory to Production"
+title:  "PyCon X - GANs: From Theory to Production"
 slug:  GANs - From Theory to Production
 date:   2019-05-06 8:00:00
 categories: machine-learning
