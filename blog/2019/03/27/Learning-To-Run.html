@@ -30,6 +30,10 @@
     
       <link rel="stylesheet" href="/css/main.css" />
     
+      <link rel="stylesheet" href="/css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="/css/custom.css" />
+    
   
 
   
@@ -150,9 +154,38 @@
 <article>
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-	  <center>
+        
+        
+        
+        
+
+        <div id="header-gh-btns">
+          
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=MultiBeerBandits&repo=learning-to-run&type=star&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=MultiBeerBandits&repo=learning-to-run&type=watch&v=2&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=MultiBeerBandits&type=follow&count=true" frameborder="0" scrolling="0" width="220px" height="20px"></iframe>
+              
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=MultiBeerBandits&repo=learning-to-run&type=fork&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                
+            
+          
+        </div>
+      
+	  <div style="margin:20px;">
+<center>
 <a href="/files/data/l2run_final.pdf"><button name="button" class="btn btn-primary" href="/files/data/l2run_final.pdf">Paper</button></a> <a href="https://www.slideshare.net/EmanueleGhelfi/learning-to-run-138950609"><button name="button" class="btn btn-primary">Slides</button></a>
 </center>
+</div>
 
 <p>In this article we present our approach for the NIPS 2017 ”Learning To Run” challenge. The goal of the challenge is to develop a controller able to run in a complex environment, by training a model with Deep Reinforcement Learning methods. We follow the approach of the team Reason8 (3rd place). We begin from the algorithm that performed better on the task, Deep Deterministic Policy Gradient (DDPG). We implement and benchmark several improvements over vanilla DDPG, including parallel sampling, parameter noise, layer normalization and domain specific changes. We were able to reproduce results of the Reason8 team, obtaining a model able to run for more than 30m.</p>
 
@@ -209,13 +242,20 @@ Deep Deterministic Policy Gradient (DDPG) <a class="citation" href="#ddpg">(Lill
 <h3 id="actor-critic">Actor Critic</h3>
 <p>Actor critic algorithm uses two networks. The actor network represents the agent policy and outputs an action given a state. The critic network takes as input the pair state action and outputs an estimates of the quality of the action in that state. The two networks used in our project are the followings:</p>
 
+<p><a class="lightbox" href="#dog">
+   <img src="http://i.huffpost.com/gen/749263/original.jpg" />
+</a></p>
+<div class="lightbox-target" id="dog">
+   <img src="http://i.huffpost.com/gen/749263/original.jpg" />
+   <a class="lightbox-close" href="#"></a>
+</div>
 <center>
 <img src="/blog/figs/l2run/actor_critic.png" style="width: 80%;" alt="Figure 2 - RL" />
 </center>
 
 <p>Critic is trained using off-policy data coming from the replay buffer, that is a FIFO queue containing tuples \( (s_t, a_t, r_t, s_{t+1}) \). Critic’s task is to minimize the Bellman error (notice that the policy is deterministic, so we can avoid the expectation over actions):</p>
 
-<script type="math/tex; mode=display">Q(s_t,a_t \mid \theta^Q ) = r(s_t,a_t) + \gamma Q(s_{t+1}, \pi (s_{t+1}  \mid \theta^\pi ) \mid \theta^Q )</script>
+<script type="math/tex; mode=display">Q(s_t,a_t \mid \theta^Q ) = r(s_t,a_t) + \gamma Q(s_{t+1}, \pi (s_{t+1}  \mid \theta^\pi ) \mid \theta^Q ),</script>
 
 <p>where \( \theta^Q \) are parameters of the critic network and \( \theta^\pi \) are actor’s parameters.
 It is evident in the equation above that the update step of the weights \( \theta^Q \) comprises \( Q(s_t, a_t \mid \theta^Q) \) in the target, resulting in an iterative update prone to divergence. DDPG solves this problem using <strong>target networks</strong>. Target networks are copies of the actor and critic networks that are only used for computing target values, and softly updated for improving stability:</p>
@@ -359,6 +399,47 @@ It is also worth highlighting that the learned model with state-action flip achi
 
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+    
+      <!-- Check if any share-links are active -->
+
+
+
+
+<section id = "social-share-section">
+  <span class="sr-only">Share: </span>
+
+  
+  <!--- Share on Twitter -->
+    <a href="https://twitter.com/intent/tweet?text=Learning+To+Run+http://emanueleghelfi.github.io/blog/2019/03/27/Learning-To-Run.html"
+      class="btn btn-social-icon btn-twitter" title="Share on Twitter">
+      <span class="fa fa-fw fa-twitter" aria-hidden="true"></span>
+      <span class="sr-only">Twitter</span>
+    </a>
+  
+
+  
+  <!--- Share on Facebook -->
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://emanueleghelfi.github.io/blog/2019/03/27/Learning-To-Run.html"
+      class="btn btn-social-icon btn-facebook" title="Share on Facebook">
+      <span class="fa fa-fw fa-facebook" aria-hidden="true"></span>
+      <span class="sr-only">Facebook</span>
+    </a>
+  
+
+  
+  <!--- Share on LinkedIn -->
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://emanueleghelfi.github.io/blog/2019/03/27/Learning-To-Run.html"
+      class="btn btn-social-icon btn-linkedin" title="Share on LinkedIn">
+      <span class="fa fa-fw fa-linkedin" aria-hidden="true"></span>
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  
+
+</section>
+
+
+    
     <ul class="pager blog-pager">
       
       <li class="previous">
@@ -378,6 +459,22 @@ It is also worth highlighting that the learned model with state-action flip achi
 <div class="row disqus-comments">
   <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
     
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'emanueleghelfi';
+	    // ensure that pages with query string get the same discussion
+            var url_parts = window.location.href.split("?");
+            var disqus_url = url_parts[0];	    
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
 
   </div>
 </div>
