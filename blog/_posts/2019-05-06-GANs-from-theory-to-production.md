@@ -8,8 +8,11 @@ date:   2019-05-06 8:00:00
 categories: machine-learning
 tags: machine-learning
 description: "GANs: from theory to production."
+gh-repo: "zurutech/gans-from-theory-to-production"
+gh-badge: [star, watch, follow, fork]
+social-share: true
 ---
-Me and my colleagues (Federico Di Mattia, Paolo Galeone, Michele De Simoni) held the training: "Deep Diving into GANs: From Theory To Production" at [PyConX](https://www.pycon.it/conference/talks/deep-diving-into-gans-form-theory-to-production) in Florence.
+Me and my colleagues (Federico Di Mattia, Paolo Galeone, Michele De Simoni) held the training: "Deep Diving into GANs: From Theory To Production" at [PyCon X](https://www.pycon.it/conference/talks/deep-diving-into-gans-form-theory-to-production) in Florence.
 
 <center>
 <img src="/blog/figs/gan/social.png" style="width: 80%;" alt="Figure 1 - PyConX">

@@ -9,14 +9,16 @@ categories: machine-learning
 tags: machine-learning
 description: "In this article we present our approach for the NIPS 2017 ”Learning To Run” challenge."
 mathjax: true
-gh-repo: MultiBeerBandits/learning-to-run
-gh-badge: star
+gh-repo: "MultiBeerBandits/learning-to-run"
+gh-badge: [star, watch, follow, fork]
 social-share: true
 ---
 
+<div style="margin:20px;">
 <center>
 <a href="/files/data/l2run_final.pdf"><button name="button" class="btn btn-primary" href="/files/data/l2run_final.pdf">Paper</button></a> <a href="https://www.slideshare.net/EmanueleGhelfi/learning-to-run-138950609"><button name="button" class="btn btn-primary">Slides</button></a>
 </center>
+</div>
 
 In this article we present our approach for the NIPS 2017 ”Learning To Run” challenge. The goal of the challenge is to develop a controller able to run in a complex environment, by training a model with Deep Reinforcement Learning methods. We follow the approach of the team Reason8 (3rd place). We begin from the algorithm that performed better on the task, Deep Deterministic Policy Gradient (DDPG). We implement and benchmark several improvements over vanilla DDPG, including parallel sampling, parameter noise, layer normalization and domain specific changes. We were able to reproduce results of the Reason8 team, obtaining a model able to run for more than 30m.
 
@@ -74,6 +76,13 @@ DDPG is an off-policy method, which means that the optimized policy is different
 ### Actor Critic
 Actor critic algorithm uses two networks. The actor network represents the agent policy and outputs an action given a state. The critic network takes as input the pair state action and outputs an estimates of the quality of the action in that state. The two networks used in our project are the followings:
 
+<a class="lightbox" href="#dog">
+   <img src="http://i.huffpost.com/gen/749263/original.jpg"/>
+</a> 
+<div class="lightbox-target" id="dog">
+   <img src="http://i.huffpost.com/gen/749263/original.jpg"/>
+   <a class="lightbox-close" href="#"></a>
+</div>
 <center>
 <img src="/blog/figs/l2run/actor_critic.png" style="width: 80%;" alt="Figure 2 - RL">
 </center>
@@ -81,7 +90,7 @@ Actor critic algorithm uses two networks. The actor network represents the agent
 Critic is trained using off-policy data coming from the replay buffer, that is a FIFO queue containing tuples \\( (s_t, a_t, r_t, s_{t+1}) \\). Critic’s task is to minimize the Bellman error (notice that the policy is deterministic, so we can avoid the expectation over actions):
 
 $$
-Q(s_t,a_t \mid \theta^Q ) = r(s_t,a_t) + \gamma Q(s_{t+1}, \pi (s_{t+1}  \mid \theta^\pi ) \mid \theta^Q )
+Q(s_t,a_t \mid \theta^Q ) = r(s_t,a_t) + \gamma Q(s_{t+1}, \pi (s_{t+1}  \mid \theta^\pi ) \mid \theta^Q ),
 $$
 
 where \\( \theta^Q \\) are parameters of the critic network and \\( \theta^\pi \\) are actor's parameters.
