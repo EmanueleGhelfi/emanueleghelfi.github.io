@@ -13,7 +13,7 @@ gh-repo: "MultiBeerBandits/learning-to-run"
 gh-badge: [star, watch, follow, fork]
 social-share: true
 comments: true
-share-img: "/blog/figs/l2run/nips2017.png"
+share-img: "https://emanueleghelfi.github.io/blog/figs/l2run/nips2017.png"
 ---
 
 <div style="margin:20px;">
