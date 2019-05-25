@@ -13,6 +13,7 @@ gh-repo: "MultiBeerBandits/learning-to-run"
 gh-badge: [star, watch, follow, fork]
 social-share: true
 comments: true
+share-img: "/blog/figs/l2run/nips2017.png"
 ---
 
 <div style="margin:20px;">
@@ -77,13 +78,6 @@ DDPG is an off-policy method, which means that the optimized policy is different
 ### Actor Critic
 Actor critic algorithm uses two networks. The actor network represents the agent policy and outputs an action given a state. The critic network takes as input the pair state action and outputs an estimates of the quality of the action in that state. The two networks used in our project are the followings:
 
-<a class="lightbox" href="#dog">
-   <img src="http://i.huffpost.com/gen/749263/original.jpg"/>
-</a> 
-<div class="lightbox-target" id="dog">
-   <img src="http://i.huffpost.com/gen/749263/original.jpg"/>
-   <a class="lightbox-close" href="#"></a>
-</div>
 <center>
 <img src="/blog/figs/l2run/actor_critic.png" style="width: 80%;" alt="Figure 2 - RL">
 </center>
