@@ -12,6 +12,7 @@ mathjax: true
 gh-repo: "MultiBeerBandits/learning-to-run"
 gh-badge: [star, watch, follow, fork]
 social-share: true
+comments: true
 ---
 
 <div style="margin:20px;">

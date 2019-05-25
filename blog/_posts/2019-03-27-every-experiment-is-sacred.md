@@ -10,6 +10,7 @@ img: sacred3.jpg
 banner: sacred3.jpg
 tags: machine-learning
 description: "How to manage Machine Learning experiments and make them reproducible."
+comments: true
 ---
 Managing Machine Learning experiments is usually painful.
 
