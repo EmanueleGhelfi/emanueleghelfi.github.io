@@ -6,12 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Projects</title>
+  <title>Reinforcement Learning in Configurable Continuous Environments</title>
 
   <meta name="author" content="Emanuele Ghelfi" />
 
-  
-  <meta name="description" content="Presentations, Projects, Research, Blogs."/>
   
 
   <link rel="alternate" type="application/rss+xml" title="Emanuele Ghelfi - Emanuele Ghelfi's personal web page" href="/feed.xml" />
@@ -57,15 +55,13 @@
   
 
   <!-- Facebook OpenGraph tags -->
-  <meta property="og:title" content="Projects" />
+  <meta property="og:title" content="Reinforcement Learning in Configurable Continuous Environments" />
   <meta property="og:type" content="website" />
 
   
-  <meta property="og:description" content="Presentations, Projects, Research, Blogs." />
-  
 
   
-  <meta property="og:url" content="http://emanueleghelfi.github.io/projects" />
+  <meta property="og:url" content="http://emanueleghelfi.github.io/blog/2019/05/22/RL-in-Conf-MDP.html" />
   
 
   
@@ -139,97 +135,224 @@
 </nav>  
 
     <div role="main" class="container main-content">
-      
-<header class="header-page">
+      <header class="header-post">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-	  <div class="page-heading">
-	    <h1>Projects</h1>
-	    
-	    <hr class="small">
-	    <span class="page-subheading">Presentations, Projects, Research, Blogs.</span>
-	    
-	  </div>
-    </div>
+      <div class="post-heading">
+        <h1>Reinforcement Learning in Configurable Continuous Environments</h1>
+        
+        <span class="post-meta">Posted on May 22, 2019</span>
+      </div>
+     </div>
   </div>
 </header>
 
 
+<script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+
+<article>
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+        
+        
+
+        <div id="header-gh-btns">
+          
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=albertometelli&repo=remps&type=star&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=albertometelli&repo=remps&type=watch&v=2&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=albertometelli&type=follow&count=true" frameborder="0" scrolling="0" width="220px" height="20px"></iframe>
+              
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=albertometelli&repo=remps&type=fork&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                
+            
+          
+        </div>
+      
+	  <div style="margin:20px;">
+<center>
+<a href="http://proceedings.mlr.press/v80/metelli18a.html"><button name="button" class="btn btn-primary" href="http://proceedings.mlr.press/v80/metelli18a.html">Paper</button></a>
+<a href="https://albertometelli.github.io/download/icml2019-remps/poster.pdf"><button name="button" class="btn btn-primary">Poster</button></a>
+<a href="https://albertometelli.github.io/download/icml2019-remps/slides.pdf"><button name="button" class="btn btn-primary">Slides</button></a>
+<a href="https://github.com/albertometelli/remps
+"><button name="button" class="btn btn-primary">Code</button></a>
+</center>
+</div>
+
+<p>Most of the problems tackled by Reinforcement Learning are typically modeled as Markov Decision Processes in which the environment is considered a <strong>fixed</strong> entity and cannot be controlled. Nevertheless, there exist several real-world examples in which a <strong>partial control</strong> on the environment can be exercised by the agent itself or by an external <strong>supervisor</strong>. For instance, in a car race the driver can set up his/her vehicle to better suit his/her needs. With the phrase <strong>environment configuration</strong> we refer to the activity of altering some environmental parameters to improve the performance of the agent’s policy. This scenario has been recently formalized as a <strong>Configurable Markov Decision Process</strong> (<strong>CMDP</strong>) <a class="citation" href="#cmdp">(Metelli, Mutti, &amp; Restelli, 2018)</a>.
+Formula One engineers have to configure their cars (e.g. wings, tyres, engine, brakes) to minimize lap time. In industry, machines have to be configured to maximize the production rate. These are cases in which the goal of the configuration is to improve performance, however in the case of car race it is possible for the supervisor to improve the learning speed of the pilot by presenting tracks of different difficulty.</p>
+
+<center>
+<a href="/blog/figs/remps/conf-env.jpg"> <img src="/blog/figs/remps/conf-env.jpg" style="width: 50%; float: left;" alt="Figure 1 - REMPS" /> </a>
+<a href="/blog/figs/remps/conf-env2.png"> <img src="/blog/figs/remps/conf-env2.png" style="width: 50%;" alt="Figure 2 - REMPS" /> </a>
+</center>
+
+<p>In our <a href="http://proceedings.mlr.press/v80/metelli18a.html">paper</a> “Reinforcement Learning in Continuous Configurable Environments”, accepted at ICML 2019, we propose a trust-region method, <strong>Relative Entropy Model Policy Search</strong> (<strong>REMPS</strong>), able to learn both the policy and the MDP configuration in continuous domains without requiring the knowledge of the true model of the environment.</p>
+
+<h2 id="optimization-and-projection">Optimization and Projection</h2>
+<p>Relative Entropy Model Policy Search (<strong>REMPS</strong>), imports several ideas from the classic REPS <a class="citation" href="#reps">(Peters, Mülling, &amp; Altun, 2010)</a>; in particular, the use of a constraint to ensure that the resulting new stationary distribution is sufficiently close to the current one. REMPS consists of two subsequent phases: optimization and projection. 
+In the optimization phase we look for the stationary distribution that optimizes the performance. This search is limited to the space of distributions that are not too dissimilar from the current stationary distribution. The notion of dissimilarity is formalized in terms of a threshold (\( \kappa &gt; 0 )\) on the KL-divergence.
+The resulting distribution may not fall within the space of the representable stationary distributions given our parametrization. Therefore, similarly to <a class="citation" href="#daniel">(Daniel, Neumann, &amp; Peters, 2012)</a>, in the projection phase we need to retrieve a policy and a configuration inducing a stationary distribution as close as possible to the optimized distribution.</p>
+
+<center>
+<figure>
+<a href="/blog/figs/remps/opt-proj.png"><img src="/blog/figs/remps/opt-proj.png" style="width: 80%" alt="Figure 2 - Optimization and Projection" /> </a>
+<figcaption>Illustration of Optimization and Projection</figcaption>
+</figure>
+</center>
+
+<h2 id="model-approximation">Model Approximation</h2>
+<p>Our formulation of REMPS requires the access to the environment dynamics \(p_\omega\), depending on the vector of configurable parameters \( \omega \). The environment dynamics represents the distribution over the next states given the current state and action:
+<script type="math/tex">p: \mathcal{S} \times \mathcal{A} \rightarrow \mathcal{S}.</script>
+In our cases the transition function depends also on some parameter:
+<script type="math/tex">p: \mathcal{S} \times \mathcal{A} \times {\Omega} \rightarrow \mathcal{S}.</script>
+Although the parameters to be configured are usually known in real word cases, the environment dynamic is usually unkown in a model-free scenario.
+Our approach is based on a <strong>Maximum Likelihood</strong> estimation. Given a dataset of experience:
+<script type="math/tex">{ ( s_i, a_i, \omega_i, s'_i )}_{i=1}^{N},</script>
+we solve the problem:</p>
+
+<script type="math/tex; mode=display">\max_{\widehat{p}} \frac{1}{N} \sum_{i=1}^{N} \log \widehat{p} (s_{i}' | s_i, a_i, \omega_i).</script>
+
+<p>Once we have the model approximation \( \widehat{p} \) we can simply run REMPS replacing the true model \(p\) with the approximated model \( \widehat{p} \).</p>
+
+<h2 id="results">Results</h2>
+
+<p>We evaluated REMPS on three domains: a simple chain domain, the classical cartpole and a more challenging car configuration task based on TORCS <a class="citation" href="#torcs">(Wymann et al., 2000)</a>. We compared REMPS with the extension of G(PO)MDP <a class="citation" href="#gpomdp">(Baxter &amp; Bartlett, 2001)</a> to the policy-configuration learning. For more details, please refer to the <a href="http://proceedings.mlr.press/v80/metelli18a.html">paper</a>.</p>
+
+<center>
+
+<figure>
+<a href="/blog/figs/remps/chain.png"> <img src="/blog/figs/remps/chain.png" style="width: 50%" alt="Performance on the Chain Problem" /> </a>
+<figcaption>Performance on the Chain Problem</figcaption>
+</figure>
+<figure>
+<a href="/blog/figs/remps/cartpole.png"> <img src="/blog/figs/remps/cartpole.png" style="width: 50%" alt="Cartpole" /> </a>
+<figcaption>Performance on the Cartpole Problem</figcaption>
+</figure>
+<figure>
+<a hfref="/blog/figs/remps/torcs.png"> <img src="/blog/figs/remps/torcs.png" style="width: 50%" alt="Torcs" /> </a>
+<figcaption>Performance on TORCS</figcaption>
+</figure>
+</center>
+
+<h2 id="authors">Authors</h2>
+
+<ul>
+  <li>Alberto Maria Metelli</li>
+  <li>Emanuele Ghelfi</li>
+  <li>Marcello Restelli</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><abbr>[cmdp]</abbr> <span id="cmdp">Metelli, A. M., Mutti, M., &amp; Restelli, M. (2018). Configurable Markov Decision Processes. In <i>35th International Conference on Machine Learning</i> (Vol. 80, pp. 3491–3500). PMLR.</span></li>
+<li><abbr>[reps]</abbr> <span id="reps">Peters, J., Mülling, K., &amp; Altun, Y. (2010). Relative Entropy Policy Search. In <i>AAAI</i> (pp. 1607–1612). Atlanta.</span></li>
+<li><abbr>[daniel]</abbr> <span id="daniel">Daniel, C., Neumann, G., &amp; Peters, J. (2012). Hierarchical relative entropy policy search. In <i>Artificial Intelligence and Statistics</i> (pp. 273–281).</span></li>
+<li><abbr>[torcs]</abbr> <span id="torcs">Wymann, B., Espié, E., Guionneau, C., Dimitrakakis, C., Coulom, R., &amp; Sumner, A. (2000). Torcs, the open racing car simulator, <i>4</i>, 6.</span></li>
+<li><abbr>[gpomdp]</abbr> <span id="gpomdp">Baxter, J., &amp; Bartlett, P. L. (2001). Infinite-horizon policy-gradient estimation. <i>Journal of Artificial Intelligence Research</i>, <i>15</i>, 319–350.</span></li></ol>
+
+	</div>
+  </div>
+</article>
+
+<!-- tags do not look great like this
+
+  <div class="blog-tags">
+	  Tags: machine-learning,, reinforcement-learning
+  </div>
+
+-->
+
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    <h2 id="public-presentations">Public presentations</h2>
 
-<ul>
-  <li>Deep Diving into GANs: from theory to production @ PyConX 2019, Florence. (<a href="https://www.pycon.it/conference/talks/deep-diving-into-gans-form-theory-to-production">PyConX</a>), (<a href="https://github.com/zurutech/gans-from-theory-to-production">Github</a>), (<a href="https://www.slideshare.net/EmanueleGhelfi/gan-theory-and-applications-143737572">SlideShare</a>)</li>
-  <li>Reinforcement Learning in Configurable Environments: an Information Theoretic approach, Thesis discussion, 20.12.2018 (<a href="https://www.slideshare.net/EmanueleGhelfi/reinforcement-learning-in-configurable-environments">SlideShare</a>)</li>
-</ul>
+    
+      <!-- Check if any share-links are active -->
 
-<h2 id="thesis">Thesis</h2>
 
-<h3 id="reinforcement-learning-in-configurable-environments-an-information-theoretic-approach">Reinforcement Learning in Configurable Environments: an Information Theoretic Approach</h3>
-<p>Master’s thesis
-Politecnico di Milano, Computer Science and Engineering, December 2018
-<a href="https://www.politesi.polimi.it/handle/10589/144736">Online</a></p>
 
-<h2 id="projects">Projects</h2>
 
-<h3 id="learning-to-run">Learning To Run</h3>
-<p>Project for the Deep Learning Course @ Polimi.
-Topics: Deep Learning, Reinforcement Learning.</p>
+<section id = "social-share-section">
+  <span class="sr-only">Share: </span>
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/HVOrhxypOGg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-</center>
+  
+  <!--- Share on Twitter -->
+    <a href="https://twitter.com/intent/tweet?text=Reinforcement+Learning+in+Configurable+Continuous+Environments+http://emanueleghelfi.github.io/blog/2019/05/22/RL-in-Conf-MDP.html"
+      class="btn btn-social-icon btn-twitter" title="Share on Twitter">
+      <span class="fa fa-fw fa-twitter" aria-hidden="true"></span>
+      <span class="sr-only">Twitter</span>
+    </a>
+  
 
-<p>The project takes inspiration from the 2017 NIPS Competition: (<a href="https://www.crowdai.org/challenges/nips-2017-learning-to-run">CrowdAI</a>).
-In this competition, you are tasked with developing a controller to enable a physiologically-based human model to navigate a complex obstacle course as quickly as possible. You are provided with a human musculoskeletal model and a physics-based simulation environment where you can synthesize physically and physiologically accurate motion. Potential obstacles include external obstacles like steps, or a slippery floor, along with internal obstacles like muscle weakness or motor noise. You are scored based on the distance you travel through the obstacle course in a set amount of time.
-The aim of the project is to study the problem and try to apply Deep Reinforcement Learning algorithms to replicate results of the top teams.</p>
+  
+  <!--- Share on Facebook -->
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://emanueleghelfi.github.io/blog/2019/05/22/RL-in-Conf-MDP.html"
+      class="btn btn-social-icon btn-facebook" title="Share on Facebook">
+      <span class="fa fa-fw fa-facebook" aria-hidden="true"></span>
+      <span class="sr-only">Facebook</span>
+    </a>
+  
 
-<ul>
-  <li><a href="https://github.com/MultiBeerBandits/learning-to-run">Github</a></li>
-  <li><a href="https://www.slideshare.net/EmanueleGhelfi/learning-to-run-138950609">Slides</a></li>
-</ul>
+  
+  <!--- Share on LinkedIn -->
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://emanueleghelfi.github.io/blog/2019/05/22/RL-in-Conf-MDP.html"
+      class="btn btn-social-icon btn-linkedin" title="Share on LinkedIn">
+      <span class="fa fa-fw fa-linkedin" aria-hidden="true"></span>
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  
 
-<h3 id="computer-vision-for-computer-art-a-pencil-writing-on-a-virtual-plane">Computer Vision for Computer Art. A pencil writing on a virtual plane</h3>
-<p>Project for the Image Analysis and Computer Vision Course @ Polimi.
-Topics: Image Analysis, Feature Extraction, Tracking, Camera Calibration, 3D reconstruction.</p>
+</section>
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/U7XAzXeBx-U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-</center>
 
-<p>Wouldn’t be great to write or draw on any surface, without the need of ink, and obtain the result in digitalized format? The task of this project is to develop an algorithm that, given a video of someone drawing using a pen without ink, recovers the 3D trajectory of the pencil tip.
-Given that, it is possible to reconstruct the drawing, by simply keeping the part of the trajectory near the writing surface. 
-The project is implemented in MATLAB.</p>
-
-<ul>
-  <li><a href="https://github.com/EmilianoGagliardiEmanueleGhelfi/inkless-painting">Github</a></li>
-  <li><a href="https://www.youtube.com/watch?v=U7XAzXeBx-U">Youtube</a></li>
-</ul>
-
-<h3 id="recommender-system-challenge--polimi-music-recommendation">Recommender System Challenge @ Polimi: Music Recommendation</h3>
-<p>I took part to the annual Kaggle competition on Recommender Systems held by Politecnico di Milano in 2017. That year topic was music recommendation, so we implemented and trained several Machine Learning algorithms to suggest songs to users based on their tastes.
-We placed among the best teams in the competition and we were invited to present our approach and solutions to the recommendation problem[1].
-We used Python, Numpy/Scipy, Jupyter Notebooks and C++ as technology tools to efficiently implement our ideas.</p>
-
-<ul>
-  <li><a href="https://www.slideshare.net/EmanueleGhelfi/recommender-system-challenge">Slides</a></li>
-  <li><a href="https://github.com/MultiBeerBandits/recsys\_challenge\_2017">Github</a></li>
-</ul>
-
-<h3 id="cnn-quantization---performance-evaluation">CNN Quantization - Performance Evaluation</h3>
-<p>Project for the Advanced Computer Architecture Course @ Polimi.
-Topics: Convolutional Neural Networks, Quantization, Performance, Cache, Tensorflow, Caffe. 
-For real world application, convolutional neural network(CNN) model can take more than 100MB of space and can be computationally too expensive. Therefore, there are multiple methods to reduce this complexity in the state of art. Ristretto is a plug-in to Caffe framework that employs several model approximation methods. For this project, first a CNN model is trained for Cifar-10 dataset with Caffe, then Ristretto will be used to generate multiple approximated versions of the trained model using different schemes. The goal of this project is the comparison of the models in terms of execution performance, model size and cache efficiency in the test and inference phase. The same steps are done with Tensorflow and Quantisation tool. The quantisation schemes of Tensorflow and Ristretto are then compared.</p>
-
-<ul>
-  <li><a href="https://www.slideshare.net/EmanueleGhelfi/cnn-quantization">Slides</a></li>
-  <li><a href="https://github.com/EmilianoGagliardiEmanueleGhelfi/CNN-compression-performance">Github</a></li>
-</ul>
-
-	
+    
+    <ul class="pager blog-pager">
+      
+      <li class="previous">
+        <a href="/blog/2019/05/06/GANs-From-Theory-to-Production.html" data-toggle="tooltip" data-placement="top" title="PyCon X - GANs: From Theory to Production">&larr; Previous Post</a>
+      </li>
+      
+      
+    </ul>
   </div>
 </div>
+
+
+<div class="row disqus-comments">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'emanueleghelfi-github-io';
+	    // ensure that pages with query string get the same discussion
+            var url_parts = window.location.href.split("?");
+            var disqus_url = url_parts[0];	    
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+  </div>
+</div>
+
 
     </div>
 
