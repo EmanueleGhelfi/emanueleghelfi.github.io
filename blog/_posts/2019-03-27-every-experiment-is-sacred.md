@@ -15,7 +15,9 @@ comments: true
 Managing Machine Learning experiments is usually painful.
 
 <center>
-<img src="/blog/figs/sacred/sacred3.jpg" style="width: 80%;" alt="Figure 1 - Experiments">
+<figure>
+<a href="/blog/figs/sacred/sacred3.jpg"><img src="/blog/figs/sacred/sacred3.jpg" style="width: 80%;" alt="Figure 1 - Experiments"> </a>
+</figure>
 </center>
 
 
@@ -116,22 +118,21 @@ Sacred dumps and saves **everything** into MongoDB including:
 To visualize and interact with your experiments a nice visualization board for this tool is [Omniboard](https://github.com/vivekratnavel/omniboard).
 
 <center>
-<img src="/blog/figs/sacred/omniboard4.png" style="width: 80%;"
- alt="Figure 1 - Omniboard">
+<figure>
+<a href="/blog/figs/sacred/omniboard4.png" > <img src="/blog/figs/sacred/omniboard4.png" style="width: 80%;"
+ alt="Figure 1 - Omniboard"> </a>
+ <figcaption> Omniboard </figure>
+ </figure>
 </center>
-*Figure 1 - Omniboard*
-<!-- ![Figure 1 - Omniboard](/blog/figs//omniboard4.png "Figure 1 - Omniboard"){:class="blog-image"}
-</div> -->
 
-
-<!-- <div markdown="1" class="blog-image-container">
-![Figure 2 - Omniboard - Experiment details](/blog/figs//omniboard5.png "Figure 2 - Omniboard - Experiment details"){:class="blog-image"}
-</div> -->
 <center>
-<img src="/blog/figs/sacred/omniboard5.png" style="width: 80%;"
+<figure>
+<a href="/blog/figs/sacred/omniboard5.png" > <img src="/blog/figs/sacred/omniboard5.png" style="width: 80%;"
  alt="Figure 2 - Omniboard - Experiment Details">
+ </a>
+ <figcaption>Omniboard - Experiment Details</figcaption>
+ </figure>
 </center>
-*Figure 2 - Omniboard - Experiment details*
 
 Omniboard lets you tag, annotate and order experiments making inspection and model selection easy.
 

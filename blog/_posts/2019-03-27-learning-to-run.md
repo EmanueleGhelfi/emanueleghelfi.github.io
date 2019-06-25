@@ -33,14 +33,20 @@ In this article we present our approach for the NIPS 2017 ”Learning To Run” 
 Reinforcement Learning (RL) deals with sequential descision making problems. At each time step the agent observes the world state, selects an action and receives a reward.
 
 <center>
-<img src="/blog/figs/l2run/high_level.png" style="width: 80%;" alt="Figure 1 - RL">
+<figure>
+<a href="/blog/figs/l2run/high_level.png"> <img src="/blog/figs/l2run/high_level.png" style="width: 80%;" alt="Figure 1 - RL"> </a>
+<figcaption> Reinforcement Learning framework </figcaption>
+</figure>
 </center>
 
 The figure above represents the Reinforcement Learning framework. The agent receives, at each time step a representation \\( s \\) of the state of the system. The agent takes an action a, according to its policy \\( \pi \\). The action has an effect on the world. The effect is a transition to the state \\( s' \\), according to the world dynamic \\( P \\). At the same time the agent receives a reward \\( r \\), based on the action and on the state.
 The policy \\( \pi \\) is often encoded in a neural network.
 
 <center>
-<img src="/blog/figs/l2run/with_nn.png" style="width: 80%;" alt="Figure 2 - RL">
+<figure>
+<a href="/blog/figs/l2run/with_nn.png" > <img src="/blog/figs/l2run/with_nn.png" style="width: 80%;" alt="Figure 2 - RL with NN"> </a>
+<figcaption> Deep Reinforcement Learning </figcaption>
+</figure>
 </center>
 
 The RL goal is to maximize the expected discounted sum of rewards:
@@ -79,7 +85,10 @@ DDPG is an off-policy method, which means that the optimized policy is different
 Actor critic algorithm uses two networks. The actor network represents the agent policy and outputs an action given a state. The critic network takes as input the pair state action and outputs an estimates of the quality of the action in that state. The two networks used in our project are the followings:
 
 <center>
-<img src="/blog/figs/l2run/actor_critic.png" style="width: 80%;" alt="Figure 2 - RL">
+<figure>
+<a href="/blog/figs/l2run/actor_critic.png" > <img src="/blog/figs/l2run/actor_critic.png" style="width: 80%;" alt="Figure 3 - Actor Critic"></a>
+<figcaption>Actor Critic representation </figcaption>
+</figure>
 </center>
 
 Critic is trained using off-policy data coming from the replay buffer, that is a FIFO queue containing tuples \\( (s_t, a_t, r_t, s_{t+1}) \\). Critic’s task is to minimize the Bellman error (notice that the policy is deterministic, so we can avoid the expectation over actions):
@@ -124,11 +133,11 @@ A key step in any reinforcement learning algorithm is the generation of \\( (s_t
 Each sampling thread is tasked with collecting trajectories using the provided policy, pushing them in a common queue and waiting for a new policy.
 
 <center>
-<img src="/blog/figs/l2run/ddpg.png" style="width: 80%;" alt="Figure 2 - RL">
-</center>
-
-<center>
-<img src="/blog/figs/l2run/ddpg_focus_1.png" style="width: 80%;" alt="Figure 2 - RL">
+<figure>
+<a href="/blog/figs/l2run/ddpg.png"> <img src="/blog/figs/l2run/ddpg.png" style="width: 80%;" alt="Figure 4 - DDPG"> </a>
+<a href="/blog/figs/l2run/ddpg_focus_1.png"> <img src="/blog/figs/l2run/ddpg_focus_1.png" style="width: 80%;" alt="Figure 5 - DDPG"> </a>
+<figcaption>Parallel Sampling Illustration </figcaption>
+</figure>
 </center>
 
 The training thread waits samples from \\( m \\) sampling threads, stores them in the replay buffer and trains the actor and critic networks for a fixed number of training steps. The new actor network is then sent to the waiting sampling threads that can now restart the sampling process.
@@ -151,7 +160,10 @@ Flipping transitions helps in obtaining symmetric policies, that is desirable si
 ## Environment
 
 <center>
-<img src="/blog/figs/l2run/our_problem.png" style="width: 80%;" alt="Figure 2 - RL">
+<figure>
+<a href="/blog/figs/l2run/our_problem.png" > <img src="/blog/figs/l2run/our_problem.png" style="width: 80%;" alt="Figure 6 - Our Problem"> </a>
+<figcaption> Learning To Run </figcaption>
+</figure>
 </center>
 
 The agent is a musculoskeletal model including information about muscles, joints and links moving in a 2D environment (no movement is possible along Z axis).
@@ -187,22 +199,32 @@ All the models running on the __reduced-state__ configuration share the same arc
 ### State action flip and parameter noise
 In this experiment we investigated on the importance of __state-action flip__ and __parameter noise__ (PN) for the learning process. We trained four models for approximately \\( 10^6 \\) training steps with all the combinations of the two improvements, i.e. with and without state-action flip and parameter noise. From our experimental results, introducing both modifications leads to both better performance, in terms of longer run distance, and a significant speed-up in terms of training steps to reach same distance. 
 It is also worth highlighting that the learned model with state-action flip achieved higher performance than the one with PN only. This possibly remarks the importance of domain-specific additions in the context of RL which outperformed an uninformed exploration.	
+
 <center>
-<img src="/blog/figs/l2run/learning_curves.png" style="width: 80%;" alt="Figure 2 - RL">
+<figure>
+<a href="/blog/figs/l2run/learning_curves.png"><img src="/blog/figs/l2run/learning_curves.png" style="width: 80%;" alt="Figure 7 - Learning Curves"></a>
+<figcaption>Performance and Training Time. On the x axis the training time expressed in steps or hours. On the y axis the performance expressed in meters.</figcaption>
+</figure>
 </center>
 
 ### Sampling threads
 In this experiment we analyzed the impact of the number of sampling threads. We trained two models with 10 and 20 sampling threads respectively. We used the same sampling-training strategy: wait for samples from 1 thread, check the state of the other threads (collecting samples if available), train for 300 steps, send the updated policies to waiting threads that restart the sampling process. The experiment with 20 sampling threads outperformed the experiment with 10  sampling threads. This shows the importance of exploration in this task, as well as the importance of parallelization. 
 
 <center>
-<img name="fig:thread-number" src="/blog/figs/l2run/thread_number.png" style="width: 80%;" alt="Figure 2 - RL">
+<figure>
+<a href="/blog/figs/l2run/thread_number.png"><img name="fig:thread-number" src="/blog/figs/l2run/thread_number.png" style="width: 80%;" alt="Figure 8 - Thread Number"> </a>
+<figcaption>Effect of the thread number on the performance</figcaption>
+</figure>
 </center>
 
 ### Full vs Reduced state
 In this experiment we compared the performance of two learned models, the first trained over __full-state__ space and the second over __reduced-state__ space. The former was trained using a \\( [150, 64] \\) __elu__ actor network and a \\( [150, 50]\\) __tanh__ critic network. The latter was trained with a \\( [64, 64] \\) __elu__ actor network and a \\( [64, 32] \\) __tanh__ critic network. From our experiments, models trained with a **reduce-state** space outperformed those trained with the bigger state space. **Full-state** space introduces several variables that could help in learning a controller for our task, but they also increase the complexity of the model. We did not test thoroughly the networks architecture for the **full-state** space and incrementing the number of neurons might lead to better performance.
 
 <center>
-<img src="/blog/figs/l2run/reduced_vs_full.png" style="width: 80%;" alt="Figure 2 - RL">
+<figure>
+<a href="/blog/figs/l2run/reduced_vs_full.png"> <img src="/blog/figs/l2run/reduced_vs_full.png" style="width: 80%;" alt="Figure 9 - Full vs Reduced"> </a>
+<figcaption>Effect of the state representation on the performance </figcaption>
+</figure>
 </center>
 
 

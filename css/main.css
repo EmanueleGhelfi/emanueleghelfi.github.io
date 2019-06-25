@@ -422,3 +422,9 @@ header.header-post .post-heading .post-subheading {
 .otro-blockquote::before{ font-family:Arial; content: "\201C"; color:#78C0A8; font-size:4em; position: absolute; left: 10px; top:-10px; }
 .otro-blockquote::after{ content: ''; }
 .otro-blockquote span{ display:block; color:#333333; font-style: normal; font-weight: bold; margin-top:1em; }
+
+
+figcaption{
+  color: gray;
+  font-size: 16px;
+  }
