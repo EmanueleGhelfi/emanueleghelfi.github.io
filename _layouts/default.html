@@ -18,6 +18,9 @@ common-js:
 <!DOCTYPE html>
 <html lang="en">
   
+  {% if site.google_verify %}
+  <meta name="google-site-verification" content="{{ site.google_verify }}">
+{% endif %}
   {% include head.html %}
 
   <body>
