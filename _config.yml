@@ -75,6 +75,8 @@ disqus: "emanueleghelfi-github-io"
 
 # Fill in your Google Analytics ID to track your website using GA
 google_analytics: "UA-67791526-3"
+# google webmaster
+google_verify: "D1nJAX0_x0Dj8DL8A77WzcxRD_6yCCdSV8FfeNDru64"
 
 # --- Don't need to touch anything below here (but you can if you want) --- #
 
@@ -137,6 +139,3 @@ scholar:
   details_dir:    bibliography
 
   query: "@*"
-
-# google webmaster
-google_verify: D1nJAX0_x0Dj8DL8A77WzcxRD_6yCCdSV8FfeNDru64

@@ -121,7 +121,7 @@ To visualize and interact with your experiments a nice visualization board for t
 <figure>
 <a href="/blog/figs/sacred/omniboard4.png" > <img src="/blog/figs/sacred/omniboard4.png" style="width: 80%;"
  alt="Figure 1 - Omniboard"> </a>
- <figcaption> Omniboard </figure>
+ <figcaption> Omniboard </figcaption>
  </figure>
 </center>
 
