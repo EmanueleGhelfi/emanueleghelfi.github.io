@@ -120,5 +120,10 @@
   <link rel="stylesheet" type="text/css" href="http://ggvis.rstudio.com/0.1/libs/ggvis/css/ggvis.css"/>
   <!-- end of ggvis scripts-->
 
+  <!-- Tags management -->
+  {% if site.tags != "" %}
+  {% include collecttags.html %}
+{% endif %}
+
 
 </head>

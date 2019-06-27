@@ -5,7 +5,7 @@ title:  "Reinforcement Learning in Configurable Continuous Environments"
 slug:  RL in Conf-MDP
 date:   2019-05-22 8:00:00
 categories: machine-learning
-tags: machine-learning, reinforcement-learning
+tags: machine-learning reinforcement-learning icml conference configurable
 description: "RL in Configurable Continuous Environments"
 mathjax: true
 gh-repo: "albertometelli/remps"

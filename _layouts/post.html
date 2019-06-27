@@ -45,6 +45,16 @@ layout: default
           {% endif %}
         </div>
       {% endif %}
+        
+      <!-- tags -->
+      <span>[
+        {% for tag in page.tags %}
+          {% capture tag_name %}{{ tag }}{% endcapture %}
+          <a href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code></a>
+        {% endfor %}
+      ]</span>
+    
+    <!-- page content-->
 	  {{ content }}
 	</div>
   </div>
