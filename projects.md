@@ -4,7 +4,7 @@ title: Projects
 subtitle: Presentations, Projects, Research, Blogs.
 ---
 
-## Pubblications
+## Publications
 
 * Reinforcement Learning in Configurable Continuous Environments. In Proceedings of the 36th International Conference on Machine Learning ([ICML](http://proceedings.mlr.press) 2019). 01-06-2019. [paper](http://proceedings.mlr.press/v97/metelli19a.html), [slides](https://albertometelli.github.io/download/icml2019-remps/slides.pdf), [code](https://github.com/albertometelli/remps), [poster](https://albertometelli.github.io/download/icml2019-remps/poster.pdf)
 * A Survey on GANs for Anomaly Detection. ArXiv e-print. 28-06-2019. [paper](https://arxiv.org/abs/1906.11632)
@@ -44,6 +44,7 @@ The aim of the project is to study the problem and try to apply Deep Reinforceme
 
 - [Github](https://github.com/MultiBeerBandits/learning-to-run)
 - [Slides](https://www.slideshare.net/EmanueleGhelfi/learning-to-run-138950609)
+- [Paper](https://emanueleghelfi.github.io/files/data/l2run_final.pdf)
 
 ### Computer Vision for Computer Art. A pencil writing on a virtual plane
 Project for the Image Analysis and Computer Vision Course @ Polimi.
@@ -59,6 +60,7 @@ The project is implemented in MATLAB.
 
 - [Github](https://github.com/EmilianoGagliardiEmanueleGhelfi/inkless-painting)
 - [Youtube](https://www.youtube.com/watch?v=U7XAzXeBx-U)
+- [Report](https://emanueleghelfi.github.io/files/data/inkless_painting.pdf)
 
 ### Recommender System Challenge @ Polimi: Music Recommendation
 I took part to the annual Kaggle competition on Recommender Systems held by Politecnico di Milano in 2017. That year topic was music recommendation, so we implemented and trained several Machine Learning algorithms to suggest songs to users based on their tastes.
