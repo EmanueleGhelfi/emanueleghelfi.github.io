@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Tag: gan</title>
+  <title>Paper Notes: Toward Multimodal Image-to-Image Translation</title>
 
   <meta name="author" content="Emanuele Ghelfi" />
 
@@ -58,13 +58,13 @@
   
 
   <!-- Facebook OpenGraph tags -->
-  <meta property="og:title" content="Tag: gan" />
+  <meta property="og:title" content="Paper Notes: Toward Multimodal Image-to-Image Translation" />
   <meta property="og:type" content="website" />
 
   
 
   
-  <meta property="og:url" content="http://emanueleghelfi.github.io/tag/gan" />
+  <meta property="og:url" content="http://emanueleghelfi.github.io/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html" />
   
 
   
@@ -148,89 +148,289 @@
 </nav>  
 
     <div role="main" class="container main-content">
-      <div class="post">
-<h1>Tag: gan</h1>
+      <header class="header-post">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post-heading">
+        <h1>Paper Notes: Toward Multimodal Image-to-Image Translation</h1>
+        
+        <span class="post-meta">Posted on June 26, 2019</span>
+      </div>
+     </div>
+  </div>
+</header>
+
+
+<script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+
+<article>
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+      <!-- tags -->
+      <span>[
+        
+          
+          <a href="/tag/machine-learning"><code class="highligher-rouge"><nobr>machine-learning</nobr></code></a>
+        
+          
+          <a href="/tag/gan"><code class="highligher-rouge"><nobr>gan</nobr></code></a>
+        
+          
+          <a href="/tag/paper-notes"><code class="highligher-rouge"><nobr>paper-notes</nobr></code></a>
+        
+          
+          <a href="/tag/image-translation"><code class="highligher-rouge"><nobr>image-translation</nobr></code></a>
+        
+      ]</span>
+    
+    <!-- page content-->
+	  <p>The paper <a href="https://junyanz.github.io/BicycleGAN/">Toward Multimodal Image-to-Image Translation</a> <a class="citation" href="#zhu_toward_2017">(Zhu et al., 2017)</a> faces the problem of multimodal image-to-image translation in a principled way. The same problem is faced in <a class="citation" href="#isola_image--image_2016">(Isola, Zhu, Zhou, &amp; Efros, 2016)</a> (pix2pix) but in a not-so-effective manner (enabling Dropout at inference time).</p>
+
+<blockquote class="blockquote"><p>
+In this paper, the authors encourage a <bold>bijection</bold> between the output and the latent code. 
+</p>
+</blockquote>
+
+<p><strong>What does it mean?</strong></p>
+
+<p>A bijection is an <strong>invertible</strong> mapping. If the mapping is invertible it means that given a latent vector and a condition the output is unique. At the same time, given the same condition and a different latent vector, corresponds a different output. In other words the latent code contains information about the output.</p>
+
+<h2 id="the-problem-multimodal-image-to-image-translation">The problem: Multimodal Image-to-Image Translation</h2>
+
+<p>The problem of image-to-image translation is inherently ambiguous since at a <strong>single</strong> input image may corresponds <strong>many</strong> outputs.</p>
+
+<center>
+<figure>
+<a href="/blog/figs/multimodal/teaser.jpg"> <img src="/blog/figs/multimodal/teaser.jpg" style="width: 80%;" alt="Figure 1 - Multimodal" /> </a>
+<figcaption> Multimodal Image-to-Image translation, from <a class="citation" href="#zhu_toward_2017">(Zhu et al., 2017)</a> </figcaption>
+</figure>
+</center>
+
+<p>The generator in this context needs to find a mapping from the source domain to a <strong>distribution</strong> of potential results.</p>
+
+<h2 id="possibilities-and-related-work">Possibilities and Related Work</h2>
+
+<p>In order to encourage a variety of results the pix2pix model uses two different approaches:</p>
+
 <ul>
-
-  <li><a href="/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html">Paper Notes: Toward Multimodal Image-to-Image Translation</a> (26 Jun 2019)<br>
-    Multimodal Image-To-Image Translation
+  <li>
+    <p>Concatenate a latent vector to the condition.</p>
   </li>
-
-  <li><a href="/blog/2019/05/06/GANs-From-Theory-to-Production.html">PyCon X - GANs: From Theory to Production</a> (06 May 2019)<br>
-    GANs: from theory to production.
+  <li>
+    <p>Enable Dropout at inference time.</p>
   </li>
-
 </ul>
+
+<p>The concatenation of latent vector is not very effective in the pix2pix case since it’s ignored by the model.</p>
+
+<p>The Dropout at inference time is not a principled and controllable way to perform multimodal image-to-image translation.</p>
+
+<h2 id="bicyclegan">BicycleGAN</h2>
+
+<p>The idea, as said before, is to encourage a bijection between output and latent space.</p>
+
+<p>The authors propose different options.</p>
+
+<p>Notation:</p>
+<ul>
+  <li>A is the input image (condition)</li>
+  <li>B is the target image (real image corresponding to the input A)</li>
+  <li>z is the latent vector</li>
+  <li>\( \widehat{B} \) is the image generated starting from A and z \( \widehat{B} = G(A, z) \)</li>
+  <li>G is the Generator</li>
+  <li>E is the Encoder</li>
+  <li>D is the Discriminator</li>
+</ul>
+
+<p><strong>cVAE-GAN</strong>: Conditional Variational AutoEncoder GAN. First encode B (target image) into latent space through E. The latent distribution is regularized through KL-penalty, enforcing a structure on the latent space and permitting sampling during inference.</p>
+
+<p><strong>cLR-GAN</strong>: Conditional Latent Regressor GAN. Feed a <strong>random</strong> latent vector into G, the encoding of \( G(A, z) \) should resemble the feeded noise z. In other words we require:</p>
+
+<script type="math/tex; mode=display">E(G(A, z)) = \widetilde{z} \approx z .</script>
+
+<p><strong>BicycleGAN</strong>: Combine both <strong>cVAE-GAN</strong> and <strong>cLR-GAN</strong> to enforce the connection between the encoding and the output.</p>
+
+<h2 id="losses">Losses</h2>
+
+<p>Bicycle GAN combines different losses. Let’s pass through all of them.</p>
+
+<h3 id="pix2pix-loss">Pix2Pix Loss</h3>
+
+<p>The Pix2Pix loss combines the adversarial loss and the L1 loss between the generated output and the real output. In math therms:</p>
+
+<script type="math/tex; mode=display">\mathcal{L}_{\text{GAN}}(G, D)  = E[\log (D(A, B))] + E[\log (1 - D(A, G(A)))]</script>
+
+<script type="math/tex; mode=display">\mathcal{L}_{1}(G)  = ||B - G(A)||_1</script>
+
+<p>Using a latent vector this becomes \( G(A, z) \) with z coming from the prior distribution (i.e. \( z \sim p_z \) ).</p>
+
+<h3 id="cvae-gan">cVAE-GAN</h3>
+
+<p>The cVAE-GAN model uses also the Encoder and enforces the random vector to contain information about the target image.</p>
+
+<script type="math/tex; mode=display">\mathcal{L}_{\text{GAN}}^{\text{VAE}}(G, D, E) = E[\log (D(A, B))] + E[\log (1 - D(A, G(A, E(B))))]</script>
+
+<script type="math/tex; mode=display">\mathcal{L}_{1}^{\text{VAE}}(G, E)  = ||B - G(A, E(B))||_1</script>
+
+<p>To enable sampling at inference time we need to add a KL penalty:</p>
+
+<script type="math/tex; mode=display">\mathcal{L}_{KL}(E) = KL(\mathcal{N}(0,1), E(B))</script>
+
+<h3 id="clr-gan">cLR-GAN</h3>
+
+<p>We have z coming from the prior distribution, thus we cannot enforce an L1 penalty. This because for an input image we have multiple output image (remember, we are in a multimodal setting).
+By the way the goal of this part is to recover the latent vector starting from the generated image. In order to do this we add an L1 loss on the latent vectors:</p>
+
+<script type="math/tex; mode=display">\mathcal{L}_{1}^{LR}(G,E)= ||z-E(G(A,z))||_1</script>
+
+<p>In words, E should be able to replicate the input latent vector.</p>
+
+<h3 id="bicyclegan-1">BicycleGAN</h3>
+
+<p>Bicycle GAN combines all the previous losses:</p>
+
+<script type="math/tex; mode=display">\mathcal{L}_{\text{Bi}} = \mathcal{L}_{\text{GAN}}^{\text{VAE}} + \lambda_1 \mathcal{L}_{1}^{\text{VAE}} + \mathcal{L}_{\text{GAN}} + \lambda_{LR} \mathcal{L}_{1}^{LR} + \lambda_{KL} \mathcal{L}_{KL}</script>
+
+<h2 id="how-to-feed-noise-inside-g">How to feed noise inside G?</h2>
+
+<p>The authors explored two ways of injecting the latent vector z to in the generator:</p>
+
+<ul>
+  <li>add_to_input: spatially replicate a Z-dimensional latent vector z to an H × W × Z tensor and concatenate it with the H × W × 3 input image</li>
+  <li>add_to_all: we add z to each intermediate layer of the network G, after spatial replication to the appropriate sizes</li>
+</ul>
+
+<h2 id="details">Details</h2>
+
+<ul>
+  <li>The generator is a UNET model</li>
+  <li>The \( \mathcal{L}_{\text{GAN}} \) loss is actually a <a href="https://arxiv.org/abs/1611.04076">Least Square GAN loss</a> <a class="citation" href="#leastsquaregan">(Mao, Li, Xie, Lau, &amp; Wang, 2016)</a></li>
+  <li><strong>Not</strong> conditioning the discriminator D on input A leads to better results</li>
+  <li>Hyperparameters: \( \lambda = 10 \), \( \lambda_{LR} = 0.5 \) and \( \lambda_{KL} = 0.01 \)</li>
+  <li>Train using Adam with a batch size of 1 and with a learning rate of 0.0002</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>latent dimension</td>
+          <td> </td>
+          <td>z</td>
+          <td> </td>
+          <td>= 8 across all the datasets</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="results">Results</h2>
+
+<center>
+<figure>
+<a href="/blog/figs/multimodal/results_matrix.jpg"> <img src="/blog/figs/multimodal/results_matrix.jpg" style="width: 80%;" alt="Figure 1 - Multimodal" /> </a>
+<figcaption> Multimodal Image-to-Image translation, from <a class="citation" href="#zhu_toward_2017">(Zhu et al., 2017)</a> </figcaption>
+</figure>
+</center>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><abbr>[zhu_toward_2017]</abbr> <span id="zhu_toward_2017">Zhu, J.-Y., Zhang, R., Pathak, D., Darrell, T., Efros, A. A., Wang, O., &amp; Shechtman, E. (2017). Toward Multimodal Image-to-Image Translation. <i>ArXiv:1711.11586 [Cs, Stat]</i>. Retrieved from http://arxiv.org/abs/1711.11586</span></li>
+<li><abbr>[isola_image--image_2016]</abbr> <span id="isola_image--image_2016">Isola, P., Zhu, J.-Y., Zhou, T., &amp; Efros, A. A. (2016). Image-to-Image Translation with Conditional Adversarial Networks. <i>ArXiv:1611.07004 [Cs]</i>. Retrieved from http://arxiv.org/abs/1611.07004</span></li>
+<li><abbr>[leastsquaregan]</abbr> <span id="leastsquaregan">Mao, X., Li, Q., Xie, H., Lau, R. Y. K., &amp; Wang, Z. (2016). Multi-class Generative Adversarial Networks with the L2 Loss Function. <i>CoRR</i>, <i>abs/1611.04076</i>. Retrieved from http://arxiv.org/abs/1611.04076</span></li></ol>
+
+	</div>
+  </div>
+</article>
+
+<!-- tags do not look great like this
+
+  <div class="blog-tags">
+	  Tags: machine-learning, gan, paper-notes, image-translation
+  </div>
+
+-->
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+    
+      <!-- Check if any share-links are active -->
+
+
+
+
+<section id = "social-share-section">
+  <span class="sr-only">Share: </span>
+
+  
+  <!--- Share on Twitter -->
+    <a href="https://twitter.com/intent/tweet?text=Paper+Notes%3A+Toward+Multimodal+Image-to-Image+Translation+http://emanueleghelfi.github.io/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html"
+      class="btn btn-social-icon btn-twitter" title="Share on Twitter">
+      <span class="fa fa-fw fa-twitter" aria-hidden="true"></span>
+      <span class="sr-only">Twitter</span>
+    </a>
+  
+
+  
+  <!--- Share on Facebook -->
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://emanueleghelfi.github.io/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html"
+      class="btn btn-social-icon btn-facebook" title="Share on Facebook">
+      <span class="fa fa-fw fa-facebook" aria-hidden="true"></span>
+      <span class="sr-only">Facebook</span>
+    </a>
+  
+
+  
+  <!--- Share on LinkedIn -->
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://emanueleghelfi.github.io/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html"
+      class="btn btn-social-icon btn-linkedin" title="Share on LinkedIn">
+      <span class="fa fa-fw fa-linkedin" aria-hidden="true"></span>
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  
+
+</section>
+
+
+    
+    <ul class="pager blog-pager">
+      
+      <li class="previous">
+        <a href="/blog/2019/06/25/Paper-Notes.html" data-toggle="tooltip" data-placement="top" title="Paper Notes">&larr; Previous Post</a>
+      </li>
+      
+      
+    </ul>
+  </div>
 </div>
-<hr>
-
-<h2>Tags</h2>
 
 
+<div class="row disqus-comments">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'emanueleghelfi-github-io';
+	    // ensure that pages with query string get the same discussion
+            var url_parts = window.location.href.split("?");
+            var disqus_url = url_parts[0];	    
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
 
-  
-  
-  <a href="/tag/machine-learning"><code class="highligher-rouge"><nobr>machine-learning</nobr></code></a>
 
-  
-  
-  <a href="/tag/reinforcement-learning"><code class="highligher-rouge"><nobr>reinforcement-learning</nobr></code></a>
+  </div>
+</div>
 
-  
-  
-  <a href="/tag/paper-notes"><code class="highligher-rouge"><nobr>paper-notes</nobr></code></a>
-
-  
-  
-  <a href="/tag/image-translation"><code class="highligher-rouge"><nobr>image-translation</nobr></code></a>
-
-  
-  
-  <a href="/tag/gan"><code class="highligher-rouge"><nobr>gan</nobr></code></a>
-
-  
-  
-  <a href="/tag/conference"><code class="highligher-rouge"><nobr>conference</nobr></code></a>
-
-  
-  
-  <a href="/tag/tutorial"><code class="highligher-rouge"><nobr>tutorial</nobr></code></a>
-
-  
-  
-  <a href="/tag/software"><code class="highligher-rouge"><nobr>software</nobr></code></a>
-
-  
-  
-  <a href="/tag/sacred"><code class="highligher-rouge"><nobr>sacred</nobr></code></a>
-
-  
-  
-  <a href="/tag/pyconit"><code class="highligher-rouge"><nobr>pyconit</nobr></code></a>
-
-  
-  
-  <a href="/tag/nips"><code class="highligher-rouge"><nobr>nips</nobr></code></a>
-
-  
-  
-  <a href="/tag/icml"><code class="highligher-rouge"><nobr>icml</nobr></code></a>
-
-  
-  
-  <a href="/tag/experiments"><code class="highligher-rouge"><nobr>experiments</nobr></code></a>
-
-  
-  
-  <a href="/tag/configurable"><code class="highligher-rouge"><nobr>configurable</nobr></code></a>
-
-  
-  
-  <a href="/tag/computer-vision"><code class="highligher-rouge"><nobr>computer-vision</nobr></code></a>
-
-  
-  
-  <a href="/tag/competition"><code class="highligher-rouge"><nobr>competition</nobr></code></a>
 
     </div>
 

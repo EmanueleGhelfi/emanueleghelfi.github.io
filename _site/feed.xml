@@ -7,6 +7,17 @@
     <atom:link href="http://emanueleghelfi.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Paper Notes: Toward Multimodal Image-to-Image Translation</title>
+        <description>
+          
+          The paper Toward Multimodal Image-to-Image Translation (Zhu et al., 2017) faces the problem of multimodal image-to-image translation in a principled way. The same problem is faced in (Isola, Zhu, Zhou, &amp;amp; Efros, 2016) (pix2pix) but in a not-so-effective manner (enabling Dropout at inference time). In this paper, the authors encourage...
+        </description>
+        <pubDate>Wed, 26 Jun 2019 08:00:00 +0000</pubDate>
+        <link>http://emanueleghelfi.github.io/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html</guid>
+      </item>
+    
+      <item>
         <title>Paper Notes</title>
         <description>
           

@@ -6,7 +6,7 @@ title:  "PyCon X - GANs: From Theory to Production"
 slug:  GANs - From Theory to Production
 date:   2019-05-06 8:00:00
 categories: machine-learning
-tags: machine-learning tutorial conference pyconit gan
+tags: machine-learning tutorial conference pyconit gan image-translation
 description: "GANs: from theory to production."
 gh-repo: "zurutech/gans-from-theory-to-production"
 gh-badge: [star, watch, follow, fork]

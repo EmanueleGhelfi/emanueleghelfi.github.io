@@ -4,18 +4,29 @@ title: Projects
 subtitle: Presentations, Projects, Research, Blogs.
 ---
 
+## Pubblications
+
+* Reinforcement Learning in Configurable Continuous Environments. In Proceedings of the 36th International Conference on Machine Learning ([ICML](http://proceedings.mlr.press) 2019). 01-06-2019. [paper](http://proceedings.mlr.press/v97/metelli19a.html), [slides](https://albertometelli.github.io/download/icml2019-remps/slides.pdf), [code](https://github.com/albertometelli/remps), [poster](https://albertometelli.github.io/download/icml2019-remps/poster.pdf)
+* A Survey on GANs for Anomaly Detection. ArXiv e-print. 28-06-2019. [paper](https://arxiv.org/abs/1906.11632)
+* Adversarial Pixel-Level Generation of Semantic Images. ArXiv e-print. 27-06-2019. [paper](https://arxiv.org/abs/1906.12195)
+
+<hr>
 
 ## Public presentations
 
 * Deep Diving into GANs: from theory to production @ PyConX 2019, Florence. ([PyConX](https://www.pycon.it/conference/talks/deep-diving-into-gans-form-theory-to-production)), ([Github](https://github.com/zurutech/gans-from-theory-to-production)), ([SlideShare](https://www.slideshare.net/EmanueleGhelfi/gan-theory-and-applications-143737572))
-* Reinforcement Learning in Configurable Environments: an Information Theoretic approach, Thesis discussion, 20.12.2018 ([SlideShare](https://www.slideshare.net/EmanueleGhelfi/reinforcement-learning-in-configurable-environments))
+* Reinforcement Learning in Configurable Environments: an Information Theoretic approach, Thesis discussion, 20-12-2018. ([SlideShare](https://www.slideshare.net/EmanueleGhelfi/reinforcement-learning-in-configurable-environments))
+
+<hr>
 
 ## Thesis
 
-### Reinforcement Learning in Configurable Environments: an Information Theoretic Approach
+**Reinforcement Learning in Configurable Environments: an Information Theoretic Approach.**
 Master's thesis
-Politecnico di Milano, Computer Science and Engineering, December 2018
+Politecnico di Milano, Computer Science and Engineering, December 2018.
 [Online](https://www.politesi.polimi.it/handle/10589/144736)
+
+<hr>
 
 ## Projects
 
