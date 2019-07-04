@@ -14,10 +14,10 @@ baseurl: ""
 # Of course don't forget to change the username and projectname to YOUR username and project
 
 # Name of website
-title: Emanuele Ghelfi
+title: "Emanuele Ghelfi's Blog"
 
 # Short description of your site
-description: Emanuele Ghelfi's personal web page
+description: "Teaching Machines to Learn"
 
 # --- Navigation bar options --- #
 
@@ -136,6 +136,6 @@ scholar:
   replace_strings: true
   join_strings:    true
 
-  details_dir:    bibliography
+  details_dir: bibliography
 
   query: "@*"
