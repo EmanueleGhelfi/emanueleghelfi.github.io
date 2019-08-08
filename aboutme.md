@@ -24,8 +24,28 @@ For all these tasks I cover the steps of solution design, algorithm implementati
 
 **Curriculum Vitae**: <a href="/files/data/cv_7.pdf">Download</a>
 
-
 [Zuru Tech Italy]: https://zuru.tech
 [Politecnico di Milano]: http://polimi.it/
 [Projects]: /projects.html
 [proj-research]: /projects.html
+
+<div class="img-grid">
+<div class="row"> 
+  <div class="column">
+    <img src="/images/about/1.jpg">
+    <img src="/images/about/2.jpg">
+    <img src="/images/about/5.jpg">
+
+  </div>
+  <div class="column">
+    <img src="/images/about/3.jpg">
+    <img src="/images/about/4.jpg">
+    <img src="/images/about/6.jpg">
+    <img src="/images/about/7.jpg">
+
+  </div> 
+</div>
+</div>
+
+
+

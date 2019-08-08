@@ -12,6 +12,8 @@ gh-repo: "zurutech/gans-from-theory-to-production"
 gh-badge: [star, watch, follow, fork]
 social-share: true
 comments: true
+image_sliders:
+  - pycon
 ---
 Me and my colleagues (Federico Di Mattia, Paolo Galeone, Michele De Simoni) held the training: "Deep Diving into GANs: From Theory To Production" at [PyCon X](https://www.pycon.it/conference/talks/deep-diving-into-gans-form-theory-to-production) in Florence.
 
@@ -37,5 +39,9 @@ The training is divided in 4 parts:
 - [TFGAN](https://github.com/zurutech/gans-from-theory-to-production/tree/master/3.%20TFGAN)
 - [Production](https://github.com/zurutech/gans-from-theory-to-production/tree/master/4.%20Production)
 
-([PyConX](https://www.pycon.it/conference/talks/deep-diving-into-gans-form-theory-to-production))
-([Github](https://github.com/zurutech/gans-from-theory-to-production))
+Here some photos of the tutorial:
+
+{% include slider.html selector="pycon" %}
+
+<span>
+</span>

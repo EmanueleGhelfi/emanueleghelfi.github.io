@@ -1,0 +1,9 @@
+- selector: pycon
+  captions: true
+  images:
+    - src: /images/pycon/0.jpg
+    - src: /images/pycon/1.jpg
+    - src: /images/pycon/2.jpg
+    - src: /images/pycon/3.jpg
+  settings:
+    height: "'auto'"

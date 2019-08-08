@@ -1,26 +1,14 @@
 ---
-layout: default
+layout: base
 ---
 
-<header class="header-post">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <div class="post-heading">
-        <h1>{{ page.title }}</h1>
-        {% if page.subtitle %}
-        <h2 class="post-subheading">{{ page.subtitle }}</h2>
-        {% endif %}
-        <span class="post-meta">Posted on {{ page.date | date: "%B %-d, %Y" }}</span>
-      </div>
-     </div>
-  </div>
-</header>
+{% include header.html type="post" %}
 
 {% if page.mathjax  %}
 <script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 {% endif %}
 
-<article>
+<div class="container">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         {% if page.gh-repo %}
@@ -54,19 +42,10 @@ layout: default
         {% endfor %}
       ]</span>
     
+<article role="main" class="blog-post">
     <!-- page content-->
 	  {{ content }}
-	</div>
-  </div>
 </article>
-
-<!-- tags do not look great like this
-{% if page.tags %}
-  <div class="blog-tags">
-	  Tags: {{ page.tags | join: ", " }}
-  </div>
-{% endif %}
--->
 
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -96,3 +75,7 @@ layout: default
   </div>
 </div>
 {% endif %}
+</div>
+</div>
+</div>
+

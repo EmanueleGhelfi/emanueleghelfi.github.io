@@ -23,7 +23,7 @@ description: "Teaching Machines to Learn"
 
 # Image to show in the navigation bar - image must be a square (width = height)
 # Remove this parameter if you don't want an image in the navbar
-avatar: "/images/manughelfi_200.jpeg"
+# avatar: "/images/manughelfi_200.jpeg"
 
 # List of links in the navigation bar
 navbar-links:
