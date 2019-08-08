@@ -22,7 +22,7 @@
   
   
     
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
     
   
 
@@ -31,9 +31,9 @@
     
       <link rel="stylesheet" href="/css/bootstrap.min.css" />
     
-      <link rel="stylesheet" href="/css/main.css" />
-    
       <link rel="stylesheet" href="/css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
     
       <link rel="stylesheet" href="/css/custom.css" />
     
@@ -64,11 +64,11 @@
   
 
   
-  <meta property="og:url" content="http://emanueleghelfi.github.io/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html" />
+  <meta property="og:url" content="http://localhost:4000/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html" />
   
 
   
-  <meta property="og:image" content="http://emanueleghelfi.github.io/images/manughelfi_200.jpeg" />
+  <meta property="og:image" content="" />
   
 
   <!-- Twitter tags -->
@@ -96,6 +96,11 @@
 
 
 
+
+
+<!-- Jekyll Ideal Image Slider Include -->
+<!-- https://github.com/jekylltools/jekyll-ideal-image-slider-include -->
+<!-- v1.8 -->
 
 
 
@@ -135,36 +140,44 @@
     </div>
 	
 	
-	<div class="avatar-container">
-	  <div class="avatar-img-border">
-	    <a href="https://emanueleghelfi.github.io">
-	      <img class="avatar-img" src="/images/manughelfi_200.jpeg" />
-		</a>
-	  </div>
-	</div>
-	
 	
   </div>
 </nav>  
 
-    <div role="main" class="container main-content">
-      <header class="header-post">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <div class="post-heading">
-        <h1>Paper Notes: Toward Multimodal Image-to-Image Translation</h1>
-        
-        <span class="post-meta">Posted on June 26, 2019</span>
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Paper Notes: Toward Multimodal Image-to-Image Translation</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on June 26, 2019</span>
+		  
+        </div>
       </div>
-     </div>
+    </div>
   </div>
+</div>
 </header>
+
+
+
 
 
 <script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 
 
-<article>
+<div class="container">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
@@ -186,6 +199,7 @@
         
       ]</span>
     
+<article role="main" class="blog-post">
     <!-- page content-->
 	  <p>The paper <a href="https://junyanz.github.io/BicycleGAN/">Toward Multimodal Image-to-Image Translation</a> <a class="citation" href="#zhu_toward_2017">(Zhu et al., 2017)</a> faces the problem of multimodal image-to-image translation in a principled way. The same problem is faced in <a class="citation" href="#isola_image--image_2016">(Isola, Zhu, Zhou, &amp; Efros, 2016)</a> (pix2pix) but in a not-so-effective manner (enabling Dropout at inference time).</p>
 
@@ -341,17 +355,7 @@ By the way the goal of this part is to recover the latent vector starting from t
 <li><abbr>[isola_image--image_2016]</abbr> <span id="isola_image--image_2016">Isola, P., Zhu, J.-Y., Zhou, T., &amp; Efros, A. A. (2016). Image-to-Image Translation with Conditional Adversarial Networks. <i>ArXiv:1611.07004 [Cs]</i>. Retrieved from http://arxiv.org/abs/1611.07004</span></li>
 <li><abbr>[leastsquaregan]</abbr> <span id="leastsquaregan">Mao, X., Li, Q., Xie, H., Lau, R. Y. K., &amp; Wang, Z. (2016). Multi-class Generative Adversarial Networks with the L2 Loss Function. <i>CoRR</i>, <i>abs/1611.04076</i>. Retrieved from http://arxiv.org/abs/1611.04076</span></li></ol>
 
-	</div>
-  </div>
 </article>
-
-<!-- tags do not look great like this
-
-  <div class="blog-tags">
-	  Tags: machine-learning, gan, paper-notes, image-translation
-  </div>
-
--->
 
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -367,7 +371,7 @@ By the way the goal of this part is to recover the latent vector starting from t
 
   
   <!--- Share on Twitter -->
-    <a href="https://twitter.com/intent/tweet?text=Paper+Notes%3A+Toward+Multimodal+Image-to-Image+Translation+http://emanueleghelfi.github.io/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html"
+    <a href="https://twitter.com/intent/tweet?text=Paper+Notes%3A+Toward+Multimodal+Image-to-Image+Translation+http://localhost:4000/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html"
       class="btn btn-social-icon btn-twitter" title="Share on Twitter">
       <span class="fa fa-fw fa-twitter" aria-hidden="true"></span>
       <span class="sr-only">Twitter</span>
@@ -376,7 +380,7 @@ By the way the goal of this part is to recover the latent vector starting from t
 
   
   <!--- Share on Facebook -->
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http://emanueleghelfi.github.io/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html"
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html"
       class="btn btn-social-icon btn-facebook" title="Share on Facebook">
       <span class="fa fa-fw fa-facebook" aria-hidden="true"></span>
       <span class="sr-only">Facebook</span>
@@ -385,7 +389,7 @@ By the way the goal of this part is to recover the latent vector starting from t
 
   
   <!--- Share on LinkedIn -->
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://emanueleghelfi.github.io/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html"
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html"
       class="btn btn-social-icon btn-linkedin" title="Share on LinkedIn">
       <span class="fa fa-fw fa-linkedin" aria-hidden="true"></span>
       <span class="sr-only">LinkedIn</span>
@@ -402,6 +406,10 @@ By the way the goal of this part is to recover the latent vector starting from t
         <a href="/blog/2019/06/25/Paper-Notes.html" data-toggle="tooltip" data-placement="top" title="Paper Notes">&larr; Previous Post</a>
       </li>
       
+      
+      <li class="next">
+        <a href="/blog/2019/08/01/ashpy.html" data-toggle="tooltip" data-placement="top" title="AshPy">Next Post &rarr;</a>
+      </li>
       
     </ul>
   </div>
@@ -431,8 +439,11 @@ By the way the goal of this part is to recover the latent vector starting from t
   </div>
 </div>
 
+</div>
+</div>
+</div>
 
-    </div>
+
 
     <footer>
   <div class="container">
@@ -818,6 +829,9 @@ By the way the goal of this part is to recover the latent vector starting from t
     });
     
     </script>
+    <!-- Jekyll Ideal Image Slider Include -->
+<!-- https://github.com/jekylltools/jekyll-ideal-image-slider-include -->
+<!-- v1.8 -->
   
   </body>
 </html>
