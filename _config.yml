@@ -120,7 +120,7 @@ prose:
     - /js
 
 # plugins    
-plugins: [jekyll-paginate, jekyll-scholar, jekyll-sitemap]
+plugins: [jekyll-paginate, jekyll-scholar, jekyll-sitemap, jekyll-seo-tag]
 
 scholar:
   style: apa
