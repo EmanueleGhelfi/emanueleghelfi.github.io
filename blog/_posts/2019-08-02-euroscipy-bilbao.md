@@ -5,7 +5,7 @@ title:  "EuroSciPy - Deep Dive into GANs"
 slug:  euroscipy-gans
 date:   2019-08-02 8:00:00
 categories: machine-learning
-tags: machine-learning open-source gan
+tags: machine-learning open-source gan tutorial conference euroscipy
 description: "EuroSciPy: deep dive into gans"
 mathjax: true
 gh-repo: "zurutech/gans-from-theory-to-production"
