@@ -60,6 +60,8 @@
     
       <link rel="stylesheet" href="/css/custom.css" />
     
+      <link rel="stylesheet" href="/css/particle.css" />
+    
   
 
   
@@ -89,7 +91,7 @@
   
 
   
-  <meta property="og:url" content="http://emanueleghelfi.github.io/" />
+  <meta property="og:url" content="http://localhost:4000/" />
   
 
   
@@ -137,12 +139,12 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Teaching Machines to Learn" />
 <meta property="og:description" content="Teaching Machines to Learn" />
-<link rel="canonical" href="http://emanueleghelfi.github.io/" />
-<meta property="og:url" content="http://emanueleghelfi.github.io/" />
+<link rel="canonical" href="http://localhost:4000/" />
+<meta property="og:url" content="http://localhost:4000/" />
 <meta property="og:site_name" content="Emanuele Ghelfi’s Blog" />
-<link rel="next" href="http://emanueleghelfi.github.io/page2" />
+<link rel="next" href="http://localhost:4000/page2" />
 <script type="application/ld+json">
-{"name":"Emanuele Ghelfi’s Blog","description":"Teaching Machines to Learn","author":{"@type":"Person","name":"Emanuele Ghelfi"},"@type":"WebSite","url":"http://emanueleghelfi.github.io/","headline":"Welcome!","@context":"https://schema.org"}</script>
+{"name":"Emanuele Ghelfi’s Blog","description":"Teaching Machines to Learn","author":{"@type":"Person","name":"Emanuele Ghelfi"},"@type":"WebSite","url":"http://localhost:4000/","headline":"Welcome!","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -151,7 +153,7 @@
 
 
   <body>
-  
+
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -222,7 +224,10 @@
 <div class="container" role="main">
 	<div class="row">
 	  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-		<div class="posts-list">
+		<!-- particles.js container -->
+<div id="particles-js"></div>
+
+<div class="posts-list">
   
   <article class="post-preview">
     <a href="/blog/2019/08/02/euroscipy-gans.html">
@@ -451,6 +456,10 @@
 
   
   
+  <a href="/tag/visualization"><code class="highligher-rouge"><nobr>visualization</nobr></code></a>
+
+  
+  
   <a href="/tag/software"><code class="highligher-rouge"><nobr>software</nobr></code></a>
 
   
@@ -479,6 +488,10 @@
 
   
   
+  <a href="/tag/datascience"><code class="highligher-rouge"><nobr>datascience</nobr></code></a>
+
+  
+  
   <a href="/tag/configurable"><code class="highligher-rouge"><nobr>configurable</nobr></code></a>
 
   
@@ -488,7 +501,6 @@
   
   
   <a href="/tag/competition"><code class="highligher-rouge"><nobr>competition</nobr></code></a>
-
 
 	
   </div>
@@ -611,6 +623,16 @@
     <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
     
 	<script src="/js/main.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/particles.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/particles-config.js"></script>
     
   
 
