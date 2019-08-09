@@ -2,7 +2,7 @@
 author: "manughelfi"
 layout: post
 title:  "Reinforcement Learning in Configurable Continuous Environments"
-slug:  RL in Conf-MDP
+slug:  rl-conf-mdp
 date:   2019-05-22 8:00:00
 categories: machine-learning
 tags: machine-learning reinforcement-learning icml conference configurable

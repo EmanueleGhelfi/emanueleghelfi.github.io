@@ -3,7 +3,7 @@ author: "manughelfi"
 layout: post
 did: "blog6"
 title:  "PyCon X - GANs: From Theory to Production"
-slug:  GANs - From Theory to Production
+slug:  pyconx-gans
 date:   2019-05-06 8:00:00
 categories: machine-learning
 tags: machine-learning tutorial conference pyconit gan image-translation

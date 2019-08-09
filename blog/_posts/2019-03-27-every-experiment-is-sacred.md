@@ -3,7 +3,7 @@ author: "manughelfi"
 layout: post
 did: "blog6"
 title:  "Every Experiment is Sacred"
-slug:  Every Experiment is sacred
+slug:  sacred
 date:   2019-02-12 8:00:00
 categories: machine-learning
 img: sacred3.jpg

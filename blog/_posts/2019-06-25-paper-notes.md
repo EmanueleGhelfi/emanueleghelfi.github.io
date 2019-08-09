@@ -2,7 +2,7 @@
 author: "manughelfi"
 layout: post
 title:  "Paper Notes"
-slug:  Paper Notes
+slug:  paper-notes
 date:   2019-06-25 8:00:00
 categories: machine-learning
 tags: machine-learning reinforcement-learning computer-vision paper-notes

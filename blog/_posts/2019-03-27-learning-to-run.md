@@ -3,7 +3,7 @@ author: "manughelfi"
 layout: post
 did: "blog6"
 title:  "Learning To Run"
-slug:  Learning To Run
+slug:  learning-to-run
 date:   2019-03-27 8:00:00
 categories: machine-learning
 tags: machine-learning reinforcement-learning competition nips
