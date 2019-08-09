@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/blog/2019/02/12/Every-Experiment-is-sacred.html</loc>
+<loc>http://localhost:4000/blog/2019/02/12/sacred.html</loc>
 <lastmod>2019-02-12T08:00:00+00:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/blog/2019/03/27/Learning-To-Run.html</loc>
+<loc>http://localhost:4000/blog/2019/03/27/learning-to-run.html</loc>
 <lastmod>2019-03-27T08:00:00+00:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/blog/2019/05/06/GANs-From-Theory-to-Production.html</loc>
+<loc>http://localhost:4000/blog/2019/05/06/pyconx-gans.html</loc>
 <lastmod>2019-05-06T08:00:00+00:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/blog/2019/05/22/RL-in-Conf-MDP.html</loc>
+<loc>http://localhost:4000/blog/2019/05/22/rl-conf-mdp.html</loc>
 <lastmod>2019-05-22T08:00:00+00:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/blog/2019/06/25/Paper-Notes.html</loc>
+<loc>http://localhost:4000/blog/2019/06/25/paper-notes.html</loc>
 <lastmod>2019-06-25T08:00:00+00:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/blog/2019/06/26/Paper-Notes-Toward-Multimodal-Image-to-Image-Translation.html</loc>
+<loc>http://localhost:4000/blog/2019/06/26/multimodal-image-to-image-translation.html</loc>
 <lastmod>2019-06-26T08:00:00+00:00</lastmod>
 </url>
 <url>
