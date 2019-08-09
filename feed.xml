@@ -7,6 +7,17 @@
     <atom:link href="http://emanueleghelfi.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>EuroSciPy - Deep Dive into GANs</title>
+        <description>
+          
+          Great news! The Zuru ML Team (me, Federico Di Mattia, Paolo Galeone, Michele De Simoni) will present the tutorial: “Deep Diving into GANs: From Theory to Production with TensorFlow 2.0” at EuroSciPy in Bilbao, the 2nd of September 2019. This tutorial builds upon the PyConX (see also here for more...
+        </description>
+        <pubDate>Fri, 02 Aug 2019 08:00:00 +0000</pubDate>
+        <link>http://emanueleghelfi.github.io/blog/2019/08/02/euroscipy-gans.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/08/02/euroscipy-gans.html</guid>
+      </item>
+    
+      <item>
         <title>AshPy</title>
         <description>
           
