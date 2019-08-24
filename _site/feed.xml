@@ -3,8 +3,8 @@
   <channel>
     <title>Emanuele Ghelfi's Blog</title>
     <description>Teaching Machines to Learn</description>
-    <link>http://localhost:4000</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://emanueleghelfi.github.io</link>
+    <atom:link href="http://emanueleghelfi.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
         <title>EuroSciPy - Deep Dive into GANs</title>
@@ -13,8 +13,8 @@
           Great news! The Zuru ML Team (me, Federico Di Mattia, Paolo Galeone, Michele De Simoni) will present the tutorial: “Deep Diving into GANs: From Theory to Production with TensorFlow 2.0” at EuroSciPy in Bilbao, the 2nd of September 2019. This tutorial builds upon the PyConX (see also here for more...
         </description>
         <pubDate>Fri, 02 Aug 2019 08:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/2019/08/02/euroscipy-gans.html</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2019/08/02/euroscipy-gans.html</guid>
+        <link>http://emanueleghelfi.github.io/blog/2019/08/02/euroscipy-gans.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/08/02/euroscipy-gans.html</guid>
       </item>
     
       <item>
@@ -24,8 +24,8 @@
           AshPy is a TensorFlow 2.0 library for (distributed) training, evaluation, model selection, and fast prototyping. It is designed to ease the burden of setting up all the nuances of the architectures built to train complex custom deep learning models. AshPy, why? Ashpy provides already prepared trainers for classifier models and...
         </description>
         <pubDate>Thu, 01 Aug 2019 08:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/2019/08/01/ashpy.html</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2019/08/01/ashpy.html</guid>
+        <link>http://emanueleghelfi.github.io/blog/2019/08/01/ashpy.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/08/01/ashpy.html</guid>
       </item>
     
       <item>
@@ -35,8 +35,8 @@
           The paper Toward Multimodal Image-to-Image Translation (Zhu et al., 2017) faces the problem of multimodal image-to-image translation in a principled way. The same problem is faced in (Isola, Zhu, Zhou, &amp;amp; Efros, 2016) (pix2pix) but in a not-so-effective manner (enabling Dropout at inference time). In this paper, the authors encourage...
         </description>
         <pubDate>Wed, 26 Jun 2019 08:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/2019/06/26/multimodal-image-to-image-translation.html</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2019/06/26/multimodal-image-to-image-translation.html</guid>
+        <link>http://emanueleghelfi.github.io/blog/2019/06/26/multimodal-image-to-image-translation.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/06/26/multimodal-image-to-image-translation.html</guid>
       </item>
     
       <item>
@@ -46,8 +46,8 @@
           This format is deliberately inspired by Adrian Colyer, Denny Britz and Daniel Takeshi. The series Paper Notes will contain the notes about papers I’ve read. This can be useful for people trying to understand better some mysterious paper and it can be very useful for me to obtain a deeper...
         </description>
         <pubDate>Tue, 25 Jun 2019 08:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/2019/06/25/paper-notes.html</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2019/06/25/paper-notes.html</guid>
+        <link>http://emanueleghelfi.github.io/blog/2019/06/25/paper-notes.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/06/25/paper-notes.html</guid>
       </item>
     
       <item>
@@ -57,8 +57,8 @@
           Paper Poster Slides Code Most of the problems tackled by Reinforcement Learning are typically modeled as Markov Decision Processes in which the environment is considered a fixed entity and cannot be controlled. Nevertheless, there exist several real-world examples in which a partial control on the environment can be exercised by...
         </description>
         <pubDate>Wed, 22 May 2019 08:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/2019/05/22/rl-conf-mdp.html</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2019/05/22/rl-conf-mdp.html</guid>
+        <link>http://emanueleghelfi.github.io/blog/2019/05/22/rl-conf-mdp.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/05/22/rl-conf-mdp.html</guid>
       </item>
     
       <item>
@@ -68,8 +68,8 @@
           Me and my colleagues (Federico Di Mattia, Paolo Galeone, Michele De Simoni) held the training: “Deep Diving into GANs: From Theory To Production” at PyCon X in Florence. GANs are the new hottest topic in the ML arena; however, they present a challenge for the researchers and the engineers alike....
         </description>
         <pubDate>Mon, 06 May 2019 08:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/2019/05/06/pyconx-gans.html</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2019/05/06/pyconx-gans.html</guid>
+        <link>http://emanueleghelfi.github.io/blog/2019/05/06/pyconx-gans.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/05/06/pyconx-gans.html</guid>
       </item>
     
       <item>
@@ -79,8 +79,8 @@
           Paper Slides In this article we present our approach for the NIPS 2017 ”Learning To Run” challenge. The goal of the challenge is to develop a controller able to run in a complex environment, by training a model with Deep Reinforcement Learning methods. We follow the approach of the team...
         </description>
         <pubDate>Wed, 27 Mar 2019 08:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/2019/03/27/learning-to-run.html</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2019/03/27/learning-to-run.html</guid>
+        <link>http://emanueleghelfi.github.io/blog/2019/03/27/learning-to-run.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/03/27/learning-to-run.html</guid>
       </item>
     
       <item>
@@ -90,25 +90,8 @@
           Managing Machine Learning experiments is usually painful. The usual workflow when approaching a problem using Machine Learning tools is the following. You study the problem, define a possible solution, then you implement that solution and measure its quality. Often the solution depends on some parameters, and we refer to the...
         </description>
         <pubDate>Tue, 12 Feb 2019 08:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/2019/02/12/sacred.html</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2019/02/12/sacred.html</guid>
-      </item>
-    
-      <item>
-        <title>Title</title>
-        <description>
-          Longer title - 
-          Text
-
-
-
-Link, more text
-
-
-        </description>
-        <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/2015/01/01/template.html</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2015/01/01/template.html</guid>
+        <link>http://emanueleghelfi.github.io/blog/2019/02/12/sacred.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/02/12/sacred.html</guid>
       </item>
     
   </channel>
