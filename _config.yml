@@ -28,7 +28,7 @@ description: "Teaching Machines to Learn"
 # List of links in the navigation bar
 navbar-links:
   Home: ""
-  Projects: "projects.html"
+  Portfolio: "portfolio.html"
   About Me: "aboutme.html"
 #  Contact: "contact.html"
   

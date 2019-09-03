@@ -1,0 +1,5 @@
+I"
+<p>This format is deliberately inspired by <a href="https://blog.acolyer.org/about/">Adrian Colyer</a>, <a href="https://github.com/dennybritz/deeplearning-papernotes">Denny Britz</a> and <a href="https://github.com/DanielTakeshi/Paper_Notes">Daniel Takeshi</a>.</p>
+
+<p>The series <strong>Paper Notes</strong> will contain the notes about papers I’ve read. This can be useful for people trying to understand better some mysterious paper and it can be very useful for me to obtain a deeper understanding of papers. I will review mostly papers about Machine Learning, especially GANs, Reinforcement Learning and Computer Vision. I will try to implement the most important part of them or at least to share the implementation. I will provide all links and related material.</p>
+:ET

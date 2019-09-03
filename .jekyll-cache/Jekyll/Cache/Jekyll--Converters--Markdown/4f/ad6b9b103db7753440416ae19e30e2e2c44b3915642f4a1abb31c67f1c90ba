@@ -1,0 +1,41 @@
+I"[<p>Me and my colleagues (Federico Di Mattia, Paolo Galeone, Michele De Simoni) held the training: “Deep Diving into GANs: From Theory To Production” at <a href="https://www.pycon.it/conference/talks/deep-diving-into-gans-form-theory-to-production">PyCon X</a> in Florence.</p>
+
+<center>
+<img src="/blog/figs/gan/social.png" style="width: 80%;" alt="Figure 1 - PyConX" />
+</center>
+
+<p>GANs are the new hottest topic in the ML arena; however, they present a challenge for the researchers and the engineers alike. Their design, and most importantly, the code implementation has been causing headaches to the ML practitioners, especially when moving to production.</p>
+
+<p>Starting from the very basic of what a GAN is, passing trough Tensorflow implementation, using the most cutting-edge APIs available in the framework, and finally, production-ready serving at scale using Google Cloud ML Engine.</p>
+
+<p>The material is available on <a href="https://github.com/zurutech/gans-from-theory-to-production">Github</a>.</p>
+
+<p>Take a look at the slides of the theory part:</p>
+
+<center>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/gO6APBMKpbeKWE" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen=""> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/EmanueleGhelfi/gan-theory-and-applications-143737572" title="GAN - Theory and Applications" target="_blank">GAN - Theory and Applications</a> </strong> from <strong><a href="https://www.slideshare.net/EmanueleGhelfi" target="_blank">Emanuele Ghelfi</a></strong> </div>
+</center>
+
+<p>The training is divided in 4 parts:</p>
+<ul>
+  <li><a href="https://github.com/zurutech/gans-from-theory-to-production">GANs - Theory and applications</a> - <a href="https://www.slideshare.net/EmanueleGhelfi/gan-theory-and-applications-143737572">Slides</a></li>
+  <li><a href="https://github.com/zurutech/gans-from-theory-to-production/tree/master/2.%20GANs%20in%20Tensorflow">GANs in Tensorflow</a></li>
+  <li><a href="https://github.com/zurutech/gans-from-theory-to-production/tree/master/3.%20TFGAN">TFGAN</a></li>
+  <li><a href="https://github.com/zurutech/gans-from-theory-to-production/tree/master/4.%20Production">Production</a></li>
+</ul>
+
+<p>Here some photos of the tutorial:</p>
+
+<!-- Jekyll Ideal Image Slider Include -->
+<!-- https://github.com/jekylltools/jekyll-ideal-image-slider-include -->
+<!-- v1.8 -->
+<div id="pycon">
+  <img data-src="" data-src-2x="" src="/images/pycon/0.jpg" title="" alt="" />
+  <img data-src="" data-src-2x="" src="/images/pycon/1.jpg" title="" alt="" />
+  <img data-src="" data-src-2x="" src="/images/pycon/2.jpg" title="" alt="" />
+  <img data-src="" data-src-2x="" src="/images/pycon/3.jpg" title="" alt="" />
+  </div>
+
+<p><span>
+</span></p>
+:ET

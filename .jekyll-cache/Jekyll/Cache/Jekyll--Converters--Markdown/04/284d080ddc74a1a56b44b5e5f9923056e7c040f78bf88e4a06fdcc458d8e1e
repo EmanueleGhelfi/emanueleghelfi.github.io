@@ -1,0 +1,21 @@
+I"�<p><strong>Great news!</strong></p>
+
+<p>The <a href="https://zuru.tech">Zuru</a> <strong>ML Team</strong> (me, Federico Di Mattia, Paolo Galeone, Michele De Simoni) will present the tutorial: <strong>“Deep Diving into GANs: From Theory to Production with TensorFlow 2.0”</strong> at <a href="https://pretalx.com/euroscipy-2019/talk/Q79NND/">EuroSciPy</a> in Bilbao, the 2nd of September 2019.</p>
+
+<p>This tutorial builds upon the <a href="https://www.pycon.it/conference/talks/deep-diving-into-gans-form-theory-to-production">PyConX</a> (see also <a href="https://emanueleghelfi.github.io/blog/2019/05/06/pyconx-gans.html">here</a> for more details) training with some differences.</p>
+
+<p>We will be showcasing all the shiny new APIs introduced by TensorFlow 2.0 by showing how to build a GAN from scratch and how to “productionize” it by leveraging the <a href="https://github.com/zurutech/ashpy">AshPy</a> (see also <a href="https://emanueleghelfi.github.io/blog/2019/08/01/ashpy.html">here</a> for more details) Python package that allows to easily <strong>design</strong>, <strong>prototype</strong>, <strong>train</strong> and <strong>export</strong> Machine Learning models defined in <a href="https://www.tensorflow.org/beta">TensorFlow 2.0</a>.</p>
+
+<p>The workshop is composed of:</p>
+
+<ul>
+  <li>Theoretical introduction</li>
+  <li><strong>GANs</strong> from Scratch in <strong>TensorFlow 2.0</strong></li>
+  <li>High-performance input data pipeline with <a href="https://www.tensorflow.org/datasets">TensorFlow Datasets</a></li>
+  <li>Introduction to the <a href="https://github.com/zurutech/ashpy">AshPy</a> API</li>
+  <li>Implementing, training, and visualizing DCGAN using <strong>AshPy</strong></li>
+  <li>Production deployment using Google Cloud ML Engine and Google Cloud Functions</li>
+</ul>
+
+<p>The materials of the workshop will be openly provided via GitHub (see <a href="https://github.com/zurutech/gans-from-theory-to-production">here</a>) prior to the event and will be run on Colab leveraging the free GPU.</p>
+:ET

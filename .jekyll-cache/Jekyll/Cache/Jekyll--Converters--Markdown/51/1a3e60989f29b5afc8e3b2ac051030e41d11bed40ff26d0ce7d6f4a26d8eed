@@ -1,0 +1,203 @@
+I"gC<p>Managing Machine Learning experiments is usually painful.</p>
+
+<center>
+<figure>
+<a href="/blog/figs/sacred/sacred3.jpg"><img src="/blog/figs/sacred/sacred3.jpg" style="width: 80%;" alt="Figure 1 - Experiments" /> </a>
+</figure>
+</center>
+
+<p>The usual workflow when approaching a problem using Machine Learning tools is the following. You study the problem, define a possible solution, then you implement that solution and measure its quality. Often the solution depends on some parameters, and we refer to the set of parameters with the term <strong>configuration</strong>. Parameters can include model type, optimizers, learning rate, batch size, steps, losses, and many others.</p>
+
+<p>The configuration profoundly influences the performance of your solution. If you have enough time and computational power, it is possible to use a Bayesian approach for solving the hyper-parameter selection problem, but in real situations, it is common to perform a limited set of experiment and select the best configuration among them.</p>
+
+<p>In this article we describe how to manage experiments in a good way, ensuring inspectability and reproducibility. We focus on Machine Learning experiments in python using <a href="www.tensorflow.com">Tensorflow</a> even if this approach applies to all computational experiments.</p>
+
+<h2 id="simple-bad-solution">Simple (Bad) Solution</h2>
+
+<p>To keep track of the configuration the usual way to go (at least in Tensorflow) is to save your models and logs inside a folder with a shared pattern for the parameters name and value.</p>
+
+<p>Using this setting with <a href="https://www.tensorflow.org/guide/summaries_and_tensorboard">Tensorboard</a> (the official Tensorflow visualization tool), it is possible to relate the plot to its configuration. However, this is <strong>not</strong> the right way to manage experiments since it is tough to see how parameters affect performance. Tensorboard offers none way to order experiments by configuration, selecting only some experiments or order experiments by performance.
+In this way, we do not have any control and tracking of our source code, except for our VCS. Unfortunately, when doing experiments, we do not always push our changes since they might be tiny changes or only trials, this can cause issues since our experiments might not be reproducible.
+We can implement an experiment using this style in the following way:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># other imports ...
+</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+
+<span class="k">def</span> <span class="nf">get_logdir</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+    <span class="n">logdir</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+        <span class="n">logdir</span> <span class="o">=</span> <span class="n">logdir</span> <span class="o">+</span> <span class="n">f</span><span class="s">"_{key}_{config[key]}"</span>
+    <span class="k">return</span> <span class="n">logdir</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># load the configuration
+</span>    <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">()</span>
+
+    <span class="c1"># load dataset, model, summaries, loss using the configuration
+</span>
+    <span class="c1"># merge summaries
+</span>    <span class="n">summary_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">merge_all</span><span class="p">()</span>
+
+    <span class="c1"># define a logdir to keep track of the configuration
+</span>    <span class="n">logdir</span> <span class="o">=</span> <span class="n">f</span><span class="s">"logs/{get_logdir(config)}"</span>
+
+    <span class="c1"># instantiate a tensorflow saver
+</span>    <span class="n">saver</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Saver</span><span class="p">()</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">SummaryWriter</span><span class="p">(</span><span class="n">log_dir</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+        <span class="c1"># train loop
+</span>        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">'steps'</span><span class="p">]):</span>
+                <span class="c1"># your training code ...
+</span>
+                <span class="n">loss_value</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+
+                <span class="c1"># write summaries
+</span>                <span class="n">writer</span><span class="o">.</span><span class="n">add_summary</span><span class="p">(</span><span class="n">summaries</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+                <span class="c1"># save model
+</span>                <span class="n">saver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="n">logdir</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In this code snippet, we load the model, dataset and other possible configurations, the logdir defined is needed for associating a configuration to the right plot in Tensorboard.
+In this way we obtain the following folder structure using only 4 parameters:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── lr=0.0002_batch_size=32_kernel_size=5_steps=100
+├── lr=0.0001_batch_size=32_kernel_size=5_steps=100
+├── lr=0.0002_batch_size=32_kernel_size=7_steps=100
+├── lr=0.0002_batch_size=16_kernel_size=7_steps=100
+</code></pre></div></div>
+<p>Logging experiments in this way is not very comfortable, and it is not the right way to manage experiments and make them reproducible.</p>
+
+<h2 id="sacred-solution">Sacred Solution</h2>
+
+<blockquote class="blockquote"><p>
+Every experiment is sacred <br />
+Every experiment is great <br />
+If an experiment is wasted <br />
+God gets quite irate
+</p></blockquote>
+<p><br />
+<a href="https://sacred.readthedocs.io/en/latest/index.html">Sacred</a> is a tool that lets you configure, organize, and log computational experiments. It is designed to introduce a minimal overhead and code addition.</p>
+
+<p>With sacred you can:</p>
+
+<ul>
+  <li>Keep track of all parameters of your experiment</li>
+  <li>Run your experiment with different settings</li>
+  <li>Save configuration and results in files or database</li>
+  <li>Reproduce your results.</li>
+</ul>
+
+<p>Sacred dumps and saves <strong>everything</strong> into MongoDB including:</p>
+
+<ul>
+  <li>Metrics (training/validation loss, accuracy, or anything else you decide to log)</li>
+  <li>Console output</li>
+  <li>All the source code you executed</li>
+  <li>All the imported library with their versions used at runtime</li>
+  <li>All your configuration parameters</li>
+  <li>Hardware spec of your host</li>
+  <li>Random seeds</li>
+  <li>Artifacts and resources.</li>
+</ul>
+
+<p>To visualize and interact with your experiments a nice visualization board for this tool is <a href="https://github.com/vivekratnavel/omniboard">Omniboard</a>.</p>
+
+<center>
+<figure>
+<a href="/blog/figs/sacred/omniboard4.png"> <img src="/blog/figs/sacred/omniboard4.png" style="width: 80%;" alt="Figure 1 - Omniboard" /> </a>
+ <figcaption> Omniboard </figcaption>
+ </figure>
+</center>
+
+<center>
+<figure>
+<a href="/blog/figs/sacred/omniboard5.png"> <img src="/blog/figs/sacred/omniboard5.png" style="width: 80%;" alt="Figure 2 - Omniboard - Experiment Details" />
+ </a>
+ <figcaption>Omniboard - Experiment Details</figcaption>
+ </figure>
+</center>
+
+<p>Omniboard lets you tag, annotate and order experiments making inspection and model selection easy.</p>
+
+<h2 id="sacred-integration">Sacred Integration</h2>
+
+<p>Integrating sacred in your code is painless. The previous code becomes:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># other imports ...
+</span>
+<span class="c1"># tensorflow
+</span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.training.summary_io</span> <span class="kn">import</span> <span class="n">SummaryWriterCache</span>
+
+<span class="c1"># sacred
+</span><span class="kn">from</span> <span class="nn">sacred</span> <span class="kn">import</span> <span class="n">Experiment</span>
+<span class="kn">from</span> <span class="nn">sacred.observers</span> <span class="kn">import</span> <span class="n">MongoObserver</span>
+
+<span class="c1"># instantiate a sacred experiment
+</span><span class="n">ex</span> <span class="o">=</span> <span class="n">Experiment</span><span class="p">(</span><span class="s">"experiment_name"</span><span class="p">)</span>
+<span class="c1"># add the MongoDB observer
+</span><span class="n">ex</span><span class="o">.</span><span class="n">observers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MongoObserver</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+<span class="c1"># load the configuration
+</span><span class="n">ex</span><span class="o">.</span><span class="n">add_config</span><span class="p">(</span><span class="s">"default.json"</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">add_config</span><span class="p">(</span><span class="s">"experiment.json"</span><span class="p">)</span>
+
+<span class="o">@</span><span class="n">ex</span><span class="o">.</span><span class="n">automain</span>
+<span class="o">@</span><span class="n">LogFileWriter</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="o">...</span> <span class="n">params</span><span class="p">,</span> <span class="n">_run</span><span class="p">):</span>
+    <span class="c1"># load dataset, model, summaries, loss using the parameters
+</span>
+    <span class="c1"># merge summaries
+</span>    <span class="n">summary_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">merge_all</span><span class="p">()</span>
+
+    <span class="c1"># define a logdir using the experiment id of sacred
+</span>    <span class="n">logdir</span> <span class="o">=</span> <span class="n">f</span><span class="s">"logs/{_run._id}"</span>
+
+    <span class="c1"># instantiate a tensorflow saver
+</span>    <span class="n">saver</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Saver</span><span class="p">()</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">SummaryWriter</span><span class="p">(</span><span class="n">log_dir</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+        <span class="c1"># train loop
+</span>        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+                <span class="c1"># your training code ...
+</span>
+                <span class="n">loss_value</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">)</span>
+
+                <span class="c1"># log loss to sacred
+</span>                <span class="n">ex</span><span class="o">.</span><span class="n">log_scalar</span><span class="p">(</span><span class="s">"training.loss"</span><span class="p">,</span> <span class="n">loss_value</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                <span class="n">summaries</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">summary_op</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">)</span>
+
+                <span class="c1"># write summaries as tensorflow logs
+</span>                <span class="n">writer</span><span class="o">.</span><span class="n">add_summary</span><span class="p">(</span><span class="n">summaries</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+                <span class="c1"># save model
+</span>                <span class="n">saver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="n">logdir</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In this way, we create a new instance of <code class="highlighter-rouge">Experiment</code> and an instance of <code class="highlighter-rouge">MongoObserver</code> to store data to MongoDB. We add two different configurations, a default configuration (<code class="highlighter-rouge">default.json</code>) and an experiment configuration (<code class="highlighter-rouge">experiment.json</code>). The function decorated with <code class="highlighter-rouge">@ex.automain</code> is the main function of the experiment and Sacred automatically injects its parameters. The <code class="highlighter-rouge">LogFileWriter(ex)</code> decorator is used to store the location of summaries produced by Tensorflow (created by <code class="highlighter-rouge">tensorflow.summary.FileWriter</code>) into the experiment record specified by the ex argument. Whenever a new <code class="highlighter-rouge">FileWriter</code> instantiation is detected in a scope of the decorator or the context manager, the path of the log is copied to the experiment record exactly as passed to the <code class="highlighter-rouge">FileWriter</code>. The location(s) can be then found under <code class="highlighter-rouge">info["tensorflow"]["logdirs"]</code> of the experiment.</p>
+
+<p>Using this approach the folder structure is clean (folders are named with a progressive id) and we detach the folder name from the actual experiment configuration.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Managing experiments in a more efficient way is a crucial priority, especially when doing research. Reproducibility is an essential requirement for computational studies including
+those based on machine learning techniques. Sacred is a potent tool, straightforward to integrate into your codebase, saving you the effort of developing a custom way to keep track of your experiments.</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://www.tensorflow.org">Tensorflow</a></li>
+  <li><a href="https://www.tensorflow.org/guide/summaries_and_tensorboard">Tensorboard</a></li>
+  <li><a href="https://sacred.readthedocs.io/en/latest/index.html">Sacred</a></li>
+  <li><a href="https://github.com/IDSIA/sacred">Sacred repository</a></li>
+  <li><a href="https://github.com/vivekratnavel/omniboard">Omniboard</a></li>
+  <li><a href="https://medium.com/@u39kun/managing-your-machine-learning-experiments-and-making-them-repeatable-in-tensorflow-pytorch-bc8043099dbd">Medium Article</a></li>
+</ul>
+
+<h2 id="disclosure">Disclosure</h2>
+<p>This article has been posted on the <a href="https://blog.zuru.tech/machine-learning/2019/02/12/every-experiment-is-sacred">Zuru Tech Italy</a> blog first and cross-posted here.</p>
+:ET

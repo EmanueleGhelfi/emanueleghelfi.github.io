@@ -1,0 +1,30 @@
+I"%<p><a href="www.github.com/zurutech/ashpy">AshPy</a> is a TensorFlow 2.0 library for (<strong>distributed</strong>) training, evaluation, model selection, and fast prototyping.
+It is designed to ease the burden of setting up all the nuances of the architectures built to train complex custom deep learning models.</p>
+
+<h2 id="ashpy-why">AshPy, why?</h2>
+
+<p>Ashpy provides already prepared trainers for classifier models and GANs. In particular, in regards of the latter, it offers a basic GAN sarchitecture with a Generator-Discriminator structure and an enhanced GAN architecture version made up of a Encoder-Generator-Discriminator structure.
+In general <strong>AshPy</strong> aims to:</p>
+
+<ul>
+  <li>Rapid model prototyping</li>
+  <li>Enforcement of best practices &amp; API consistency</li>
+  <li>Remove duplicated and boilerplate code</li>
+  <li>General usability by new project</li>
+</ul>
+
+<h2 id="ashpy-where">AshPy, where?</h2>
+
+<p>The first version of AshPy is available on <a href="https://pypi.org/project/ashpy/">PyPi</a>, you can install it in your virtualenv with <code class="highlighter-rouge">pip install ashpy</code>.</p>
+
+<p>Here some useful links:</p>
+
+<ul>
+  <li><strong>Documentation</strong>: <a href="https://ashpy.zurutech.io">ashpy.zurutech.io</a></li>
+  <li><strong>Github</strong>: <a href="https://github.com/zurutech/ashpy">zurutech/ashpy</a></li>
+</ul>
+
+<p>AshPy is created and maintained primarily by the ML &amp; CV Lab @ <a href="https://zuru.tech">Zuru Tech</a>.
+Please contact ml@zuru.tech for doubt, information or suggestions.</p>
+
+:ET

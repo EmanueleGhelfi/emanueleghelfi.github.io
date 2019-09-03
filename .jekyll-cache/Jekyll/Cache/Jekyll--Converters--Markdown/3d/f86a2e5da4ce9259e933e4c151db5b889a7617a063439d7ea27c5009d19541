@@ -1,0 +1,39 @@
+I" <p><strong>Work</strong>: Since November 2018, I have been working as a Machine Learning and Computer Vision Engineer at <a href="https://zuru.tech">Zuru Tech Italy</a>. 
+I’m involved in the following topics:</p>
+<ul>
+  <li>Anomaly detection</li>
+  <li>Generative Adversarial Networks (GANs) applied to various problems</li>
+  <li>Computer Vision applied to industrial processes</li>
+  <li>Sequence Modeling through Recurrent Models (LSTM)</li>
+  <li>Machine Learning models deployment on Google Cloud Platform</li>
+</ul>
+
+<p>For all these tasks I cover the steps of solution design, algorithm implementation, algorithm evaluation, solution deployment.</p>
+
+<p><strong>Education</strong>: I finished my M.Sc. in Computer Science and Engineering at <a href="http://polimi.it/">Politecnico di Milano</a> in December 2018. In my thesis I developed a new Reinforcement Learning algorithm in order to optimize jointly the environment and the agent policy. The paper from my thesis has been accepted at ICML 2019. See more about my research in the <a href="/portfolio.html">Portfolio</a>.</p>
+
+<p><strong>Hobbies</strong>: On my spare time I love reading RL papers, playing football with friends, visiting new places.</p>
+
+<p><strong>Accounts</strong>: <a href="https://scholar.google.it/citations?user=JJqNoGQAAAAJ&amp;hl=it">Google Scholar</a></p>
+
+<p><strong>Curriculum Vitae</strong>: <a href="/files/data/cv_7.pdf">Download</a></p>
+
+<div class="img-grid">
+<div class="row"> 
+  <div class="column">
+    <img src="/images/about/1.jpg" />
+    <img src="/images/about/2.jpg" />
+    <img src="/images/about/5.jpg" />
+
+  </div>
+  <div class="column">
+    <img src="/images/about/3.jpg" />
+    <img src="/images/about/4.jpg" />
+    <img src="/images/about/6.jpg" />
+    <img src="/images/about/7.jpg" />
+
+  </div> 
+</div>
+</div>
+
+:ET
