@@ -7,6 +7,17 @@
     <atom:link href="http://emanueleghelfi.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Machine Learning Notes</title>
+        <description>
+          
+          .PDF Web Version Here I share a brief summary of the theory behind Machine Learning. These notes were taken during my M.Sc. (2016/2017) following the Machine Learning lectures. They might contain errors, they can be imprecise, they may contain typos. You can contact me if you spot errors, if you...
+        </description>
+        <pubDate>Tue, 03 Sep 2019 08:00:00 +0000</pubDate>
+        <link>http://emanueleghelfi.github.io/blog/2019/09/03/sacred.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/09/03/sacred.html</guid>
+      </item>
+    
+      <item>
         <title>EuroSciPy - Deep Dive into GANs</title>
         <description>
           

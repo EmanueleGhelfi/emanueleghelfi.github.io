@@ -1,4 +1,4 @@
-I"ž <p>The paper <a href="https://junyanz.github.io/BicycleGAN/">Toward Multimodal Image-to-Image Translation</a> <a class="citation" href="#zhu_toward_2017">(Zhu et al., 2017)</a> faces the problem of multimodal image-to-image translation in a principled way. The same problem is faced in <a class="citation" href="#isola_image--image_2016">(Isola, Zhu, Zhou, &amp; Efros, 2016)</a> (pix2pix) but in a not-so-effective manner (enabling Dropout at inference time).</p>
+I"£ <p>The paper <a href="https://junyanz.github.io/BicycleGAN/">Toward Multimodal Image-to-Image Translation</a> <a class="citation" href="#zhu_toward_2017">(Zhu et al., 2017)</a> faces the problem of multimodal image-to-image translation in a principled way. The same problem is faced in <a class="citation" href="#isola_image--image_2016">(Isola, Zhu, Zhou, &amp; Efros, 2016)</a> (pix2pix) but in a not-so-effective manner (enabling Dropout at inference time).</p>
 
 <blockquote class="blockquote"><p>
 In this paper, the authors encourage a <bold>bijection</bold> between the output and the latent code. 
@@ -126,11 +126,11 @@ By the way the goal of this part is to recover the latent vector starting from t
     <table>
       <tbody>
         <tr>
-          <td>latent dimension</td>
+          <td>latent dimension \(</td>
           <td>Â </td>
           <td>z</td>
           <td>Â </td>
-          <td>= 8 across all the datasets</td>
+          <td>= 8\) across all the datasets</td>
         </tr>
       </tbody>
     </table>

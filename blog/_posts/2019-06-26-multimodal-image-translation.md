@@ -141,7 +141,7 @@ The authors explored two ways of injecting the latent vector z to in the generat
 - **Not** conditioning the discriminator D on input A leads to better results
 - Hyperparameters: \\( \lambda = 10 \\), \\( \lambda_{LR} = 0.5 \\) and \\( \lambda_{KL} = 0.01 \\)
 - Train using Adam with a batch size of 1 and with a learning rate of 0.0002
-- latent dimension ||z|| = 8 across all the datasets
+- latent dimension \\(||z|| = 8\\) across all the datasets
 
 ## Results
 

@@ -1,0 +1,31 @@
+I"D<div style="margin:20px;">
+<center>
+<a href="/files/data/DeepLearningSummary.pdf"><button name="button" class="btn btn-primary" href="/files/data/DeepLearningSummary.pdf">.PDF</button></a>
+<a href="/files/deep-learning"><button name="button" class="btn btn-primary">Web Version</button></a>
+</center>
+</div>
+
+<p>Here I share a brief summary of the theory behind Machine Learning. These notes were taken during my M.Sc. (2016/2017) following the Machine Learning lectures. They might contain errors, they can be imprecise, they may contain typos. You can contact me if you spot errors, if you have issues, comments or doubts.<br />
+You can download the .pdf <a href="/files/data/DeepLearningSummary.pdf">here</a> or you can see the web version <a href="/files/deep-learning">here</a>.</p>
+
+<p>Table of contents:</p>
+<ul>
+  <li>Machine Learning
+    <ul>
+      <li>Perceptrons</li>
+      <li>Multi Layer Neural Network</li>
+      <li>Maximum Likelihood Estimation</li>
+      <li>Regularization</li>
+    </ul>
+  </li>
+  <li>Deep Learning
+    <ul>
+      <li>Convolutional Networks</li>
+      <li>Autoencoders</li>
+      <li>Time Series Analysis</li>
+    </ul>
+  </li>
+</ul>
+
+<p>The web version of the summary was obtained using <a href="https://github.com/arxiv-vanity/engrafo">engrafo</a> that is an amazing tool that converts latex to html pages.</p>
+:ET
