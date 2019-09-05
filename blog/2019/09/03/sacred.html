@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Tag: sacred</title>
+  <title>Machine Learning Notes</title>
 
   <meta name="author" content="Emanuele Ghelfi" />
 
@@ -81,13 +81,13 @@
   
 
   <!-- Facebook OpenGraph tags -->
-  <meta property="og:title" content="Tag: sacred" />
+  <meta property="og:title" content="Machine Learning Notes" />
   <meta property="og:type" content="website" />
 
   
 
   
-  <meta property="og:url" content="http://emanueleghelfi.github.io/tag/sacred" />
+  <meta property="og:url" content="http://emanueleghelfi.github.io/blog/2019/09/03/sacred.html" />
   
 
   
@@ -128,18 +128,20 @@
 
 <!-- seo -->
 <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Tag: sacred | Emanuele Ghelfi’s Blog</title>
+<title>Machine Learning Notes | Emanuele Ghelfi’s Blog</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Tag: sacred" />
-<meta name="author" content="Emanuele Ghelfi" />
+<meta property="og:title" content="Machine Learning Notes" />
+<meta name="author" content="manughelfi" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Teaching Machines to Learn" />
-<meta property="og:description" content="Teaching Machines to Learn" />
-<link rel="canonical" href="http://emanueleghelfi.github.io/tag/sacred" />
-<meta property="og:url" content="http://emanueleghelfi.github.io/tag/sacred" />
+<meta name="description" content="Some notes about the basic theory behind machine learning." />
+<meta property="og:description" content="Some notes about the basic theory behind machine learning." />
+<link rel="canonical" href="http://emanueleghelfi.github.io/blog/2019/09/03/sacred.html" />
+<meta property="og:url" content="http://emanueleghelfi.github.io/blog/2019/09/03/sacred.html" />
 <meta property="og:site_name" content="Emanuele Ghelfi’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-03T08:00:00+00:00" />
 <script type="application/ld+json">
-{"url":"http://emanueleghelfi.github.io/tag/sacred","headline":"Tag: sacred","author":{"@type":"Person","name":"Emanuele Ghelfi"},"description":"Teaching Machines to Learn","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"http://emanueleghelfi.github.io/blog/2019/09/03/sacred.html","headline":"Machine Learning Notes","dateModified":"2019-09-03T08:00:00+00:00","datePublished":"2019-09-03T08:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://emanueleghelfi.github.io/blog/2019/09/03/sacred.html"},"author":{"@type":"Person","name":"manughelfi"},"description":"Some notes about the basic theory behind machine learning.","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -184,106 +186,173 @@
   </div>
 </nav>  
 
-    <div class="intro-header"></div>
+    <!-- TODO this file has become a mess, refactor it -->
 
-<div role="main" class="container">
-  <div class="post">
-<h1>Tag: sacred</h1>
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Machine Learning Notes</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on September 3, 2019</span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+      <!-- tags -->
+      <span>[
+        
+          
+          <a href="/tag/machine-learning"><code class="highligher-rouge"><nobr>machine-learning</nobr></code></a>
+        
+          
+          <a href="/tag/notes"><code class="highligher-rouge"><nobr>notes</nobr></code></a>
+        
+          
+          <a href="/tag/summary"><code class="highligher-rouge"><nobr>summary</nobr></code></a>
+        
+      ]</span>
+    
+<article role="main" class="blog-post">
+    <!-- page content-->
+	  <div style="margin:20px;">
+<center>
+<a href="/files/data/DeepLearningSummary.pdf"><button name="button" class="btn btn-primary" href="/files/data/DeepLearningSummary.pdf">.PDF</button></a>
+<a href="/files/deep-learning"><button name="button" class="btn btn-primary">Web Version</button></a>
+</center>
+</div>
+
+<p>Here I share a brief summary of the theory behind Machine Learning. These notes were taken during my M.Sc. (2016/2017) following the Machine Learning lectures. They might contain errors, they can be imprecise, they may contain typos. You can contact me if you spot errors, if you have issues, comments or doubts.<br />
+You can download the .pdf <a href="/files/data/DeepLearningSummary.pdf">here</a> or you can see the web version <a href="/files/deep-learning">here</a>.</p>
+
+<p>Table of contents:</p>
 <ul>
-
-  <li><a href="/blog/2019/02/12/sacred.html">Every Experiment is Sacred</a> (12 Feb 2019)<br>
-    How to manage Machine Learning experiments and make them reproducible.
+  <li>Machine Learning
+    <ul>
+      <li>Perceptrons</li>
+      <li>Multi Layer Neural Network</li>
+      <li>Maximum Likelihood Estimation</li>
+      <li>Regularization</li>
+    </ul>
   </li>
-
+  <li>Deep Learning
+    <ul>
+      <li>Convolutional Networks</li>
+      <li>Autoencoders</li>
+      <li>Time Series Analysis</li>
+    </ul>
+  </li>
 </ul>
+
+<p>The web version of the summary was obtained using <a href="https://github.com/arxiv-vanity/engrafo">engrafo</a> that is an amazing tool that converts latex to html pages.</p>
+
+</article>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+    
+      <!-- Check if any share-links are active -->
+
+
+
+
+<section id = "social-share-section">
+  <span class="sr-only">Share: </span>
+
+  
+  <!--- Share on Twitter -->
+    <a href="https://twitter.com/intent/tweet?text=Machine+Learning+Notes+http://emanueleghelfi.github.io/blog/2019/09/03/sacred.html"
+      class="btn btn-social-icon btn-twitter" title="Share on Twitter">
+      <span class="fa fa-fw fa-twitter" aria-hidden="true"></span>
+      <span class="sr-only">Twitter</span>
+    </a>
+  
+
+  
+  <!--- Share on Facebook -->
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://emanueleghelfi.github.io/blog/2019/09/03/sacred.html"
+      class="btn btn-social-icon btn-facebook" title="Share on Facebook">
+      <span class="fa fa-fw fa-facebook" aria-hidden="true"></span>
+      <span class="sr-only">Facebook</span>
+    </a>
+  
+
+  
+  <!--- Share on LinkedIn -->
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://emanueleghelfi.github.io/blog/2019/09/03/sacred.html"
+      class="btn btn-social-icon btn-linkedin" title="Share on LinkedIn">
+      <span class="fa fa-fw fa-linkedin" aria-hidden="true"></span>
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  
+
+</section>
+
+
+    
+    <ul class="pager blog-pager">
+      
+      <li class="previous">
+        <a href="/blog/2019/08/02/euroscipy-gans.html" data-toggle="tooltip" data-placement="top" title="EuroSciPy - Deep Dive into GANs">&larr; Previous Post</a>
+      </li>
+      
+      
+    </ul>
+  </div>
 </div>
-<hr>
-
-<h2>Tags</h2>
 
 
+<div class="row disqus-comments">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'emanueleghelfi-github-io';
+	    // ensure that pages with query string get the same discussion
+            var url_parts = window.location.href.split("?");
+            var disqus_url = url_parts[0];	    
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
 
-  
-  
-  <a href="/tag/machine-learning"><code class="highligher-rouge"><nobr>machine-learning</nobr></code></a>
 
-  
-  
-  <a href="/tag/gan"><code class="highligher-rouge"><nobr>gan</nobr></code></a>
-
-  
-  
-  <a href="/tag/reinforcement-learning"><code class="highligher-rouge"><nobr>reinforcement-learning</nobr></code></a>
-
-  
-  
-  <a href="/tag/conference"><code class="highligher-rouge"><nobr>conference</nobr></code></a>
-
-  
-  
-  <a href="/tag/tutorial"><code class="highligher-rouge"><nobr>tutorial</nobr></code></a>
-
-  
-  
-  <a href="/tag/paper-notes"><code class="highligher-rouge"><nobr>paper-notes</nobr></code></a>
-
-  
-  
-  <a href="/tag/open-source"><code class="highligher-rouge"><nobr>open-source</nobr></code></a>
-
-  
-  
-  <a href="/tag/image-translation"><code class="highligher-rouge"><nobr>image-translation</nobr></code></a>
-
-  
-  
-  <a href="/tag/summary"><code class="highligher-rouge"><nobr>summary</nobr></code></a>
-
-  
-  
-  <a href="/tag/software"><code class="highligher-rouge"><nobr>software</nobr></code></a>
-
-  
-  
-  <a href="/tag/sacred"><code class="highligher-rouge"><nobr>sacred</nobr></code></a>
-
-  
-  
-  <a href="/tag/pyconit"><code class="highligher-rouge"><nobr>pyconit</nobr></code></a>
-
-  
-  
-  <a href="/tag/notes"><code class="highligher-rouge"><nobr>notes</nobr></code></a>
-
-  
-  
-  <a href="/tag/nips"><code class="highligher-rouge"><nobr>nips</nobr></code></a>
-
-  
-  
-  <a href="/tag/icml"><code class="highligher-rouge"><nobr>icml</nobr></code></a>
-
-  
-  
-  <a href="/tag/experiments"><code class="highligher-rouge"><nobr>experiments</nobr></code></a>
-
-  
-  
-  <a href="/tag/euroscipy"><code class="highligher-rouge"><nobr>euroscipy</nobr></code></a>
-
-  
-  
-  <a href="/tag/configurable"><code class="highligher-rouge"><nobr>configurable</nobr></code></a>
-
-  
-  
-  <a href="/tag/computer-vision"><code class="highligher-rouge"><nobr>computer-vision</nobr></code></a>
-
-  
-  
-  <a href="/tag/competition"><code class="highligher-rouge"><nobr>competition</nobr></code></a>
+  </div>
+</div>
 
 </div>
+</div>
+</div>
+
 
 
     <footer>
