@@ -7,7 +7,7 @@ slug:  learning-to-run
 date:   2019-03-27 8:00:00
 categories: machine-learning
 tags: machine-learning reinforcement-learning competition nips
-description: "In this article we present our approach for the NIPS 2017 ”Learning To Run” challenge."
+description: "In this article we present our approach for the NIPS 2017 'Learning To Run' challenge."
 mathjax: true
 gh-repo: "MultiBeerBandits/learning-to-run"
 gh-badge: [star, watch, follow, fork]
