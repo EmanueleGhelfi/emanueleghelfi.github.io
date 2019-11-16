@@ -14,6 +14,8 @@ I'm involved in the following topics:
 
 For all these tasks I cover the steps of solution design, algorithm implementation, algorithm evaluation, solution deployment.
 
+**Data Science and Artificial Intelligence in Parma**: In Semptember 2019 I became member of the **Data Science and Artificial Intelligence in Parma** association. The goal of the association is to promote Machine Learning, Data Science topics organizing events, talks, courses, workshops, etc. If you are interested in giving a talk or you want to become a member of the association or you want just more information about the community you can contact me, you can write in our [Telegram](http://bit.do/datascienceparma) group or you can contact us through our [Facebook](https://www.facebook.com/DSAIinParma/) page.
+
 **Education**: I finished my M.Sc. in Computer Science and Engineering at [Politecnico di Milano] in December 2018. In my thesis I developed a new Reinforcement Learning algorithm in order to optimize jointly the environment and the agent policy. The paper from my thesis has been accepted at ICML 2019. See more about my research in the [Portfolio][proj-research].
 
 **Hobbies**: On my spare time I love reading RL papers, playing football with friends, visiting new places.
