@@ -37,15 +37,23 @@ Links:
 <div class="img-grid">
 <div class="row"> 
   <div class="column">
-    <img src="/images/about/1.jpg">
-    <img src="/images/about/2.jpg">
-    <img src="/images/about/5.jpg">
+      <img src="/images/about/4.jpg">
+      <img src="/images/about/2.jpg">
+      <img src="/images/about/5.jpg">
+      <img src="/images/about/9.jpeg">
+      <img src="/images/about/8.jpeg">
+      <img src="/images/about/10.jpg">
+      <img src="/images/about/11.jpg">
+      <img src="/images/about/12.jpg">
   </div>
   <div class="column">
+    <img src="/images/about/1.jpg">
     <img src="/images/about/3.jpg">
-    <img src="/images/about/4.jpg">
     <img src="/images/about/6.jpg">
     <img src="/images/about/7.jpg">
+    <img src="/images/about/13.jpg">
+    <img src="/images/about/14.jpg">
+    <img src="/images/about/15.jpg">
   </div> 
 </div>
 </div>
