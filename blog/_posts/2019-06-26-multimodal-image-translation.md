@@ -4,7 +4,7 @@ layout: post
 title:  "Paper Notes: Toward Multimodal Image-to-Image Translation"
 slug:  multimodal-image-to-image-translation
 date:   2019-06-26 8:00:00
-categories: machine-learning
+categories: machine-learning paper-notes
 tags: machine-learning gan paper-notes image-translation
 description: "Multimodal Image-To-Image Translation"
 mathjax: true

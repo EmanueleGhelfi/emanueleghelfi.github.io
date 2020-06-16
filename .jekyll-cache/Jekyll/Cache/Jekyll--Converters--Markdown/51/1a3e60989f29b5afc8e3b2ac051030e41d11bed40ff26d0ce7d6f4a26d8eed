@@ -1,4 +1,4 @@
-I"gC<p>Managing Machine Learning experiments is usually painful.</p>
+I"RE<p>Managing Machine Learning experiments is usually painful.</p>
 
 <center>
 <figure>
@@ -26,7 +26,7 @@ We can implement an experiment using this style in the following way:</p>
 <span class="k">def</span> <span class="nf">get_logdir</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
     <span class="n">logdir</span> <span class="o">=</span> <span class="s">""</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
-        <span class="n">logdir</span> <span class="o">=</span> <span class="n">logdir</span> <span class="o">+</span> <span class="n">f</span><span class="s">"_{key}_{config[key]}"</span>
+        <span class="n">logdir</span> <span class="o">=</span> <span class="n">logdir</span> <span class="o">+</span> <span class="s">f"_</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s">"</span>
     <span class="k">return</span> <span class="n">logdir</span>
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -36,28 +36,28 @@ We can implement an experiment using this style in the following way:</p>
     <span class="c1"># load dataset, model, summaries, loss using the configuration
 </span>
     <span class="c1"># merge summaries
-</span>    <span class="n">summary_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">merge_all</span><span class="p">()</span>
+</span>    <span class="n">summary_op</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">summary</span><span class="p">.</span><span class="n">merge_all</span><span class="p">()</span>
 
     <span class="c1"># define a logdir to keep track of the configuration
-</span>    <span class="n">logdir</span> <span class="o">=</span> <span class="n">f</span><span class="s">"logs/{get_logdir(config)}"</span>
+</span>    <span class="n">logdir</span> <span class="o">=</span> <span class="s">f"logs/</span><span class="si">{</span><span class="n">get_logdir</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="si">}</span><span class="s">"</span>
 
     <span class="c1"># instantiate a tensorflow saver
-</span>    <span class="n">saver</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Saver</span><span class="p">()</span>
-    <span class="n">writer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">SummaryWriter</span><span class="p">(</span><span class="n">log_dir</span><span class="p">)</span>
+</span>    <span class="n">saver</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">train</span><span class="p">.</span><span class="n">Saver</span><span class="p">()</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">SummaryWriter</span><span class="p">(</span><span class="n">log_dir</span><span class="p">)</span>
 
-    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="p">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
         <span class="c1"># train loop
 </span>        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">'steps'</span><span class="p">]):</span>
                 <span class="c1"># your training code ...
 </span>
-                <span class="n">loss_value</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+                <span class="n">loss_value</span> <span class="o">=</span> <span class="n">sess</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
 
                 <span class="c1"># write summaries
-</span>                <span class="n">writer</span><span class="o">.</span><span class="n">add_summary</span><span class="p">(</span><span class="n">summaries</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
-                <span class="n">writer</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+</span>                <span class="n">writer</span><span class="p">.</span><span class="n">add_summary</span><span class="p">(</span><span class="n">summaries</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                <span class="n">writer</span><span class="p">.</span><span class="n">flush</span><span class="p">()</span>
 
                 <span class="c1"># save model
-</span>                <span class="n">saver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="n">logdir</span><span class="p">)</span>
+</span>                <span class="n">saver</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="n">logdir</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>In this code snippet, we load the model, dataset and other possible configurations, the logdir defined is needed for associating a configuration to the right plot in Tensorboard.
@@ -138,44 +138,44 @@ God gets quite irate
 <span class="c1"># instantiate a sacred experiment
 </span><span class="n">ex</span> <span class="o">=</span> <span class="n">Experiment</span><span class="p">(</span><span class="s">"experiment_name"</span><span class="p">)</span>
 <span class="c1"># add the MongoDB observer
-</span><span class="n">ex</span><span class="o">.</span><span class="n">observers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MongoObserver</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+</span><span class="n">ex</span><span class="p">.</span><span class="n">observers</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">MongoObserver</span><span class="p">.</span><span class="n">create</span><span class="p">())</span>
 
 <span class="c1"># load the configuration
-</span><span class="n">ex</span><span class="o">.</span><span class="n">add_config</span><span class="p">(</span><span class="s">"default.json"</span><span class="p">)</span>
-<span class="n">ex</span><span class="o">.</span><span class="n">add_config</span><span class="p">(</span><span class="s">"experiment.json"</span><span class="p">)</span>
+</span><span class="n">ex</span><span class="p">.</span><span class="n">add_config</span><span class="p">(</span><span class="s">"default.json"</span><span class="p">)</span>
+<span class="n">ex</span><span class="p">.</span><span class="n">add_config</span><span class="p">(</span><span class="s">"experiment.json"</span><span class="p">)</span>
 
-<span class="o">@</span><span class="n">ex</span><span class="o">.</span><span class="n">automain</span>
+<span class="o">@</span><span class="n">ex</span><span class="p">.</span><span class="n">automain</span>
 <span class="o">@</span><span class="n">LogFileWriter</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="o">...</span> <span class="n">params</span><span class="p">,</span> <span class="n">_run</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="p">...</span> <span class="n">params</span><span class="p">,</span> <span class="n">_run</span><span class="p">):</span>
     <span class="c1"># load dataset, model, summaries, loss using the parameters
 </span>
     <span class="c1"># merge summaries
-</span>    <span class="n">summary_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">merge_all</span><span class="p">()</span>
+</span>    <span class="n">summary_op</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">summary</span><span class="p">.</span><span class="n">merge_all</span><span class="p">()</span>
 
     <span class="c1"># define a logdir using the experiment id of sacred
-</span>    <span class="n">logdir</span> <span class="o">=</span> <span class="n">f</span><span class="s">"logs/{_run._id}"</span>
+</span>    <span class="n">logdir</span> <span class="o">=</span> <span class="s">f"logs/</span><span class="si">{</span><span class="n">_run</span><span class="p">.</span><span class="n">_id</span><span class="si">}</span><span class="s">"</span>
 
     <span class="c1"># instantiate a tensorflow saver
-</span>    <span class="n">saver</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Saver</span><span class="p">()</span>
-    <span class="n">writer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">SummaryWriter</span><span class="p">(</span><span class="n">log_dir</span><span class="p">)</span>
+</span>    <span class="n">saver</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">train</span><span class="p">.</span><span class="n">Saver</span><span class="p">()</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">SummaryWriter</span><span class="p">(</span><span class="n">log_dir</span><span class="p">)</span>
 
-    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="p">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
         <span class="c1"># train loop
 </span>        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
                 <span class="c1"># your training code ...
 </span>
-                <span class="n">loss_value</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">)</span>
+                <span class="n">loss_value</span> <span class="o">=</span> <span class="n">sess</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">)</span>
 
                 <span class="c1"># log loss to sacred
-</span>                <span class="n">ex</span><span class="o">.</span><span class="n">log_scalar</span><span class="p">(</span><span class="s">"training.loss"</span><span class="p">,</span> <span class="n">loss_value</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
-                <span class="n">summaries</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">summary_op</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">)</span>
+</span>                <span class="n">ex</span><span class="p">.</span><span class="n">log_scalar</span><span class="p">(</span><span class="s">"training.loss"</span><span class="p">,</span> <span class="n">loss_value</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                <span class="n">summaries</span> <span class="o">=</span> <span class="n">sess</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">summary_op</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">)</span>
 
                 <span class="c1"># write summaries as tensorflow logs
-</span>                <span class="n">writer</span><span class="o">.</span><span class="n">add_summary</span><span class="p">(</span><span class="n">summaries</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
-                <span class="n">writer</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+</span>                <span class="n">writer</span><span class="p">.</span><span class="n">add_summary</span><span class="p">(</span><span class="n">summaries</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                <span class="n">writer</span><span class="p">.</span><span class="n">flush</span><span class="p">()</span>
 
                 <span class="c1"># save model
-</span>                <span class="n">saver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="n">logdir</span><span class="p">)</span>
+</span>                <span class="n">saver</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="n">logdir</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>In this way, we create a new instance of <code class="highlighter-rouge">Experiment</code> and an instance of <code class="highlighter-rouge">MongoObserver</code> to store data to MongoDB. We add two different configurations, a default configuration (<code class="highlighter-rouge">default.json</code>) and an experiment configuration (<code class="highlighter-rouge">experiment.json</code>). The function decorated with <code class="highlighter-rouge">@ex.automain</code> is the main function of the experiment and Sacred automatically injects its parameters. The <code class="highlighter-rouge">LogFileWriter(ex)</code> decorator is used to store the location of summaries produced by Tensorflow (created by <code class="highlighter-rouge">tensorflow.summary.FileWriter</code>) into the experiment record specified by the ex argument. Whenever a new <code class="highlighter-rouge">FileWriter</code> instantiation is detected in a scope of the decorator or the context manager, the path of the log is copied to the experiment record exactly as passed to the <code class="highlighter-rouge">FileWriter</code>. The location(s) can be then found under <code class="highlighter-rouge">info["tensorflow"]["logdirs"]</code> of the experiment.</p>

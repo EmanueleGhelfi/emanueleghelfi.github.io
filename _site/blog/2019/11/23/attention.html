@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  
+  <meta name="google-site-verification" content="D1nJAX0_x0Dj8DL8A77WzcxRD_6yCCdSV8FfeNDru64">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Paper Notes: Attention Is All You Need</title>
+
+  <meta name="author" content="Emanuele Ghelfi" />
+
+  
+
+  <link rel="alternate" type="application/rss+xml" title="Emanuele Ghelfi's Blog - Teaching Machines to Learn" href="/feed.xml" />
+
+
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="/apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+<link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/favicon-128.png" sizes="128x128" />
+<meta name="application-name" content="&nbsp;"/>
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<meta name="msapplication-TileImage" content="mstile-144x144.png" />
+<meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
+<meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
+<meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
+<!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+  
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
+    
+  
+
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+      <link rel="stylesheet" href="/css/custom.css" />
+    
+      <link rel="stylesheet" href="/css/particle.css" />
+    
+  
+
+  
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  <!-- Facebook OpenGraph tags -->
+  <meta property="og:title" content="Paper Notes: Attention Is All You Need" />
+  <meta property="og:type" content="website" />
+
+  
+
+  
+  <meta property="og:url" content="http://emanueleghelfi.github.io/blog/2019/11/23/attention.html" />
+  
+
+  
+  <meta property="og:image" content="" />
+  
+
+  <!-- Twitter tags -->
+  <meta name="twitter:card" content="summary" />
+
+      <!-- Scripts for ggvis from http://ggvis.rstudio.com/0.1/interactivity.html-->
+  <!-- ggvis stuff -->
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/jquery-1.11.0.min.js"></script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/jquery-ui/js/jquery-ui-1.10.4.custom.min.js"></script>
+  <script charset="utf-8" src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/d3.min.js"></script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/vega.min.js"></script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/QuadTree.js"></script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/lodash.min.js"></script>
+  <script>var lodash = _.noConflict();</script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/js/ggvis.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css"/>
+  <link rel="stylesheet" type="text/css" href="http://ggvis.rstudio.com/0.1/libs/ggvis/css/ggvis.css"/>
+  <!-- end of ggvis scripts-->
+
+  <!-- Tags management -->
+  
+    
+
+
+
+
+
+  
+
+<!-- Jekyll Ideal Image Slider Include -->
+<!-- https://github.com/jekylltools/jekyll-ideal-image-slider-include -->
+<!-- v1.8 -->
+
+
+<!-- seo -->
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Paper Notes: Attention Is All You Need | Emanuele Ghelfi’s Blog</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Paper Notes: Attention Is All You Need" />
+<meta name="author" content="manughelfi" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Paper notes about Attention and Transformers." />
+<meta property="og:description" content="Paper notes about Attention and Transformers." />
+<link rel="canonical" href="http://emanueleghelfi.github.io/blog/2019/11/23/attention.html" />
+<meta property="og:url" content="http://emanueleghelfi.github.io/blog/2019/11/23/attention.html" />
+<meta property="og:site_name" content="Emanuele Ghelfi’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-23T08:00:00+00:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://emanueleghelfi.github.io/blog/2019/11/23/attention.html"},"url":"http://emanueleghelfi.github.io/blog/2019/11/23/attention.html","headline":"Paper Notes: Attention Is All You Need","dateModified":"2019-11-23T08:00:00+00:00","datePublished":"2019-11-23T08:00:00+00:00","description":"Paper notes about Attention and Transformers.","author":{"@type":"Person","name":"manughelfi"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+
+</head>
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://emanueleghelfi.github.io">Emanuele Ghelfi's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+	    
+        <li>
+		  <a href="/">Home</a>
+		</li>
+		
+        <li>
+		  <a href="/portfolio.html">Portfolio</a>
+		</li>
+		
+        <li>
+		  <a href="/aboutme.html">About Me</a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	
+  </div>
+</nav>  
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Paper Notes: Attention Is All You Need</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on November 23, 2019</span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+      <!-- tags -->
+      <span>[
+        
+          
+          <a href="/tag/machine-learning"><code class="highligher-rouge"><nobr>machine-learning</nobr></code></a>
+        
+          
+          <a href="/tag/computer-vision"><code class="highligher-rouge"><nobr>computer-vision</nobr></code></a>
+        
+          
+          <a href="/tag/natural-language-processing"><code class="highligher-rouge"><nobr>natural-language-processing</nobr></code></a>
+        
+          
+          <a href="/tag/paper-notes"><code class="highligher-rouge"><nobr>paper-notes</nobr></code></a>
+        
+      ]</span>
+    
+<article role="main" class="blog-post">
+    <!-- page content-->
+	  <p>I went through the last Facebook paper <a class="citation" href="#carion2020endtoend">(Carion et al., 2020)</a>, which proposes a new architecture, DETR, for object detection and segmentation based on Transformers. To better understand the paper, I decided to review the basic principles of Transformers and Attention. I am not pretending to write the best article on Transformers on the Internet. I just want to reason a bit about Transformers and maybe present the underlying ideas simply and intuitively.</p>
+
+<h1 id="transformers">Transformers</h1>
+
+<center>
+<img src="/blog/figs/detr/transformers.jpg" />
+</center>
+
+<p>Transformers <a class="citation" href="#vaswani_attention_2017">(Vaswani et al., 2017)</a> are a deep learning architecture based on the <strong>attention</strong> mechanism. They are usually applied to <strong>sequential</strong> data in NLP tasks. Attention relates different positions of a single sequence in order to compute a meaningful representation of the sequence.</p>
+
+<p>Characteristics:</p>
+
+<ul>
+  <li><a href="#attention">Attention</a></li>
+  <li><a href="#encoder-decoder">Encoder-Decoder stack</a></li>
+  <li><a href="#positional-encoding">Positional encoding</a></li>
+</ul>
+
+<h2 id="attention">Attention</h2>
+
+<p>The attention function has different inputs in the form of vectors:</p>
+
+<ul>
+  <li><strong>query</strong> (denoted as <script type="math/tex">q</script>)</li>
+  <li><strong>key</strong>-<strong>value</strong> pairs (denoted as <script type="math/tex">k</script> and <script type="math/tex">v</script>)</li>
+</ul>
+
+<p>The output is computed as a <strong>weighted</strong> sum of the values based on the key similarity with respect to the query.
+It can be described as a retrieval mechanism in which the keys may not be exactly equal to the query. Here, the key similarity is obtained through a compatibility function of the query and the keys.</p>
+
+<p><strong>How to obtain a similarity (or compatibility) score?</strong></p>
+
+<p>This is very easy, you need just to compute the dot product of two vectors. So, let us say you want to compute the similarity of the vectors <script type="math/tex">q \in \mathcal{R}^n</script> and <script type="math/tex">k \in \mathcal{R}^n</script>:</p>
+
+<script type="math/tex; mode=display">Sim(q, k) = q \cdot k^T .</script>
+
+<p>If we have one query and multiple keys we can multiply the query vector with all keys arranged in a matrix, denoted as <script type="math/tex">K \in \mathcal{R}^{d \times n}</script>:</p>
+
+<script type="math/tex; mode=display">Sim(q, K) = q \cdot K^T = [Sim(q, k_1), Sim(q, k_2), \dots, Sim(q, k_n)] \in \mathcal{R}^d</script>
+
+<p>If we have multiple queries and multiple keys we can also arrange the queries in a matrix <script type="math/tex">Q \in \mathcal{R}^{m \times n}</script>:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+Sim(Q, K) = Q \cdot K^T = \left[ \begin{array}{ccc}
+      Sim(q_1, k_1) & \cdots & Sim(q_1, k_n) \\
+      \vdots & \ddots & \vdots \\ 
+      Sim(q_m, k_1) & \cdots & Sim(q_m, k_n)
+    \end{array}  \right] %]]></script>
+
+<p>Notice that <script type="math/tex">Sim(Q, K) \in \mathcal{R}^{m \times d}</script>.</p>
+
+<p>To understand better the attention as information retrieval mechanism, it is useful to think in these terms.</p>
+
+<p>Let us say we have 3 keys, corresponding to the vectors forming angles of 0, 45 and 90 degrees. Suppose to have a query vector forming an angle of 60 degree. The keys are visualized in blue and the query in red:</p>
+
+<center>
+<img src="/blog/figs/detr/attention_vectors.png" style="width: 50%;" alt="Attention vectors" />
+</center>
+
+<p>As we can see, the query is similar to keys <script type="math/tex">k_2</script> and <script type="math/tex">k_3</script>. To quantify the similarity, we calculate the dot product between the query and the keys matrix:</p>
+
+<div>
+$$
+q K^T = [ \underbrace{0.5}_{\color{red}{q} \cdot \color{blue}{k_1}^T} \; \underbrace{0.96}_{\color{red}{q} \cdot \color{blue}{k_2}^T} \; \underbrace{0.86}_{\color{red}{q} \cdot \color{blue}{k_3}^T} ]
+$$
+</div>
+
+<p>To normalize the similarity matrix, we can apply the <script type="math/tex">softmax</script> function, obtaining the attention weights:</p>
+
+<div>
+$$
+\text{softmax}(q K^T) = [\underbrace{0.24}_{\color{orange}{w_1}} \; \underbrace{0.39}_{\color{orange}{w_2}} \; \underbrace{0.35}_{\color{orange}{w_3}}]
+$$
+</div>
+
+<p>For larger values of <script type="math/tex">n</script>, query and key dimension, the dot product grows large in magnitude and pushes the softmax (see later) in regions with small gradients.
+To overcome this limitation, we divide each element of the similarity matrix by <script type="math/tex">\sqrt{n}</script>, the dimension of the query and the key. The attention weights scaled are simply the weights obtained applying the softmax function to the similarity matrix scaled.</p>
+
+<p><strong>Attention Score</strong></p>
+
+<p>Using the softmax we find the weights associated to each value, we can then multiply the weghts by the values obtaining the attention score:</p>
+
+<script type="math/tex; mode=display">\text{Attention}(Q, K, V) = \text{softmax} \left( \frac{QK^T}{\sqrt{n}} \right) V \in \mathcal{R}^{m \times u}</script>
+
+<p>where <script type="math/tex">V \in \mathcal{R}^{d \times u}</script>.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/detr/attention.png" />
+<figcaption>Attention Block.</figcaption>
+</figure>
+</center>
+
+<p>Going back to our example we can summarize the whole mechanism with the following diagram:</p>
+
+<p><img src="/blog/figs/detr/attention_diagram.svg" alt="attention_diagram" /></p>
+
+<p>From the query vector and the keys we calculate the attention weights, we can then use the attention weights associated to each key to weight the corresponding value.</p>
+
+<p><strong>Multi-Head Attention</strong></p>
+
+<p>Multi-Head attention refers to the computation of <script type="math/tex">h</script> attention scores starting from linear projections of the input vectors. These linear projections are learned during training.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/detr/multi_head_attention.png" />
+<figcaption>Multi Head Attention Block.</figcaption>
+</figure>
+</center>
+
+<p><strong>Why Multi-Head Attention?</strong></p>
+
+<p>Using Multi-Head attention the model can exploit different input representations to attend different positions.</p>
+
+<p><strong>Why Linear Projection?</strong></p>
+
+<p>The Linear Projection of the keys and the query is a very important characteristic of the attention mechanism. If we keep the query and key fixed we will end up in learning nothing. A learnable projection is highly fundamental. In this way the input can adapt to the keys and can understand what is important to ask. If we think of the keys as representing attributes of the input sentence, our learned query can ask important attributes for the decoding part.</p>
+
+<p><strong>Self-Attention</strong></p>
+
+<p>In a self-attention layer the keys, values and queries are all the same:</p>
+
+<script type="math/tex; mode=display">\text{Self-Attention}(X) = Attention(X, X, X)</script>
+
+<p><strong>Linear Projection in a Self-Attention Layer</strong></p>
+
+<p>In a self-attention layer the linear projection becomes more important. If we compute the self-attention using only the embedding we would only use the similarity defined by the embedding. Using a linear projection we let the embedding to adapt to the specific task. In this way the similarity between inputs can be learned during training. At the same time, learning values can be beneficial as they represent important attributes of the input.</p>
+
+<h2 id="encoder-decoder">Encoder-Decoder</h2>
+
+<p>The Transformer model is made of two parts: an Encoder and a Decoder.</p>
+
+<p><strong>Encoder</strong></p>
+
+<p>The Encoder is a stack of N blocks. Each block is made of two layers:</p>
+
+<ul>
+  <li>Multi-Head (Self-)Attention</li>
+  <li>Position-wise Feed Forward Network (FFN)</li>
+</ul>
+
+<p>In addition, the original Transformer uses Residual connections and Layer Normalization.</p>
+
+<p>The Encoder takes the inputs, and it converts it into a latent representation. In the context of NLP, the inputs are the tokenized words projected into an embedding.</p>
+
+<p>A position-wise FFN is a FFN applied to each position in an independent way. Across the same layer, the parameters are shared. This is equivalent to a convolution with kernel size 1.</p>
+
+<p><strong>Decoder</strong></p>
+
+<p>The decoder is a stack of N blocks. Each block is composed of:</p>
+
+<ul>
+  <li>Multi-Head (Self-)Attention considering the outputs</li>
+  <li>Multi-Head Attention considering the output of the encoder</li>
+  <li>Position-wise FFN</li>
+</ul>
+
+<p>Similarly to the encoder, the decoder uses Residual connections and Layer Normalization.</p>
+
+<p>In a Machine Translation task, the decoder generates token sequentially like an autoregressive model. It starts from the initial token, and it generates a distribution over the next token. The token associated with the highest probability is selected and fed again in the decoder. During this process, the decoder can attend at each position of the output generate up to the current one.</p>
+
+<p><strong>Attentions</strong></p>
+
+<p>There are three different attention application in the transformer model:</p>
+
+<ul>
+  <li>
+    <p>Encoder <strong>self</strong>-attention. The key, values and queries are the same and comes from the previous layer of the encoder. Motivation: in this way, the encoder can <strong>attend</strong> to different positions of the previous layer.</p>
+  </li>
+  <li>
+    <p>Encoder-decoder <strong>attention</strong>. The output of the encoder is used as keys and values, while the queries come from the previous layer of the decoder. This is a very interesting technique. The encoder can suggest interesting keys and values; we can think of them as attributes of the input sequence. The decoder can ask through the query some properties it is interested in. This allows the decoder to <strong>attend</strong> different positions of the input sequence.</p>
+  </li>
+  <li>
+    <p>Decoder <strong>self</strong>-attention. The self-attention layer of the decoder allows the encoder to attend all the generated positions up to and including the current position.</p>
+  </li>
+</ul>
+
+<h2 id="positional-encoding">Positional Encoding</h2>
+
+<p>The transformer model contains no information about the element position. The inputs are fed into the encoder without keeping the structure in the sentence. Positional-encoding is a rather simple trick to help the network to understand the order of tokens in the sequence. Positional encoding can be learned or fixed.</p>
+
+<p>The paper uses trigonometric functions of different frequencies to encode each position in a differentiable manner:</p>
+
+<script type="math/tex; mode=display">PE(pos, 2i) = \sin (\frac{pos}{1e5^{2i/n}})
+PE(pos, 2i+1) = \cos (\frac{pos}{1e5^{2i/n}}),</script>
+
+<p>where <script type="math/tex">pos</script> is the position and <script type="math/tex">i</script> is the dimension. Each dimension of the positional encoding corresponds to a sinusoid.</p>
+
+<p>It is useful to visualize each dimension of the positional encoding as a sinusoid. The positional encoding of a determined position is the value of all the sinusoids in that position.</p>
+
+<center>
+<img src="/blog/figs/detr/positional_encoding.png" />
+</center>
+
+<p>For the sake of visualization, we can arrange the positional encodings in a grid obtaining the following plot:</p>
+
+<center>
+<img src="/blog/figs/detr/positional_encoding_colormesh.png" style="width: 80%;" alt="Figure 1 - Positional Encoding" />
+</center>
+
+<h2 id="transformers-vs-lstm">Transformers vs LSTM</h2>
+
+<p>Prior to Transformers, the most used architecture for sequence to sequence learning was the LSTM <a class="citation" href="#hochreiter_long_1997">(Hochreiter &amp; Schmidhuber, 1997)</a>. It is beneficial to understand the differences between these two architectures.</p>
+
+<h3 id="input-handling">Input Handling</h3>
+
+<p><strong>LSTM</strong></p>
+
+<p>In an LSTM, the input is analyzed in a sequential fashion, starting from the first token and going on. It is also possible to use a Bidirectional LSTM that analyzes the input from both directions (forward and backward).</p>
+
+<p><strong>Transformer</strong></p>
+
+<p>The transformer processes each input token at the same. Transformers exploit the positional encoding to understand the input structure.</p>
+
+<h3 id="gradient-flow">Gradient Flow</h3>
+
+<p><strong>LSTM</strong></p>
+
+<p>In an LSTM, the path from an input token to the output depends on the position of the token. The input token goes through a sequence of transformations before being projected in the latent representation. In an LSTM layer, there are <script type="math/tex">n</script> sequential operations, where <script type="math/tex">n</script> denotes the sequence length. The number of operations that connects two input positions is proportional to their distance in the sentence.</p>
+
+<p><strong>Transformers</strong></p>
+
+<p>In a Transformer, the path from an input token to the output is shorter, and it does not depend on the input length. This allows transformers to be able to process longer sequences. In an self-attention layer, there is a constant number of sequential operations, not depending on the sequence length. In addition, in a self-attention layer, each input position is connected to the other positions through a single operation.</p>
+
+<h3 id="output-generation">Output Generation</h3>
+
+<p>The output generation of LSTM and Transformer is very similar. Both generate token sequentially, and the current generated token is used to predict the next token.</p>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=iDulhoQ2pro">Attention is All You Need</a> by Yannic Kilcher</li>
+  <li><a href="https://www.tensorflow.org/tutorials/text/transformer">Transformer model for language understanding</a>, TensorFlow Tutorial</li>
+  <li><a href="http://jalammar.github.io/illustrated-transformer/">The Illustrated Transformer</a> by Jay Alammar</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><abbr>[carion2020endtoend]</abbr> <span id="carion2020endtoend">Carion, N., Massa, F., Synnaeve, G., Usunier, N., Kirillov, A., &amp; Zagoruyko, S. (2020). End-to-End Object Detection with Transformers.</span></li>
+<li><abbr>[vaswani_attention_2017]</abbr> <span id="vaswani_attention_2017">Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., … Polosukhin, I. (2017). Attention Is All You Need. <i>ArXiv:1706.03762 [Cs]</i>. Retrieved from http://arxiv.org/abs/1706.03762</span></li>
+<li><abbr>[hochreiter_long_1997]</abbr> <span id="hochreiter_long_1997">Hochreiter, S., &amp; Schmidhuber, J. (1997). Long Short-Term Memory. <i>Neural Computation</i>, <i>9</i>(8), 1735–1780. https://doi.org/10.1162/neco.1997.9.8.1735</span></li></ol>
+
+</article>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+    
+      <!-- Check if any share-links are active -->
+
+
+
+
+<section id = "social-share-section">
+  <span class="sr-only">Share: </span>
+
+  
+  <!--- Share on Twitter -->
+    <a href="https://twitter.com/intent/tweet?text=Paper+Notes%3A+Attention+Is+All+You+Need+http://emanueleghelfi.github.io/blog/2019/11/23/attention.html"
+      class="btn btn-social-icon btn-twitter" title="Share on Twitter">
+      <span class="fa fa-fw fa-twitter" aria-hidden="true"></span>
+      <span class="sr-only">Twitter</span>
+    </a>
+  
+
+  
+  <!--- Share on Facebook -->
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://emanueleghelfi.github.io/blog/2019/11/23/attention.html"
+      class="btn btn-social-icon btn-facebook" title="Share on Facebook">
+      <span class="fa fa-fw fa-facebook" aria-hidden="true"></span>
+      <span class="sr-only">Facebook</span>
+    </a>
+  
+
+  
+  <!--- Share on LinkedIn -->
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://emanueleghelfi.github.io/blog/2019/11/23/attention.html"
+      class="btn btn-social-icon btn-linkedin" title="Share on LinkedIn">
+      <span class="fa fa-fw fa-linkedin" aria-hidden="true"></span>
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  
+
+</section>
+
+
+    
+    <ul class="pager blog-pager">
+      
+      <li class="previous">
+        <a href="/blog/2019/09/03/machine-learning-notes.html" data-toggle="tooltip" data-placement="top" title="Machine Learning Notes">&larr; Previous Post</a>
+      </li>
+      
+      
+    </ul>
+  </div>
+</div>
+
+
+<div class="row disqus-comments">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'emanueleghelfi-github-io';
+	    // ensure that pages with query string get the same discussion
+            var url_parts = window.location.href.split("?");
+            var disqus_url = url_parts[0];	    
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          <li>
+            <a href="https://github.com/EmanueleGhelfi" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://twitter.com/manughelfi" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="mailto:manughelfi1994@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://linkedin.com/in/emanuele-ghelfi-9a408396" title="LinkedIn">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+      
+          <li>
+            <a href="https://scholar.google.com/citations?user=JJqNoGQAAAAJ&hl=en" title="Scholar">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-graduation-cap fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+		  <li>
+			<a href="/feed.xml" title="RSS">
+			  <span class="fa-stack fa-lg">
+				<i class="fa fa-circle fa-stack-2x"></i>
+				<i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+			  </span>
+			</a>
+		  </li>		
+          		  
+        </ul>
+        <p class="copyright text-muted">
+		  Emanuele Ghelfi
+		  &nbsp;&bull;&nbsp;
+		  2020
+		  
+		  
+	    </p>
+		<p class="theme-by text-muted">
+		  Theme by
+		  <a href="https://github.com/daattali/beautiful-jekyll">beautiful-jekyll</a>
+		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/particles.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/particles-config.js"></script>
+    
+  
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-67791526-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+
+    <script src="/js/jquery-1.11.2.min.js"></script>
+    <style>
+    .lightbox {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.85); z-index: 9999999; line-height: 0; cursor: pointer;}
+    .lightbox .img {
+        position: relative; 
+        top: 50%;
+        left: 50%;
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .lightbox .img img {opacity: 0; pointer-events: none; width: auto;}
+    @media screen and (min-width: 1200px) {
+        .lightbox .img {
+            max-width: 1200px;
+        }
+    }
+    @media screen and (min-height: 1200px) {
+        .lightbox img {
+            max-height: 1200px;
+        }
+    }
+    .lightbox span {
+            display: block; 
+            position: fixed; 
+            bottom: 13px; 
+            height: 1.5em; 
+            line-height: 1.4em; 
+            width: 100%; 
+            text-align: center; 
+            color: white;
+            text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;  
+    }
+    
+    
+    
+    
+    
+    
+    .lightbox .videoWrapperContainer {
+        position: relative; 
+        top: 50%;
+        left: 50%;
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        max-width: 900px;
+        max-height: 100%;
+    }
+    .lightbox .videoWrapperContainer .videoWrapper {
+        height: 0;
+        line-height: 0;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        padding-bottom: 56.333%; /* custom */
+        background: black;
+    } 
+    .lightbox .videoWrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+    }   
+    .lightbox #prev, .lightbox #next {height: 50px; line-height: 36px; display: none; margin-top: -25px; position: fixed; top: 50%; padding: 0 15px; cursor: pointer; text-decoration: none; z-index: 99; color: white; font-size: 60px;}
+    .lightbox.gallery #prev, .lightbox.gallery #next {display: block;}
+    .lightbox #prev {left: 0;}
+    .lightbox #next {right: 0;}
+    .lightbox #close {height: 50px; width: 50px; position: fixed; cursor: pointer; text-decoration: none; z-index: 99; right: 0; top: 0;}
+    .lightbox #close:after, .lightbox #close:before {position: absolute; margin-top: 22px; margin-left: 14px; content: ""; height: 3px; background: white; width: 23px;
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    /* Safari */
+    -webkit-transform: rotate(-45deg);
+    /* Firefox */
+    -moz-transform: rotate(-45deg);
+    /* IE */
+    -ms-transform: rotate(-45deg);
+    /* Opera */
+    -o-transform: rotate(-45deg);
+    }
+    .lightbox #close:after {
+    /* Safari */
+    -webkit-transform: rotate(45deg);
+    /* Firefox */
+    -moz-transform: rotate(45deg);
+    /* IE */
+    -ms-transform: rotate(45deg);
+    /* Opera */
+    -o-transform: rotate(45deg);
+    }
+    .lightbox, .lightbox * {
+        -webkit-user-select: none;  
+        -moz-user-select: none;    
+        -ms-user-select: none;      
+        user-select: none;
+    }
+    </style>
+            
+    <script>
+    function is_youtubelink(url) {
+      var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+      return (url.match(p)) ? RegExp.$1 : false;
+    }
+    function is_imagelink(url) {
+        var p = /([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i;
+        return (url.match(p)) ? true : false;
+    }
+    function is_vimeolink(url,el) {
+        var id = false;
+        $.ajax({
+          url: 'https://vimeo.com/api/oembed.json?url='+url,
+          async: true,
+          success: function(response) {
+            if(response.video_id) {
+              id = response.video_id;
+              $(el).addClass('lightbox-vimeo').attr('data-id',id);
+            }
+          }
+        });
+    }
+    
+    $(document).ready(function() {
+        //add classes to links to be able to initiate lightboxes
+        $("a").each(function(){
+            var url = $(this).attr('href');
+            if(url) {
+                if(url.indexOf('vimeo') !== -1 && !$(this).hasClass('no-lightbox')) is_vimeolink(url,$(this));
+                if(is_youtubelink(url) && !$(this).hasClass('no-lightbox')) $(this).addClass('lightbox-youtube').attr('data-id',is_youtubelink(url));
+                if(is_imagelink(url) && !$(this).hasClass('no-lightbox')) {
+                    $(this).addClass('lightbox-image');
+                    var href = $(this).attr('href');
+                    var filename = href.split('/').pop();
+                    var split = filename.split(".");
+                    var name = split[0];
+                    $(this).attr('title',name);
+                }
+            }
+        });
+        //remove the clicked lightbox
+        $("body").on("click", ".lightbox", function(event){
+            if($(this).hasClass('gallery')) {
+                
+                $(this).remove();
+    
+                if($(event.target).attr('id')=='next') {
+                    //next item
+                    if($("a.gallery.current").nextAll("a.gallery:first").length) $("a.gallery.current").nextAll("a.gallery:first").click();
+                    else $("a.gallery.current").parent().find("a.gallery").first().click();
+                }
+                else if ($(event.target).attr('id')=='prev') {
+                    //prev item
+                    if($("a.gallery.current").prevAll("a.gallery:first").length) $("a.gallery.current").prevAll("a.gallery:first").click();
+                    else $("a.gallery.current").parent().find("a.gallery").last().click();
+                }
+                else {
+                    $("a.gallery").removeClass('gallery');
+                }
+            }
+            else $(this).remove();
+        });
+        //prevent image from being draggable (for swipe)
+        $("body").on('dragstart', ".lightbox img", function(event) { event.preventDefault(); });
+        //add the youtube lightbox on click
+        $("a.lightbox-youtube").click(function(event){
+            event.preventDefault();
+            $('<div class="lightbox"><a id="close"></a><a id="next">&rsaquo;</a><a id="prev">&lsaquo;</a><div class="videoWrapperContainer"><div class="videoWrapper"><iframe src="https://www.youtube.com/embed/'+$(this).attr('data-id')+'?autoplay=1&showinfo=0&rel=0"></iframe></div></div></div>').appendTo('body');
+        });
+        //add the image lightbox on click
+        $("a.lightbox-image").click(function(event){
+            event.preventDefault();
+            $('<div class="lightbox"><a id="close"></a><a id="next">&rsaquo;</a><a id="prev">&lsaquo;</a><div class="img" style="background: url(\''+$(this).attr('href')+'\') center center / contain no-repeat;" title="'+$(this).attr('title')+'" ><img src="'+$(this).attr('href')+'" alt="'+$(this).attr('title')+'" /></div><span>'+$(this).attr('title')+'</span></div>').appendTo('body');
+        });
+        //add the vimeo lightbox on click
+        $("body").on("click", "a.lightbox-vimeo", function(event){
+            event.preventDefault();
+            $('<div class="lightbox"><a id="close"></a><a id="next">&rsaquo;</a><a id="prev">&lsaquo;</a><div class="videoWrapperContainer"><div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+$(this).attr('data-id')+'/?autoplay=1&byline=0&title=0&portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div></div>').appendTo('body');
+        });
+    
+        $("body").on("click", "a[class*='lightbox-']", function(){
+            var link_elements = $(this).parent().find("a[class*='lightbox-']");
+            $(link_elements).removeClass('current');
+            for (var i=0; i<link_elements.length; i++) {
+                if($(this).attr('href') == $(link_elements[i]).attr('href')) {
+                    $(link_elements[i]).addClass('current');
+                }
+            }
+            if(link_elements.length>1) {
+                $('.lightbox').addClass('gallery');
+                $(link_elements).addClass('gallery');
+            }
+        });
+    
+        
+    });
+    
+    $(document).keydown(function(e) {
+        switch(e.which) {
+            case 37: // left
+            $("#prev").click();
+            break;
+            case 39: // right
+            $("#next").click();
+            break;
+        case 27: // esc
+            $("#close").click();
+            break;
+            default: return; // exit this handler for other keys
+        }
+        e.preventDefault(); // prevent the default action (scroll / move caret)
+    });
+    
+    
+    
+      /*===========================
+      Swipe-it v1.4.1
+      An event listener for swiping gestures with vanilla js.
+      https://github.com/tri613/swipe-it#readme
+     
+      @Create 2016/09/22
+      @Update 2017/08/11
+      @Author Trina Lu
+      ===========================*/
+    
+      "use strict";var _slicedToArray=function(){function n(n,t){var e=[],i=!0,o=!1,r=void 0;try{for(var u,c=n[Symbol.iterator]();!(i=(u=c.next()).done)&&(e.push(u.value),!t||e.length!==t);i=!0);}catch(n){o=!0,r=n}finally{try{!i&&c.return&&c.return()}finally{if(o)throw r}}return e}return function(t,e){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return n(t,e);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}();!function(n,t,e){function i(n){function e(){o("touchstart",m,w),o("touchmove",d,w),o("touchend",p,w),E.mouseEvent&&o("mousedown",s,w)}function i(){y=!1,D=!1,A=!1,b=!1,a=!1}function s(n){a=this,y=n.clientX,D=n.clientY,o("mousemove",l,v),o("mouseup",h,v)}function l(n){n.preventDefault(),y&&D&&(A=n.clientX,b=n.clientY)}function h(n){r("mousemove",l,v),r("mouseup",h,v),p(n)}function m(n){a=this,y=n.touches[0].clientX,D=n.touches[0].clientY}function d(n){A=n.touches[0].clientX,b=n.touches[0].clientY}function p(n){if(y&&D&&A&&b){var t=y-A,e=D-b,o=[t,e].map(Math.abs),r=_slicedToArray(o,2),c=r[0],s=r[1],v=E.minDistance;if(c>v){var f=y<A?"swipeRight":"swipeLeft";u(f,a,{distance:t,start:y,end:A})}if(s>v){var l=D>b?"swipeUp":"swipeDown";u(l,a,{distance:e,start:D,end:b})}(c>v||s>v)&&u("swipe",a)}i()}var E=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},w=c(t.querySelectorAll(n)),y=void 0,D=void 0,A=void 0,b=void 0;E.mouseEvent=void 0===E.mouseEvent?f.mouseEvent:E.mouseEvent,E.minDistance=void 0===E.minDistance?f.minDistance:E.minDistance,i(),e(),this.on=function(n,t){return o(n,t,w),this}}function o(n,t,e){s(e).forEach(function(e){return e.addEventListener(n,t)})}function r(n,t,e){s(e).forEach(function(e){return e.removeEventListener(n,t)})}function u(n,e){var i=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{},o=t.createEvent("Event");o.initEvent(n,!0,!0),o.swipe=i,s(e).forEach(function(n){return n.dispatchEvent(o)})}function c(n){for(var t=[],e=0;e<n.length;e++)t.push(n[e]);return t}function s(n){return Array.isArray(n)?n:[n]}var a=!1,v=[n],f={mouseEvent:!0,minDistance:30};n[e]=i}(window,document,"SwipeIt");
+    
+    var mySwipeIt = new SwipeIt('body');
+    mySwipeIt.on('swipeLeft',function(e){
+        //check if lightbox is present
+        if($('.lightbox').length >  0 ) {
+            $("#next").click();
+        }
+    }).on('swipeRight',function(e){
+        //check if lightbox is present
+        if($('.lightbox').length >  0 ) {
+            $("#prev").click();
+        }
+    });
+    
+    </script>
+    <!-- Jekyll Ideal Image Slider Include -->
+<!-- https://github.com/jekylltools/jekyll-ideal-image-slider-include -->
+<!-- v1.8 -->
+  
+  </body>
+</html>

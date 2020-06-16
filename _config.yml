@@ -130,7 +130,7 @@ scholar:
   order: ascending
 
   source: ./_bibliography
-  bibliography: references.bib
+  bibliography: "*.bib"
   bibliography_template: <abbr>[{{key}}]</abbr> {{reference}}
 
   replace_strings: true
