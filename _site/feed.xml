@@ -12,9 +12,9 @@
           
           I went through the last Facebook paper (Carion et al., 2020), which proposes a new architecture, DETR, for object detection and segmentation based on Transformers. To better understand the paper, I decided to review the basic principles of Transformers and Attention. I am not pretending to write the best article...
         </description>
-        <pubDate>Sat, 23 Nov 2019 08:00:00 +0000</pubDate>
-        <link>http://emanueleghelfi.github.io/blog/2019/11/23/attention.html</link>
-        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2019/11/23/attention.html</guid>
+        <pubDate>Fri, 06 Mar 2020 08:00:00 +0000</pubDate>
+        <link>http://emanueleghelfi.github.io/blog/2020/03/06/attention.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2020/03/06/attention.html</guid>
       </item>
     
       <item>

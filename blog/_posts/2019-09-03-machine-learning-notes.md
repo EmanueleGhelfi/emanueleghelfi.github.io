@@ -1,7 +1,6 @@
 ---
 author: "manughelfi"
 layout: post
-did: "blog6"
 title:  "Machine Learning Notes"
 slug:  machine-learning-notes
 date:   2019-09-03 8:00:00

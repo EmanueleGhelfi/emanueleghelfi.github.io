@@ -3,7 +3,7 @@ author: "manughelfi"
 layout: post
 title:  "Paper Notes: Attention Is All You Need"
 slug:  attention
-date:   2019-11-23 8:00:00
+date:   2020-03-06 8:00:00
 categories: machine-learning computer-vision natural-language-processing paper-notes
 tags: machine-learning computer-vision natural-language-processing paper-notes
 description: "Paper notes about Attention and Transformers."
