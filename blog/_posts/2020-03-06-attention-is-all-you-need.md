@@ -191,8 +191,8 @@ The transformer model contains no information about the element position. The in
 The paper uses trigonometric functions of different frequencies to encode each position in a differentiable manner:
 
 $$
-PE(pos, 2i) = \sin (\frac{pos}{1e5^{2i/n}})
-PE(pos, 2i+1) = \cos (\frac{pos}{1e5^{2i/n}}),
+PE(pos, 2i) = \sin \left( \frac{pos}{1e5^{2i/n}} \right) \\
+PE(pos, 2i+1) = \cos \left( \frac{pos}{1e5^{2i/n}} \right) ,
 $$
 
 where $$pos$$ is the position and $$i$$ is the dimension. Each dimension of the positional encoding corresponds to a sinusoid.
@@ -206,7 +206,10 @@ It is useful to visualize each dimension of the positional encoding as a sinusoi
 For the sake of visualization, we can arrange the positional encodings in a grid obtaining the following plot: 
 
 <center>
+<figure>
 <img src="/blog/figs/detr/positional_encoding_colormesh.png" style="width: 80%;" alt="Figure 1 - Positional Encoding">
+<figcaption>Positional Encoding, from <href>tensorflow.org/tutorials/text/transformer</href> </figcaption>
+</figure>
 </center>
 
 ## Transformers vs LSTM

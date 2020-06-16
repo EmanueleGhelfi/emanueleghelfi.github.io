@@ -1,4 +1,4 @@
-I"ê:<p>I went through the last Facebook paper <a class="citation" href="#carion2020endtoend">(Carion et al., 2020)</a>, which proposes a new architecture, DETR, for object detection and segmentation based on Transformers. To better understand the paper, I decided to review the basic principles of Transformers and Attention. I am not pretending to write the best article on Transformers on the Internet. I just want to reason a bit about Transformers and maybe present the underlying ideas simply and intuitively.</p>
+I",;<p>I went through the last Facebook paper <a class="citation" href="#carion2020endtoend">(Carion et al., 2020)</a>, which proposes a new architecture, DETR, for object detection and segmentation based on Transformers. To better understand the paper, I decided to review the basic principles of Transformers and Attention. I am not pretending to write the best article on Transformers on the Internet. I just want to reason a bit about Transformers and maybe present the underlying ideas simply and intuitively.</p>
 
 <h1 id="transformers">Transformers</h1>
 
@@ -181,8 +181,8 @@ To overcome this limitation, we divide each element of the similarity matrix by 
 
 <p>The paper uses trigonometric functions of different frequencies to encode each position in a differentiable manner:</p>
 
-<script type="math/tex; mode=display">PE(pos, 2i) = \sin (\frac{pos}{1e5^{2i/n}})
-PE(pos, 2i+1) = \cos (\frac{pos}{1e5^{2i/n}}),</script>
+<script type="math/tex; mode=display">PE(pos, 2i) = \sin \left( \frac{pos}{1e5^{2i/n}} \right) \\
+PE(pos, 2i+1) = \cos \left( \frac{pos}{1e5^{2i/n}} \right) ,</script>
 
 <p>where <script type="math/tex">pos</script> is the position and <script type="math/tex">i</script> is the dimension. Each dimension of the positional encoding corresponds to a sinusoid.</p>
 
@@ -195,7 +195,10 @@ PE(pos, 2i+1) = \cos (\frac{pos}{1e5^{2i/n}}),</script>
 <p>For the sake of visualization, we can arrange the positional encodings in a grid obtaining the following plot:</p>
 
 <center>
+<figure>
 <img src="/blog/figs/detr/positional_encoding_colormesh.png" style="width: 80%;" alt="Figure 1 - Positional Encoding" />
+<figcaption>Positional Encoding, from <href>tensorflow.org/tutorials/text/transformer</href> </figcaption>
+</figure>
 </center>
 
 <h2 id="transformers-vs-lstm">Transformers vs LSTM</h2>
