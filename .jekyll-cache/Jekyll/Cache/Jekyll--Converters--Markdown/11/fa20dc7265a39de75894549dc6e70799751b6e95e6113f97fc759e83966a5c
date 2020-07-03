@@ -1,0 +1,17 @@
+I"<p>I attented the course <a href="http://lcsl.mit.edu/courses/regml/regml2020/">Regularization Methods for Machine Learning</a> (RegML 2020).</p>
+
+<p>Topics:</p>
+
+<ul>
+  <li>Regularization Methods: Penalization, Projection, Early Stopping.</li>
+  <li>Kernel Methods</li>
+  <li>Regularization in Multi-Task Learning</li>
+  <li>Sparsity</li>
+  <li>Geometric Deep Learning</li>
+  <li>Representation Learning</li>
+</ul>
+
+<p><a href="https://www.notion.so/RegML-998736a4db4b483a8a8c1cce43e54563">Here</a> you can find my notes about the lessons. There can be errors, imprecisions and so on. They are still in progress.</p>
+
+<p><a href="https://github.com/EmanueleGhelfi/RegML">Here</a> you can find my repository with the solutions of some of the exercises presented during the course.</p>
+:ET

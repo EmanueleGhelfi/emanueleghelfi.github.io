@@ -138,7 +138,7 @@ The Linear Projection of the keys and the query is a very important characterist
 In a self-attention layer the keys, values and queries are all the same:
 
 $$
-\text{Self-Attention}(X) = Attention(X, X, X)
+\text{Self-Attention}(X) = \text{Attention}(X, X, X)
 $$
 
 **Linear Projection in a Self-Attention Layer**
@@ -174,9 +174,9 @@ Similarly to the encoder, the decoder uses Residual connections and Layer Normal
 
 In a Machine Translation task, the decoder generates token sequentially like an autoregressive model. It starts from the initial token, and it generates a distribution over the next token. The token associated with the highest probability is selected and fed again in the decoder. During this process, the decoder can attend at each position of the output generate up to the current one.
 
-**Attentions**
+**Attention in Transformer**
 
-There are three different attention application in the transformer model:
+There are three different attention applications in the transformer model:
 
 - Encoder **self**-attention. The key, values and queries are the same and comes from the previous layer of the encoder. Motivation: in this way, the encoder can **attend** to different positions of the previous layer.
 
@@ -207,8 +207,10 @@ For the sake of visualization, we can arrange the positional encodings in a grid
 
 <center>
 <figure>
-<img src="/blog/figs/detr/positional_encoding_colormesh.png" style="width: 80%;" alt="Figure 1 - Positional Encoding">
-<figcaption>Positional Encoding, from <href>tensorflow.org/tutorials/text/transformer</href> </figcaption>
+  <img src="/blog/figs/detr/positional_encoding_colormesh.png" style="width: 80%;" alt="Figure 1 - Positional Encoding">
+  <figcaption>
+    Positional Encoding, from <a href="http://tensorflow.org/tutorials/text/transformer">TensorFlow Tutorial</a>
+  </figcaption>
 </figure>
 </center>
 
@@ -239,6 +241,13 @@ In a Transformer, the path from an input token to the output is shorter, and it 
 ### Output Generation
 
 The output generation of LSTM and Transformer is very similar. Both generate token sequentially, and the current generated token is used to predict the next token.
+
+## Other Attention Applications
+
+### Self-Attention Generative Adversarial Networks
+
+Self-Attention Generative Adversarial Networks {$ cite Han18 %} employ the Self-Attention mechanism to use global information both in the generator and in the discriminator. GANs are usually based on convolutional building blocks, that 
+
 
 Resources
 ---------
