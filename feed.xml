@@ -7,6 +7,17 @@
     <atom:link href="http://emanueleghelfi.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Course: RegML 2020</title>
+        <description>
+          
+          I attented the course Regularization Methods for Machine Learning (RegML 2020). Topics: Regularization Methods: Penalization, Projection, Early Stopping. Kernel Methods Regularization in Multi-Task Learning Sparsity Geometric Deep Learning Representation Learning Here you can find my notes about the lessons. There can be errors, imprecisions and so on. They are still...
+        </description>
+        <pubDate>Fri, 03 Jul 2020 08:00:00 +0000</pubDate>
+        <link>http://emanueleghelfi.github.io/blog/2020/07/03/regml.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2020/07/03/regml.html</guid>
+      </item>
+    
+      <item>
         <title>Paper Notes: Attention Is All You Need</title>
         <description>
           

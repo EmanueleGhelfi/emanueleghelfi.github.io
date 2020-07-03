@@ -365,7 +365,7 @@ To overcome this limitation, we divide each element of the similarity matrix by 
 
 <p>In a self-attention layer the keys, values and queries are all the same:</p>
 
-<script type="math/tex; mode=display">\text{Self-Attention}(X) = Attention(X, X, X)</script>
+<script type="math/tex; mode=display">\text{Self-Attention}(X) = \text{Attention}(X, X, X)</script>
 
 <p><strong>Linear Projection in a Self-Attention Layer</strong></p>
 
@@ -404,9 +404,9 @@ To overcome this limitation, we divide each element of the similarity matrix by 
 
 <p>In a Machine Translation task, the decoder generates token sequentially like an autoregressive model. It starts from the initial token, and it generates a distribution over the next token. The token associated with the highest probability is selected and fed again in the decoder. During this process, the decoder can attend at each position of the output generate up to the current one.</p>
 
-<p><strong>Attentions</strong></p>
+<p><strong>Attention in Transformer</strong></p>
 
-<p>There are three different attention application in the transformer model:</p>
+<p>There are three different attention applications in the transformer model:</p>
 
 <ul>
   <li>
@@ -441,8 +441,10 @@ PE(pos, 2i+1) = \cos \left( \frac{pos}{1e5^{2i/n}} \right) ,</script>
 
 <center>
 <figure>
-<img src="/blog/figs/detr/positional_encoding_colormesh.png" style="width: 80%;" alt="Figure 1 - Positional Encoding" />
-<figcaption>Positional Encoding, from <href>tensorflow.org/tutorials/text/transformer</href> </figcaption>
+  <img src="/blog/figs/detr/positional_encoding_colormesh.png" style="width: 80%;" alt="Figure 1 - Positional Encoding" />
+  <figcaption>
+    Positional Encoding, from <a href="http://tensorflow.org/tutorials/text/transformer">TensorFlow Tutorial</a>
+  </figcaption>
 </figure>
 </center>
 
@@ -473,6 +475,12 @@ PE(pos, 2i+1) = \cos \left( \frac{pos}{1e5^{2i/n}} \right) ,</script>
 <h3 id="output-generation">Output Generation</h3>
 
 <p>The output generation of LSTM and Transformer is very similar. Both generate token sequentially, and the current generated token is used to predict the next token.</p>
+
+<h2 id="other-attention-applications">Other Attention Applications</h2>
+
+<h3 id="self-attention-generative-adversarial-networks">Self-Attention Generative Adversarial Networks</h3>
+
+<p>Self-Attention Generative Adversarial Networks {$ cite Han18 %} employ the Self-Attention mechanism to use global information both in the generator and in the discriminator. GANs are usually based on convolutional building blocks, that</p>
 
 <h2 id="resources">Resources</h2>
 
@@ -539,6 +547,10 @@ PE(pos, 2i+1) = \cos \left( \frac{pos}{1e5^{2i/n}} \right) ,</script>
         <a href="/blog/2019/09/03/machine-learning-notes.html" data-toggle="tooltip" data-placement="top" title="Machine Learning Notes">&larr; Previous Post</a>
       </li>
       
+      
+      <li class="next">
+        <a href="/blog/2020/07/03/regml.html" data-toggle="tooltip" data-placement="top" title="Course: RegML 2020">Next Post &rarr;</a>
+      </li>
       
     </ul>
   </div>
