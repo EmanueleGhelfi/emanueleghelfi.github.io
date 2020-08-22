@@ -4,6 +4,12 @@ The site uses the [Beautiful Jekyll](http://deanattali.com/beautiful-jekyll) the
 
 ## For me
 
-```
+```bash
 rvm use ruby-2.6.3 --default
+```
+
+## After build
+
+```bash
+cp CNAME _site
 ```
