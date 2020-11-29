@@ -8,7 +8,7 @@ subtitle: Learning to Present Myself
 
 - **September 2020 - Present**: Machine Learning and Computer Vision Engineer at [Deep Vision Consulting]. 
 
-- **November 2018 - Semptembed 2020**: Machine Learning and Computer Vision Engineer at [Zuru Tech Italy].
+- **November 2018 - September 2020**: Machine Learning and Computer Vision Engineer at [Zuru Tech Italy].
   I was involved in the following topics:
   - Anomaly detection
   - Generative Adversarial Networks (GANs) applied to various problems
