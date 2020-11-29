@@ -1,0 +1,33 @@
+I"�<p>I’m really proud to announce that “The Reinforcement Learning Workshop” is finally published!</p>
+
+<div style="margin:20px;">
+<center>
+<a href="https://www.packtpub.com/product/the-reinforcement-learning-workshop/9781800200456"><button name="button" class="btn btn-primary" href="https://www.packtpub.com/product/the-reinforcement-learning-workshop/9781800200456">Packt</button></a>
+<a href="https://courses.packtpub.com/courses/reinforcement-learning"><button name="button" class="btn btn-primary">Interactive</button></a>
+<a href="https://www.amazon.com/Reinforcement-Learning-Workshop-cutting-edge-reinforcement/dp/1800200455/ref=sr_1_1?crid=3UDJJ8M5FIVEJ&amp;dchild=1&amp;keywords=the+reinforcement+learning+workshop&amp;qid=1606641728&amp;sprefix=the+reinforcement+l%2Caps%2C-1&amp;sr=8-1"><button name="button" class="btn btn-primary">Amazon</button></a>
+</center>
+</div>
+
+<center>
+<a href="/blog/figs/rl-workshop/cover.jpeg"> <img src="/blog/figs/rl-workshop/cover.jpeg" style="width: 100%;" alt="Figure 1 - Cover" /> </a>
+</center>
+
+<p>Starting with an introduction to RL, you’ll be guided through different RL environments and frameworks. You’ll learn how to implement your own custom environments and use OpenAI baselines to run RL algorithms. Once you’ve explored classic RL techniques such as Dynamic Programming, Monte Carlo, and TD Learning, you’ll understand when to apply the different deep learning methods in RL and advance to deep Q-learning. The book will even help you understand the different stages of machine-based problem-solving by using DARQN on a popular video game Breakout. Finally, you’ll find out when to use a policy-based method to tackle an RL problem.</p>
+
+<p>The book has an associated repository on <a href="https://github.com/PacktWorkshops/The-Reinforcement-Learning-Workshop">Github</a>.</p>
+
+<p>The book is published on:</p>
+
+<ul>
+  <li><a href="https://www.packtpub.com/product/the-reinforcement-learning-workshop/9781800200456">Packt</a> with an interactive version <a href="https://courses.packtpub.com/courses/reinforcement-learning">here</a></li>
+  <li><a href="https://www.amazon.it/Reinforcement-Learning-Workshop-cutting-edge-reinforcement/dp/1800200455/ref=sr_1_1?__mk_it_IT=ÅMÅŽÕÑ&amp;dchild=1&amp;keywords=the+reinforcement+learning+workshop&amp;qid=1606641584&amp;sr=8-1">Amazon.it</a></li>
+  <li><a href="https://www.amazon.com/Reinforcement-Learning-Workshop-cutting-edge-reinforcement/dp/1800200455/ref=sr_1_1?crid=3UDJJ8M5FIVEJ&amp;dchild=1&amp;keywords=the+reinforcement+learning+workshop&amp;qid=1606641728&amp;sprefix=the+reinforcement+l%2Caps%2C-1&amp;sr=8-1">Amazon.com</a></li>
+</ul>
+
+<p>Preview:</p>
+
+<center>
+<iframe type="text/html" width="336" height="550" frameborder="0" allowfullscreen="" style="max-width:100%" src="https://leggi.amazon.it/kp/card?asin=B08BZSTZ4K&amp;preview=inline&amp;linkCode=kpe&amp;ref_=cm_sw_r_kb_dp_ZE2WFbRBHC8Y1"></iframe>
+</center>
+
+:ET
