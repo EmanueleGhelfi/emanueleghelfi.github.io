@@ -39,7 +39,10 @@ If your are interested, read the post about my thesis [here][thesis-post].
 
 **Accounts**: [Google Scholar](https://scholar.google.it/citations?user=JJqNoGQAAAAJ&hl=it)
 
-**Curriculum Vitae**: <a href="/files/data/cv.pdf">Download</a>
+**Curriculum Vitae**: 
+
+- Standard: <a href="/files/data/cv.pdf">Download</a>
+- Short Form: <a href="/files/data/cv_short.pdf">Download</a>
 
 [Zuru Tech Italy]: https://zuru.tech
 [Deep Vision Consulting]: https://www.deepvisionconsulting.com

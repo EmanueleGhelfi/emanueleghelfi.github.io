@@ -29,8 +29,9 @@ description: "Teaching Machines to Learn"
 navbar-links:
   Home: ""
   Portfolio: "portfolio.html"
+  CV: "cv.html"
   About Me: "aboutme.html"
-  # Gallery: "photos.html"
+# Gallery: "photos.html"
 #  Contact: "contact.html"
   
 # --- Footer options --- #
