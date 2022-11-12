@@ -1,0 +1,300 @@
+I"�<<h1 id="object-detection-a-review">Object Detection: A Review</h1>
+
+<p>In this article, I review some 2D Object Detection papers.</p>
+
+<h2 id="r-cnn">R-CNN</h2>
+<p><a href="https://arxiv.org/abs/1311.2524">R-CNN</a> <a class="citation" href="#rcnn_2014">(Girshick et al., 2014)</a> (Regions with CNN features) presents a first, preliminary, approach to Object Detection.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/r_cnn/r_cnn_1.png" />
+<figcaption>Figure 1: R-CNN</figcaption>
+</figure>
+</center>
+
+<p>Pipeline:</p>
+
+<ul>
+  <li>Extract around <em>2000</em> bottom up region proposals from the input image</li>
+  <li>Warp regions to <em>fixed size</em></li>
+  <li>Extract features using a large CNN from <em>warped regions</em></li>
+  <li>Classify each region using <em>class-specific linear SVMs</em></li>
+</ul>
+
+<p>3 main modules:</p>
+
+<ul>
+  <li>Region proposal: <br />
+Selective search + affine warping to fixed size</li>
+  <li>Feature Extraction: <br />
+  Extract 4096-dimensional feature vector. Images are “normalized” by subtracting their mean before computing the features</li>
+  <li>Image classification</li>
+</ul>
+
+<p>This approach is actually an <strong>hand-crafted</strong> region proposal followed by a classifier. The standard R-CNN network can be extend with a Bounding Box Regression module to improve localization performance.</p>
+
+<p>After scoring each proposal with a class-specific SVM, a class-specific bounding-box regressor is applied to the CNN features.</p>
+
+<p>The bounding box regression module predicts 4 parameters, \(d_x, d_y, d_w, d_h\) such that, given the proposal bounding box \(P_x, P_y, P_w, P_h\), the final box is predicted as:</p>
+
+\[G_x = P_w d_x + P_x \\
+G_y = P_h d_y + P_y \\
+G_w = P_w exp(d_w)\\
+G_h = P_h exp(d_h)\]
+
+<p>In words, the module predicts:</p>
+<ul>
+  <li>A shift (\(d_x\), \(d_y\)) that is relative to the bounding box width and height</li>
+  <li>The log of ratio between the real size and the proposal size. If the ratio is 1, the proposal size is equal to the ground truth size and the network can just predict 0. If the real height is smaller than the proposal height, the network should predict \(d_h &lt; 0\), otherwise  \(d_h &gt; 0\). The same reasoning applies to the proposal width.</li>
+</ul>
+
+<p>The authors do not actually learn the parameters of the network, they solve the problem in closed form using regularized least squares.</p>
+
+<p>Figure 2 shows the final architecture of R-CNN.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/r_cnn/r_cnn_2.png" style="width: 50%;" alt="RCNN" />
+<figcaption>Figure 2: Full architecture of R-CNN</figcaption>
+</figure>
+</center>
+
+<p><strong>Problems</strong>:</p>
+
+<ul>
+  <li>Huge amount of time to train the network for each of the 2000 proposals regardless of the content of the image</li>
+  <li>Not real time, inference around 47 seconds</li>
+  <li>Selective search is a <strong>hand-crafted</strong> algorithm, no learning involved.</li>
+</ul>
+
+<h2 id="fast-r-cnn">Fast R-CNN</h2>
+
+<p><a href="https://arxiv.org/abs/1504.08083">Fast R-CNN</a> <a class="citation" href="#fastrcnn_2015">(Girshick, 2015)</a>, from the same authors of R-CNN, represents an improvement over the previous architecture.
+As in R-CNN, in Fast R-CNN the Network takes as input a set of RoIs (no learning is involved in this stage).
+Differently from R-CNN, the CNN backbone processes the whole image to extract features. 
+Each RoI is <strong>pooled</strong> (through <strong>RoI Pooling</strong>) into a fixed-size feature map. The feature map is flattened and feeded into Fully Connected layers. The Network outputs softmax scores and bounding box parameters for each RoI.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/fast_rcnn/fast_rcnn.png" style="width: 50%;" alt="Fast-RCNN" />
+<figcaption>
+Figure 3: Fast R-CNN architecture.
+</figcaption>
+</figure>
+</center>
+
+<p>Key ideas and contributions (my opinion):</p>
+<ul>
+  <li>RoI (max) Pooling</li>
+  <li>Smooth L1 Loss for localization</li>
+  <li>Truncated SVD for fully connected layers for performance reasons</li>
+</ul>
+
+<p>Main pipeline:</p>
+<ul>
+  <li>Hand-crafted RoIs from input image</li>
+  <li>The CNN backbone processes the <strong>whole image</strong> (differently from R-CNN)</li>
+  <li>RoI Pooling to obtain fixed size images from input RoI and CNN features</li>
+  <li>Fully Connected layers to obtain class scores and bounding box refinement</li>
+</ul>
+
+<h3 id="roi-pooling">RoI Pooling</h3>
+
+<p>RoI Pooling, or RoI Max Pooling, maps the input RoI into a fixed size feature map.
+The output map has a fixed dimension of \(H \times W\), hyperparameters independent with respect to the RoI.</p>
+
+<p>How does it work?</p>
+
+<p>Let’s say the input RoI has a size of \(h \times w\).
+RoI Pooling divides the RoI into sub-regions of size \(h/W \times w/W\). Max-Pooling is applied into sub-regions to obtain the output value for the sub-region.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/fast_rcnn/roi_pooling-1.gif" style="width: 50%;" alt="Roi Pooling" />
+<figcaption>
+Figure 4: Roi Pooling. <br /> Credit: <a href="https://deepsense.ai/region-of-interest-pooling-explained/">deepsense.ai</a>
+</figcaption>
+</figure>
+</center>
+
+<p><strong>Back-propagation through RoI Pooling.</strong></p>
+
+<p>RoI pooling is mathematically <strong>non-differentiable</strong> as it involves the max function for each region. The approximated derivative is back-propagated only through the value corresponding to the max of each region, with the assumption that a small perturbation of the input would not change the maximum value.</p>
+
+<h3 id="loss">Loss</h3>
+<p>Fast-RCNN uses a Smooth \(L_1\) loss for localization, less sensitive to outliers than the standard \(L_2\) loss.</p>
+
+\[L_{\text{loc}} = \sum_{i \in {x, y, w, h}} \text{smooth}_{L_1} (p_i - g_i),\]
+
+<p>where</p>
+
+\[\text{smooth}_{L_1}(x) = 
+\begin{cases}
+0.5 x^2 &amp; \text{if} |x| &lt; 1 \\
+|x| - 0.5 &amp; \text{otherwise}.
+\end{cases}\]
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/fast_rcnn/smooth_l1.png" style="width: 50%;" alt="Smooth L1" />
+</figure>
+</center>
+
+<h2 id="faster-r-cnn">Faster R-CNN</h2>
+
+<p><a href="https://arxiv.org/abs/1506.01497">Faster R-CNN</a> <a class="citation" href="#faster_rcnn_2016">(Ren et al., 2016)</a>, again from the same authors, tries to solve the region proposal problem of the previous approaches.
+In the previous approaches, region proposal was an hand-crafted and time expensive algorithm, with no learning involved. At that time the two SOTA methods for region proposals were Selective Search and EdgeBoxes.
+<strong>Selective Search</strong> took 2 seconds per image in a CPU implementation.
+<strong>EdgeBoxes</strong> took 0.2 seconds per image, was the best tradeoff between proposal quality and speed.</p>
+
+<p>Faster R-CNN focuses on computing proposals with a deep convolutional network to share computation between the proposal task and the detection task.
+Given the feature maps extracted from the backbone, the RPN (Region Proposal Network) extracts region proposals, that are used as input for the detection network, together with the convolutional features.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/faster_rcnn/faster_rcnn.png" style="width: 50%;" alt="Faster R-CNN" />
+<figcaption>
+Figure 5: Faster R-CNN architecture
+</figcaption>
+</figure>
+</center>
+
+<p>Key ideas and contributions (my opinion):</p>
+<ul>
+  <li>Region Proposal Networks</li>
+  <li>Anchor concept</li>
+  <li>Feature sharing between region proposals and object detection</li>
+</ul>
+
+<h3 id="region-proposal-networks">Region Proposal Networks</h3>
+
+<p>The Region Proposal Network takes as input the output of the backbone network. A \(n \times n\) convolutional layer is followed by two \(1 \times 1\) convolutional layers, predicting the class and the bounding box parameters.
+At each sliding window location, multiple proposals are predicted simultaneously, we denote with \(k\) the number of proposals.</p>
+
+<p>The regression layer has \(4\) outputs for each proposal encoding the parameters of the \(k\) boxes, so in total \(4k\) outputs. 
+The \(k\) proposals are parameterized with respect to \(k\) reference boxes, called <strong>anchors</strong>. Each anchors is centered in the considered region and associated with a specific scale and aspect ratio. The authors used 9 anchors at each location.</p>
+
+<p>The class prediction layer has 2 outputs for each proposal, the probability of object and the probability of background (no object), so in total \(2k\) outputs.</p>
+
+<p><strong>Loss</strong></p>
+
+<p>In order to train the RPN to predict the objectness score for each anchor, we must assign the ground truth label to each anchor.</p>
+
+<ul>
+  <li>Positive label:
+    <ul>
+      <li>IoU higher than a threshold (0.7) with any ground truth box</li>
+      <li>Highest IoU overlap with a given ground truth box, even if less than threshold</li>
+    </ul>
+  </li>
+  <li>Negative label:
+    <ul>
+      <li>IoU lower than th (0.3) for all ground truth boxes.</li>
+    </ul>
+  </li>
+  <li>Don’t care label:
+    <ul>
+      <li>Anchors that are neither positive or negative do not contribute to the loss</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Given the label for each anchor, a simple classification loss is used.</p>
+
+<h2 id="mask-r-cnn">Mask R-CNN</h2>
+
+<p><a href="https://arxiv.org/abs/1703.06870">Mask R-CNN</a> <a class="citation" href="#mask_rcnn_2018">(He et al., 2018)</a> extends Faster R-CNN adding an object mask branch in parallel to the class prediction and box prediction branches.
+The goal of the network is to perform instance segmentation, identifying for each object in the image the associated pixels.
+Notice: this is different from semantic segmentation whose goal is to correctly classify pixels in a fixed set of categories without differentiating between object instances.</p>
+
+<p>The main problem when trying to extend Faster R-CNN for instance segmentation tasks is that it was not designed for pixel to pixel alignment between inputs and outputs. This is due mainly to the Roi Pooling layer, that performs <strong>coarse spatial quantization</strong>.
+For this reason, Mask R-CNN introduces Roi Align layer that preserves exact spatial locations.</p>
+
+<p>An interesting feature of Mask R-CNN is that the mask prediction is performed independently for each class. At inference time, the mask corresponding to the predicted class is used combining in this way class prediction and mask prediction without competition among classes.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/mask_rcnn/mask_rcnn.png" style="width: 50%;" alt="Mask R-CNN" />
+<figcaption>
+Figure 6: Mask R-CNN architecture
+</figcaption>
+</figure>
+</center>
+
+<h3 id="mask-prediction">Mask Prediction</h3>
+
+<p>The mask branch outputs \(K\) binary masks of resolution \(m \times m\), one for each of the \(K\) classes. At the end, no softmax is applied, as it is usually done for semantic segmentation tasks. A per-pixel sigmoid activation is applied to scale the score of each mask in the range (0, 1). The mask loss is calculated only for the ground truth mask, while the other masks do not contribute to the loss.
+In this way, a mask is generate for every class without competition among classes and the output mask is selected by the class prediction layer. This effectively decouples mask and class prediction.</p>
+
+<h3 id="roi-align">RoI Align</h3>
+
+<p>Let’s see the problems of RoI Pooling before exploring the RoI Align layer.
+RoI pooling first quantizes the proposed RoI to the granularity of the feature map. The quantized RoI is divided into spatial bins, again quantixed. For each bin, values are aggregated through max pooling. This has a negative effect on the prediction of pixel-accurate segmentation masks, while the classification and detection tasks are usually robust with respect to small translations.</p>
+
+<p><strong>RoI Align</strong> tries to properly align the extracted features with the input. Given the input RoI, no quantization is applied. The RoI is then divided into bins, for each bin four regularly sampled locations are used to calculate the values of input features through bilinear sampling.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/mask_rcnn/roi_align.png" style="width: 50%;" alt="RoI Align" />
+<figcaption>
+Figure 7: RoI Align
+</figcaption>
+</figure>
+</center>
+
+<p><strong>Focus: Bi-Linear Interpolation</strong></p>
+
+<p>Bi-Linear interpolation applies linear interpolation in two directions. It uses 4 nearest neighbors to output the final value of the interpolated point.</p>
+
+<p>Suppose we want to perform bi-linear interpolation using the query point A (0.6, 0.3) in this situation:</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/mask_rcnn/Bilinear_1.png" style="width: 30%;" alt="Bi-Linear" />
+<figcaption>
+Figure 8: Bi-Linear 1
+</figcaption>
+</figure>
+</center>
+
+<p>Bi-Linear interpolation performs a first linear interpolation for the two rows finding the values of the locations B(0.6, 0) and C(0.6, 1).</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/mask_rcnn/Bilinear_2.png" style="width: 30%;" alt="Bi-Linear 2" />
+<figcaption>
+Figure 9: Bi-Linear 2
+</figcaption>
+</figure>
+</center>
+
+\[\color{green}{B} = \frac{A_x - P_x}{Q_x - P_x} \color{blue}{P} + \frac{Q_x - A_x}{Q_x - P_x} \color{blue}{Q} \\
+\color{green}{C} = \frac{A_x - R_x}{S_x - R_x} \color{blue}{R} + \frac{S_x - A_x}{S_x - R_x} \color{blue}{S} \\\]
+
+<p>Then, the final value is another linear interpolation between the values B and C considering only the y-coordinate:</p>
+
+\[\color{red}{A} = \frac{A_y - B_y}{C_y - B_y} \color{green}{B} + \frac{C_y - A_y}{C_y - B_y} \color{green}{C}\]
+
+<p><strong>Extra: Tri-Linear interpolation</strong>
+At this point it is interesting to see how bilinear interpolation extends to 3 dimension. This is not actually linked to RoI Align, but it is still interesting.
+Tri-Linear interpolation can be seen as a linear interpolation of two bi-linear interpolation.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/mask_rcnn/trilinear.png" style="width: 30%;" alt="Tri-Linear 2" />
+<figcaption>
+Figure 10: Tri-Linear Interpolation
+</figcaption>
+</figure>
+</center>
+
+<p>Given the query point <span style="color:blue">g</span>, we first compute the values <span style="color:red">a b c d</span> using the quantity <span style="color:red">tx</span>.
+We then compute <span style="color:green">e f</span> interpolating <span style="color:red">a b c d</span> using <span style="color:green">ty</span> and finally we find the value of the query point <span style="color:blue">g</span> interpolating <span style="color:green">e f</span> through  <span style="color:blue">tz</span>.</p>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><abbr>[rcnn_2014]</abbr> <span id="rcnn_2014">Girshick, R., Donahue, J., Darrell, T., &amp; Malik, J. (2014). <i>Rich feature hierarchies for accurate object detection and semantic segmentation</i>.</span></li>
+<li><abbr>[fastrcnn_2015]</abbr> <span id="fastrcnn_2015">Girshick, R. (2015). <i>Fast R-CNN</i>.</span></li>
+<li><abbr>[faster_rcnn_2016]</abbr> <span id="faster_rcnn_2016">Ren, S., He, K., Girshick, R., &amp; Sun, J. (2016). <i>Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks</i>.</span></li>
+<li><abbr>[mask_rcnn_2018]</abbr> <span id="mask_rcnn_2018">He, K., Gkioxari, G., Dollár, P., &amp; Girshick, R. (2018). <i>Mask R-CNN</i>.</span></li></ol>
+:ET

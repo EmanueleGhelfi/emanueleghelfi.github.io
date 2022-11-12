@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  
+  <meta name="google-site-verification" content="D1nJAX0_x0Dj8DL8A77WzcxRD_6yCCdSV8FfeNDru64">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Object Detection: A Review</title>
+
+  <meta name="author" content="Emanuele Ghelfi" />
+
+  
+
+  <link rel="alternate" type="application/rss+xml" title="Emanuele Ghelfi's Blog - Teaching Machines to Learn" href="/feed.xml" />
+
+
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="/apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+<link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/favicon-128.png" sizes="128x128" />
+<meta name="application-name" content="&nbsp;"/>
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<meta name="msapplication-TileImage" content="mstile-144x144.png" />
+<meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
+<meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
+<meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
+<!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+  
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
+    
+  
+
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+      <link rel="stylesheet" href="/css/custom.css" />
+    
+      <link rel="stylesheet" href="/css/particle.css" />
+    
+  
+
+  
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  <!-- Facebook OpenGraph tags -->
+  <meta property="og:title" content="Object Detection: A Review" />
+  <meta property="og:type" content="website" />
+
+  
+
+  
+  <meta property="og:url" content="http://emanueleghelfi.github.io/blog/2022/01/29/object_detection.html" />
+  
+
+  
+  <meta property="og:image" content="" />
+  
+
+  <!-- Twitter tags -->
+  <meta name="twitter:card" content="summary" />
+
+      <!-- Scripts for ggvis from http://ggvis.rstudio.com/0.1/interactivity.html-->
+  <!-- ggvis stuff -->
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/jquery-1.11.0.min.js"></script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/jquery-ui/js/jquery-ui-1.10.4.custom.min.js"></script>
+  <script charset="utf-8" src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/d3.min.js"></script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/vega.min.js"></script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/QuadTree.js"></script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/lodash.min.js"></script>
+  <script>var lodash = _.noConflict();</script>
+  <script src="http://ggvis.rstudio.com/0.1/libs/ggvis/js/ggvis.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://ggvis.rstudio.com/0.1/libs/ggvis/lib/jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css"/>
+  <link rel="stylesheet" type="text/css" href="http://ggvis.rstudio.com/0.1/libs/ggvis/css/ggvis.css"/>
+  <!-- end of ggvis scripts-->
+
+  <!-- Tags management -->
+  
+    
+
+
+
+
+
+  
+
+<!-- Jekyll Ideal Image Slider Include -->
+<!-- https://github.com/jekylltools/jekyll-ideal-image-slider-include -->
+<!-- v1.8 -->
+
+
+<!-- seo -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Object Detection: A Review | Emanuele Ghelfi’s Blog</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Object Detection: A Review" />
+<meta name="author" content="manughelfi" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A Review of Object Detection Architectures based on DL" />
+<meta property="og:description" content="A Review of Object Detection Architectures based on DL" />
+<link rel="canonical" href="http://emanueleghelfi.github.io/blog/2022/01/29/object_detection.html" />
+<meta property="og:url" content="http://emanueleghelfi.github.io/blog/2022/01/29/object_detection.html" />
+<meta property="og:site_name" content="Emanuele Ghelfi’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-01-29T08:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Object Detection: A Review" />
+<script type="application/ld+json">
+{"description":"A Review of Object Detection Architectures based on DL","headline":"Object Detection: A Review","dateModified":"2022-01-29T08:00:00+00:00","datePublished":"2022-01-29T08:00:00+00:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://emanueleghelfi.github.io/blog/2022/01/29/object_detection.html"},"url":"http://emanueleghelfi.github.io/blog/2022/01/29/object_detection.html","author":{"@type":"Person","name":"manughelfi"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+
+</head>
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://emanueleghelfi.github.io">Emanuele Ghelfi's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+	    
+        <li>
+		  <a href="/">Home</a>
+		</li>
+		
+        <li>
+		  <a href="/portfolio.html">Portfolio</a>
+		</li>
+		
+        <li>
+		  <a href="/cv.html">CV</a>
+		</li>
+		
+        <li>
+		  <a href="/aboutme.html">About Me</a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	
+  </div>
+</nav>  
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Object Detection: A Review</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on January 29, 2022</span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<script type="text/javascript" async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+      <!-- tags -->
+      <span>[
+        
+          
+          <a href="/tag/machine-learning"><code class="highligher-rouge"><nobr>machine-learning</nobr></code></a>
+        
+          
+          <a href="/tag/computer-vision"><code class="highligher-rouge"><nobr>computer-vision</nobr></code></a>
+        
+          
+          <a href="/tag/paper-notes"><code class="highligher-rouge"><nobr>paper-notes</nobr></code></a>
+        
+      ]</span>
+    
+<article role="main" class="blog-post">
+    <!-- page content-->
+	  <h1 id="object-detection-a-review">Object Detection: A Review</h1>
+
+<p>In this article, I review some 2D Object Detection papers.</p>
+
+<h2 id="r-cnn">R-CNN</h2>
+<p><a href="https://arxiv.org/abs/1311.2524">R-CNN</a> <a class="citation" href="#rcnn_2014">(Girshick et al., 2014)</a> (Regions with CNN features) presents a first, preliminary, approach to Object Detection.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/r_cnn/r_cnn_1.png" />
+<figcaption>Figure 1: R-CNN</figcaption>
+</figure>
+</center>
+
+<p>Pipeline:</p>
+
+<ul>
+  <li>Extract around <em>2000</em> bottom up region proposals from the input image</li>
+  <li>Warp regions to <em>fixed size</em></li>
+  <li>Extract features using a large CNN from <em>warped regions</em></li>
+  <li>Classify each region using <em>class-specific linear SVMs</em></li>
+</ul>
+
+<p>3 main modules:</p>
+
+<ul>
+  <li>Region proposal: <br />
+Selective search + affine warping to fixed size</li>
+  <li>Feature Extraction: <br />
+  Extract 4096-dimensional feature vector. Images are “normalized” by subtracting their mean before computing the features</li>
+  <li>Image classification</li>
+</ul>
+
+<p>This approach is actually an <strong>hand-crafted</strong> region proposal followed by a classifier. The standard R-CNN network can be extend with a Bounding Box Regression module to improve localization performance.</p>
+
+<p>After scoring each proposal with a class-specific SVM, a class-specific bounding-box regressor is applied to the CNN features.</p>
+
+<p>The bounding box regression module predicts 4 parameters, \(d_x, d_y, d_w, d_h\) such that, given the proposal bounding box \(P_x, P_y, P_w, P_h\), the final box is predicted as:</p>
+
+\[G_x = P_w d_x + P_x \\
+G_y = P_h d_y + P_y \\
+G_w = P_w exp(d_w)\\
+G_h = P_h exp(d_h)\]
+
+<p>In words, the module predicts:</p>
+<ul>
+  <li>A shift (\(d_x\), \(d_y\)) that is relative to the bounding box width and height</li>
+  <li>The log of ratio between the real size and the proposal size. If the ratio is 1, the proposal size is equal to the ground truth size and the network can just predict 0. If the real height is smaller than the proposal height, the network should predict \(d_h &lt; 0\), otherwise  \(d_h &gt; 0\). The same reasoning applies to the proposal width.</li>
+</ul>
+
+<p>The authors do not actually learn the parameters of the network, they solve the problem in closed form using regularized least squares.</p>
+
+<p>Figure 2 shows the final architecture of R-CNN.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/r_cnn/r_cnn_2.png" style="width: 50%;" alt="RCNN" />
+<figcaption>Figure 2: Full architecture of R-CNN</figcaption>
+</figure>
+</center>
+
+<p><strong>Problems</strong>:</p>
+
+<ul>
+  <li>Huge amount of time to train the network for each of the 2000 proposals regardless of the content of the image</li>
+  <li>Not real time, inference around 47 seconds</li>
+  <li>Selective search is a <strong>hand-crafted</strong> algorithm, no learning involved.</li>
+</ul>
+
+<h2 id="fast-r-cnn">Fast R-CNN</h2>
+
+<p><a href="https://arxiv.org/abs/1504.08083">Fast R-CNN</a> <a class="citation" href="#fastrcnn_2015">(Girshick, 2015)</a>, from the same authors of R-CNN, represents an improvement over the previous architecture.
+As in R-CNN, in Fast R-CNN the Network takes as input a set of RoIs (no learning is involved in this stage).
+Differently from R-CNN, the CNN backbone processes the whole image to extract features. 
+Each RoI is <strong>pooled</strong> (through <strong>RoI Pooling</strong>) into a fixed-size feature map. The feature map is flattened and feeded into Fully Connected layers. The Network outputs softmax scores and bounding box parameters for each RoI.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/fast_rcnn/fast_rcnn.png" style="width: 50%;" alt="Fast-RCNN" />
+<figcaption>
+Figure 3: Fast R-CNN architecture.
+</figcaption>
+</figure>
+</center>
+
+<p>Key ideas and contributions (my opinion):</p>
+<ul>
+  <li>RoI (max) Pooling</li>
+  <li>Smooth L1 Loss for localization</li>
+  <li>Truncated SVD for fully connected layers for performance reasons</li>
+</ul>
+
+<p>Main pipeline:</p>
+<ul>
+  <li>Hand-crafted RoIs from input image</li>
+  <li>The CNN backbone processes the <strong>whole image</strong> (differently from R-CNN)</li>
+  <li>RoI Pooling to obtain fixed size images from input RoI and CNN features</li>
+  <li>Fully Connected layers to obtain class scores and bounding box refinement</li>
+</ul>
+
+<h3 id="roi-pooling">RoI Pooling</h3>
+
+<p>RoI Pooling, or RoI Max Pooling, maps the input RoI into a fixed size feature map.
+The output map has a fixed dimension of \(H \times W\), hyperparameters independent with respect to the RoI.</p>
+
+<p>How does it work?</p>
+
+<p>Let’s say the input RoI has a size of \(h \times w\).
+RoI Pooling divides the RoI into sub-regions of size \(h/W \times w/W\). Max-Pooling is applied into sub-regions to obtain the output value for the sub-region.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/fast_rcnn/roi_pooling-1.gif" style="width: 50%;" alt="Roi Pooling" />
+<figcaption>
+Figure 4: Roi Pooling. <br /> Credit: <a href="https://deepsense.ai/region-of-interest-pooling-explained/">deepsense.ai</a>
+</figcaption>
+</figure>
+</center>
+
+<p><strong>Back-propagation through RoI Pooling.</strong></p>
+
+<p>RoI pooling is mathematically <strong>non-differentiable</strong> as it involves the max function for each region. The approximated derivative is back-propagated only through the value corresponding to the max of each region, with the assumption that a small perturbation of the input would not change the maximum value.</p>
+
+<h3 id="loss">Loss</h3>
+<p>Fast-RCNN uses a Smooth \(L_1\) loss for localization, less sensitive to outliers than the standard \(L_2\) loss.</p>
+
+\[L_{\text{loc}} = \sum_{i \in {x, y, w, h}} \text{smooth}_{L_1} (p_i - g_i),\]
+
+<p>where</p>
+
+\[\text{smooth}_{L_1}(x) = 
+\begin{cases}
+0.5 x^2 &amp; \text{if} |x| &lt; 1 \\
+|x| - 0.5 &amp; \text{otherwise}.
+\end{cases}\]
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/fast_rcnn/smooth_l1.png" style="width: 50%;" alt="Smooth L1" />
+</figure>
+</center>
+
+<h2 id="faster-r-cnn">Faster R-CNN</h2>
+
+<p><a href="https://arxiv.org/abs/1506.01497">Faster R-CNN</a> <a class="citation" href="#faster_rcnn_2016">(Ren et al., 2016)</a>, again from the same authors, tries to solve the region proposal problem of the previous approaches.
+In the previous approaches, region proposal was an hand-crafted and time expensive algorithm, with no learning involved. At that time the two SOTA methods for region proposals were Selective Search and EdgeBoxes.
+<strong>Selective Search</strong> took 2 seconds per image in a CPU implementation.
+<strong>EdgeBoxes</strong> took 0.2 seconds per image, was the best tradeoff between proposal quality and speed.</p>
+
+<p>Faster R-CNN focuses on computing proposals with a deep convolutional network to share computation between the proposal task and the detection task.
+Given the feature maps extracted from the backbone, the RPN (Region Proposal Network) extracts region proposals, that are used as input for the detection network, together with the convolutional features.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/faster_rcnn/faster_rcnn.png" style="width: 50%;" alt="Faster R-CNN" />
+<figcaption>
+Figure 5: Faster R-CNN architecture
+</figcaption>
+</figure>
+</center>
+
+<p>Key ideas and contributions (my opinion):</p>
+<ul>
+  <li>Region Proposal Networks</li>
+  <li>Anchor concept</li>
+  <li>Feature sharing between region proposals and object detection</li>
+</ul>
+
+<h3 id="region-proposal-networks">Region Proposal Networks</h3>
+
+<p>The Region Proposal Network takes as input the output of the backbone network. A \(n \times n\) convolutional layer is followed by two \(1 \times 1\) convolutional layers, predicting the class and the bounding box parameters.
+At each sliding window location, multiple proposals are predicted simultaneously, we denote with \(k\) the number of proposals.</p>
+
+<p>The regression layer has \(4\) outputs for each proposal encoding the parameters of the \(k\) boxes, so in total \(4k\) outputs. 
+The \(k\) proposals are parameterized with respect to \(k\) reference boxes, called <strong>anchors</strong>. Each anchors is centered in the considered region and associated with a specific scale and aspect ratio. The authors used 9 anchors at each location.</p>
+
+<p>The class prediction layer has 2 outputs for each proposal, the probability of object and the probability of background (no object), so in total \(2k\) outputs.</p>
+
+<p><strong>Loss</strong></p>
+
+<p>In order to train the RPN to predict the objectness score for each anchor, we must assign the ground truth label to each anchor.</p>
+
+<ul>
+  <li>Positive label:
+    <ul>
+      <li>IoU higher than a threshold (0.7) with any ground truth box</li>
+      <li>Highest IoU overlap with a given ground truth box, even if less than threshold</li>
+    </ul>
+  </li>
+  <li>Negative label:
+    <ul>
+      <li>IoU lower than th (0.3) for all ground truth boxes.</li>
+    </ul>
+  </li>
+  <li>Don’t care label:
+    <ul>
+      <li>Anchors that are neither positive or negative do not contribute to the loss</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Given the label for each anchor, a simple classification loss is used.</p>
+
+<h2 id="mask-r-cnn">Mask R-CNN</h2>
+
+<p><a href="https://arxiv.org/abs/1703.06870">Mask R-CNN</a> <a class="citation" href="#mask_rcnn_2018">(He et al., 2018)</a> extends Faster R-CNN adding an object mask branch in parallel to the class prediction and box prediction branches.
+The goal of the network is to perform instance segmentation, identifying for each object in the image the associated pixels.
+Notice: this is different from semantic segmentation whose goal is to correctly classify pixels in a fixed set of categories without differentiating between object instances.</p>
+
+<p>The main problem when trying to extend Faster R-CNN for instance segmentation tasks is that it was not designed for pixel to pixel alignment between inputs and outputs. This is due mainly to the Roi Pooling layer, that performs <strong>coarse spatial quantization</strong>.
+For this reason, Mask R-CNN introduces Roi Align layer that preserves exact spatial locations.</p>
+
+<p>An interesting feature of Mask R-CNN is that the mask prediction is performed independently for each class. At inference time, the mask corresponding to the predicted class is used combining in this way class prediction and mask prediction without competition among classes.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/mask_rcnn/mask_rcnn.png" style="width: 50%;" alt="Mask R-CNN" />
+<figcaption>
+Figure 6: Mask R-CNN architecture
+</figcaption>
+</figure>
+</center>
+
+<h3 id="mask-prediction">Mask Prediction</h3>
+
+<p>The mask branch outputs \(K\) binary masks of resolution \(m \times m\), one for each of the \(K\) classes. At the end, no softmax is applied, as it is usually done for semantic segmentation tasks. A per-pixel sigmoid activation is applied to scale the score of each mask in the range (0, 1). The mask loss is calculated only for the ground truth mask, while the other masks do not contribute to the loss.
+In this way, a mask is generate for every class without competition among classes and the output mask is selected by the class prediction layer. This effectively decouples mask and class prediction.</p>
+
+<h3 id="roi-align">RoI Align</h3>
+
+<p>Let’s see the problems of RoI Pooling before exploring the RoI Align layer.
+RoI pooling first quantizes the proposed RoI to the granularity of the feature map. The quantized RoI is divided into spatial bins, again quantixed. For each bin, values are aggregated through max pooling. This has a negative effect on the prediction of pixel-accurate segmentation masks, while the classification and detection tasks are usually robust with respect to small translations.</p>
+
+<p><strong>RoI Align</strong> tries to properly align the extracted features with the input. Given the input RoI, no quantization is applied. The RoI is then divided into bins, for each bin four regularly sampled locations are used to calculate the values of input features through bilinear sampling.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/mask_rcnn/roi_align.png" style="width: 50%;" alt="RoI Align" />
+<figcaption>
+Figure 7: RoI Align
+</figcaption>
+</figure>
+</center>
+
+<p><strong>Focus: Bi-Linear Interpolation</strong></p>
+
+<p>Bi-Linear interpolation applies linear interpolation in two directions. It uses 4 nearest neighbors to output the final value of the interpolated point.</p>
+
+<p>Suppose we want to perform bi-linear interpolation using the query point A (0.6, 0.3) in this situation:</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/mask_rcnn/Bilinear_1.png" style="width: 30%;" alt="Bi-Linear" />
+<figcaption>
+Figure 8: Bi-Linear 1
+</figcaption>
+</figure>
+</center>
+
+<p>Bi-Linear interpolation performs a first linear interpolation for the two rows finding the values of the locations B(0.6, 0) and C(0.6, 1).</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/mask_rcnn/Bilinear_2.png" style="width: 30%;" alt="Bi-Linear 2" />
+<figcaption>
+Figure 9: Bi-Linear 2
+</figcaption>
+</figure>
+</center>
+
+\[\color{green}{B} = \frac{A_x - P_x}{Q_x - P_x} \color{blue}{P} + \frac{Q_x - A_x}{Q_x - P_x} \color{blue}{Q} \\
+\color{green}{C} = \frac{A_x - R_x}{S_x - R_x} \color{blue}{R} + \frac{S_x - A_x}{S_x - R_x} \color{blue}{S} \\\]
+
+<p>Then, the final value is another linear interpolation between the values B and C considering only the y-coordinate:</p>
+
+\[\color{red}{A} = \frac{A_y - B_y}{C_y - B_y} \color{green}{B} + \frac{C_y - A_y}{C_y - B_y} \color{green}{C}\]
+
+<p><strong>Extra: Tri-Linear interpolation</strong>
+At this point it is interesting to see how bilinear interpolation extends to 3 dimension. This is not actually linked to RoI Align, but it is still interesting.
+Tri-Linear interpolation can be seen as a linear interpolation of two bi-linear interpolation.</p>
+
+<center>
+<figure>
+<img src="/blog/figs/object_detection/mask_rcnn/trilinear.png" style="width: 30%;" alt="Tri-Linear 2" />
+<figcaption>
+Figure 10: Tri-Linear Interpolation
+</figcaption>
+</figure>
+</center>
+
+<p>Given the query point <span style="color:blue">g</span>, we first compute the values <span style="color:red">a b c d</span> using the quantity <span style="color:red">tx</span>.
+We then compute <span style="color:green">e f</span> interpolating <span style="color:red">a b c d</span> using <span style="color:green">ty</span> and finally we find the value of the query point <span style="color:blue">g</span> interpolating <span style="color:green">e f</span> through  <span style="color:blue">tz</span>.</p>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><abbr>[rcnn_2014]</abbr> <span id="rcnn_2014">Girshick, R., Donahue, J., Darrell, T., &amp; Malik, J. (2014). <i>Rich feature hierarchies for accurate object detection and semantic segmentation</i>.</span></li>
+<li><abbr>[fastrcnn_2015]</abbr> <span id="fastrcnn_2015">Girshick, R. (2015). <i>Fast R-CNN</i>.</span></li>
+<li><abbr>[faster_rcnn_2016]</abbr> <span id="faster_rcnn_2016">Ren, S., He, K., Girshick, R., &amp; Sun, J. (2016). <i>Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks</i>.</span></li>
+<li><abbr>[mask_rcnn_2018]</abbr> <span id="mask_rcnn_2018">He, K., Gkioxari, G., Dollár, P., &amp; Girshick, R. (2018). <i>Mask R-CNN</i>.</span></li></ol>
+
+</article>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+    
+      <!-- Check if any share-links are active -->
+
+
+
+
+<section id = "social-share-section">
+  <span class="sr-only">Share: </span>
+
+  
+  <!--- Share on Twitter -->
+    <a href="https://twitter.com/intent/tweet?text=Object+Detection%3A+A+Review+http://emanueleghelfi.github.io/blog/2022/01/29/object_detection.html"
+      class="btn btn-social-icon btn-twitter" title="Share on Twitter">
+      <span class="fa fa-fw fa-twitter" aria-hidden="true"></span>
+      <span class="sr-only">Twitter</span>
+    </a>
+  
+
+  
+  <!--- Share on Facebook -->
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://emanueleghelfi.github.io/blog/2022/01/29/object_detection.html"
+      class="btn btn-social-icon btn-facebook" title="Share on Facebook">
+      <span class="fa fa-fw fa-facebook" aria-hidden="true"></span>
+      <span class="sr-only">Facebook</span>
+    </a>
+  
+
+  
+  <!--- Share on LinkedIn -->
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://emanueleghelfi.github.io/blog/2022/01/29/object_detection.html"
+      class="btn btn-social-icon btn-linkedin" title="Share on LinkedIn">
+      <span class="fa fa-fw fa-linkedin" aria-hidden="true"></span>
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  
+
+</section>
+
+
+    
+    <ul class="pager blog-pager">
+      
+      <li class="previous">
+        <a href="/blog/2020/07/03/rl-workshop.html" data-toggle="tooltip" data-placement="top" title="The Reinforcement Learning Workshop">&larr; Previous Post</a>
+      </li>
+      
+      
+    </ul>
+  </div>
+</div>
+
+
+<div class="row disqus-comments">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'emanueleghelfi-github-io';
+	    // ensure that pages with query string get the same discussion
+            var url_parts = window.location.href.split("?");
+            var disqus_url = url_parts[0];	    
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          <li>
+            <a href="https://github.com/EmanueleGhelfi" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://twitter.com/manughelfi" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="mailto:manughelfi1994@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://linkedin.com/in/emanuele-ghelfi-9a408396" title="LinkedIn">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+      
+          <li>
+            <a href="https://scholar.google.com/citations?user=JJqNoGQAAAAJ&hl=en" title="Scholar">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-graduation-cap fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+		  <li>
+			<a href="/feed.xml" title="RSS">
+			  <span class="fa-stack fa-lg">
+				<i class="fa fa-circle fa-stack-2x"></i>
+				<i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+			  </span>
+			</a>
+		  </li>		
+          		  
+        </ul>
+        <p class="copyright text-muted">
+		  Emanuele Ghelfi
+		  &nbsp;&bull;&nbsp;
+		  2022
+		  
+		  
+	    </p>
+		<p class="theme-by text-muted">
+		  Theme by
+		  <a href="https://github.com/daattali/beautiful-jekyll">beautiful-jekyll</a>
+		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/particles.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/particles-config.js"></script>
+    
+  
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-67791526-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+
+    <script src="/js/jquery-1.11.2.min.js"></script>
+    <style>
+    .lightbox {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.85); z-index: 9999999; line-height: 0; cursor: pointer;}
+    .lightbox .img {
+        position: relative; 
+        top: 50%;
+        left: 50%;
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .lightbox .img img {opacity: 0; pointer-events: none; width: auto;}
+    @media screen and (min-width: 1200px) {
+        .lightbox .img {
+            max-width: 1200px;
+        }
+    }
+    @media screen and (min-height: 1200px) {
+        .lightbox img {
+            max-height: 1200px;
+        }
+    }
+    .lightbox span {
+            display: block; 
+            position: fixed; 
+            bottom: 13px; 
+            height: 1.5em; 
+            line-height: 1.4em; 
+            width: 100%; 
+            text-align: center; 
+            color: white;
+            text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;  
+    }
+    
+    
+    
+    
+    
+    
+    .lightbox .videoWrapperContainer {
+        position: relative; 
+        top: 50%;
+        left: 50%;
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        max-width: 900px;
+        max-height: 100%;
+    }
+    .lightbox .videoWrapperContainer .videoWrapper {
+        height: 0;
+        line-height: 0;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        padding-bottom: 56.333%; /* custom */
+        background: black;
+    } 
+    .lightbox .videoWrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+    }   
+    .lightbox #prev, .lightbox #next {height: 50px; line-height: 36px; display: none; margin-top: -25px; position: fixed; top: 50%; padding: 0 15px; cursor: pointer; text-decoration: none; z-index: 99; color: white; font-size: 60px;}
+    .lightbox.gallery #prev, .lightbox.gallery #next {display: block;}
+    .lightbox #prev {left: 0;}
+    .lightbox #next {right: 0;}
+    .lightbox #close {height: 50px; width: 50px; position: fixed; cursor: pointer; text-decoration: none; z-index: 99; right: 0; top: 0;}
+    .lightbox #close:after, .lightbox #close:before {position: absolute; margin-top: 22px; margin-left: 14px; content: ""; height: 3px; background: white; width: 23px;
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    /* Safari */
+    -webkit-transform: rotate(-45deg);
+    /* Firefox */
+    -moz-transform: rotate(-45deg);
+    /* IE */
+    -ms-transform: rotate(-45deg);
+    /* Opera */
+    -o-transform: rotate(-45deg);
+    }
+    .lightbox #close:after {
+    /* Safari */
+    -webkit-transform: rotate(45deg);
+    /* Firefox */
+    -moz-transform: rotate(45deg);
+    /* IE */
+    -ms-transform: rotate(45deg);
+    /* Opera */
+    -o-transform: rotate(45deg);
+    }
+    .lightbox, .lightbox * {
+        -webkit-user-select: none;  
+        -moz-user-select: none;    
+        -ms-user-select: none;      
+        user-select: none;
+    }
+    </style>
+            
+    <script>
+    function is_youtubelink(url) {
+      var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+      return (url.match(p)) ? RegExp.$1 : false;
+    }
+    function is_imagelink(url) {
+        var p = /([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i;
+        return (url.match(p)) ? true : false;
+    }
+    function is_vimeolink(url,el) {
+        var id = false;
+        $.ajax({
+          url: 'https://vimeo.com/api/oembed.json?url='+url,
+          async: true,
+          success: function(response) {
+            if(response.video_id) {
+              id = response.video_id;
+              $(el).addClass('lightbox-vimeo').attr('data-id',id);
+            }
+          }
+        });
+    }
+    
+    $(document).ready(function() {
+        //add classes to links to be able to initiate lightboxes
+        $("a").each(function(){
+            var url = $(this).attr('href');
+            if(url) {
+                if(url.indexOf('vimeo') !== -1 && !$(this).hasClass('no-lightbox')) is_vimeolink(url,$(this));
+                if(is_youtubelink(url) && !$(this).hasClass('no-lightbox')) $(this).addClass('lightbox-youtube').attr('data-id',is_youtubelink(url));
+                if(is_imagelink(url) && !$(this).hasClass('no-lightbox')) {
+                    $(this).addClass('lightbox-image');
+                    var href = $(this).attr('href');
+                    var filename = href.split('/').pop();
+                    var split = filename.split(".");
+                    var name = split[0];
+                    $(this).attr('title',name);
+                }
+            }
+        });
+        //remove the clicked lightbox
+        $("body").on("click", ".lightbox", function(event){
+            if($(this).hasClass('gallery')) {
+                
+                $(this).remove();
+    
+                if($(event.target).attr('id')=='next') {
+                    //next item
+                    if($("a.gallery.current").nextAll("a.gallery:first").length) $("a.gallery.current").nextAll("a.gallery:first").click();
+                    else $("a.gallery.current").parent().find("a.gallery").first().click();
+                }
+                else if ($(event.target).attr('id')=='prev') {
+                    //prev item
+                    if($("a.gallery.current").prevAll("a.gallery:first").length) $("a.gallery.current").prevAll("a.gallery:first").click();
+                    else $("a.gallery.current").parent().find("a.gallery").last().click();
+                }
+                else {
+                    $("a.gallery").removeClass('gallery');
+                }
+            }
+            else $(this).remove();
+        });
+        //prevent image from being draggable (for swipe)
+        $("body").on('dragstart', ".lightbox img", function(event) { event.preventDefault(); });
+        //add the youtube lightbox on click
+        $("a.lightbox-youtube").click(function(event){
+            event.preventDefault();
+            $('<div class="lightbox"><a id="close"></a><a id="next">&rsaquo;</a><a id="prev">&lsaquo;</a><div class="videoWrapperContainer"><div class="videoWrapper"><iframe src="https://www.youtube.com/embed/'+$(this).attr('data-id')+'?autoplay=1&showinfo=0&rel=0"></iframe></div></div></div>').appendTo('body');
+        });
+        //add the image lightbox on click
+        $("a.lightbox-image").click(function(event){
+            event.preventDefault();
+            $('<div class="lightbox"><a id="close"></a><a id="next">&rsaquo;</a><a id="prev">&lsaquo;</a><div class="img" style="background: url(\''+$(this).attr('href')+'\') center center / contain no-repeat;" title="'+$(this).attr('title')+'" ><img src="'+$(this).attr('href')+'" alt="'+$(this).attr('title')+'" /></div><span>'+$(this).attr('title')+'</span></div>').appendTo('body');
+        });
+        //add the vimeo lightbox on click
+        $("body").on("click", "a.lightbox-vimeo", function(event){
+            event.preventDefault();
+            $('<div class="lightbox"><a id="close"></a><a id="next">&rsaquo;</a><a id="prev">&lsaquo;</a><div class="videoWrapperContainer"><div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+$(this).attr('data-id')+'/?autoplay=1&byline=0&title=0&portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div></div>').appendTo('body');
+        });
+    
+        $("body").on("click", "a[class*='lightbox-']", function(){
+            var link_elements = $(this).parent().find("a[class*='lightbox-']");
+            $(link_elements).removeClass('current');
+            for (var i=0; i<link_elements.length; i++) {
+                if($(this).attr('href') == $(link_elements[i]).attr('href')) {
+                    $(link_elements[i]).addClass('current');
+                }
+            }
+            if(link_elements.length>1) {
+                $('.lightbox').addClass('gallery');
+                $(link_elements).addClass('gallery');
+            }
+        });
+    
+        
+    });
+    
+    $(document).keydown(function(e) {
+        switch(e.which) {
+            case 37: // left
+            $("#prev").click();
+            break;
+            case 39: // right
+            $("#next").click();
+            break;
+        case 27: // esc
+            $("#close").click();
+            break;
+            default: return; // exit this handler for other keys
+        }
+        e.preventDefault(); // prevent the default action (scroll / move caret)
+    });
+    
+    
+    
+      /*===========================
+      Swipe-it v1.4.1
+      An event listener for swiping gestures with vanilla js.
+      https://github.com/tri613/swipe-it#readme
+     
+      @Create 2016/09/22
+      @Update 2017/08/11
+      @Author Trina Lu
+      ===========================*/
+    
+      "use strict";var _slicedToArray=function(){function n(n,t){var e=[],i=!0,o=!1,r=void 0;try{for(var u,c=n[Symbol.iterator]();!(i=(u=c.next()).done)&&(e.push(u.value),!t||e.length!==t);i=!0);}catch(n){o=!0,r=n}finally{try{!i&&c.return&&c.return()}finally{if(o)throw r}}return e}return function(t,e){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return n(t,e);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}();!function(n,t,e){function i(n){function e(){o("touchstart",m,w),o("touchmove",d,w),o("touchend",p,w),E.mouseEvent&&o("mousedown",s,w)}function i(){y=!1,D=!1,A=!1,b=!1,a=!1}function s(n){a=this,y=n.clientX,D=n.clientY,o("mousemove",l,v),o("mouseup",h,v)}function l(n){n.preventDefault(),y&&D&&(A=n.clientX,b=n.clientY)}function h(n){r("mousemove",l,v),r("mouseup",h,v),p(n)}function m(n){a=this,y=n.touches[0].clientX,D=n.touches[0].clientY}function d(n){A=n.touches[0].clientX,b=n.touches[0].clientY}function p(n){if(y&&D&&A&&b){var t=y-A,e=D-b,o=[t,e].map(Math.abs),r=_slicedToArray(o,2),c=r[0],s=r[1],v=E.minDistance;if(c>v){var f=y<A?"swipeRight":"swipeLeft";u(f,a,{distance:t,start:y,end:A})}if(s>v){var l=D>b?"swipeUp":"swipeDown";u(l,a,{distance:e,start:D,end:b})}(c>v||s>v)&&u("swipe",a)}i()}var E=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},w=c(t.querySelectorAll(n)),y=void 0,D=void 0,A=void 0,b=void 0;E.mouseEvent=void 0===E.mouseEvent?f.mouseEvent:E.mouseEvent,E.minDistance=void 0===E.minDistance?f.minDistance:E.minDistance,i(),e(),this.on=function(n,t){return o(n,t,w),this}}function o(n,t,e){s(e).forEach(function(e){return e.addEventListener(n,t)})}function r(n,t,e){s(e).forEach(function(e){return e.removeEventListener(n,t)})}function u(n,e){var i=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{},o=t.createEvent("Event");o.initEvent(n,!0,!0),o.swipe=i,s(e).forEach(function(n){return n.dispatchEvent(o)})}function c(n){for(var t=[],e=0;e<n.length;e++)t.push(n[e]);return t}function s(n){return Array.isArray(n)?n:[n]}var a=!1,v=[n],f={mouseEvent:!0,minDistance:30};n[e]=i}(window,document,"SwipeIt");
+    
+    var mySwipeIt = new SwipeIt('body');
+    mySwipeIt.on('swipeLeft',function(e){
+        //check if lightbox is present
+        if($('.lightbox').length >  0 ) {
+            $("#next").click();
+        }
+    }).on('swipeRight',function(e){
+        //check if lightbox is present
+        if($('.lightbox').length >  0 ) {
+            $("#prev").click();
+        }
+    });
+    
+    </script>
+    <!-- Jekyll Ideal Image Slider Include -->
+<!-- https://github.com/jekylltools/jekyll-ideal-image-slider-include -->
+<!-- v1.8 -->
+  
+  </body>
+</html>

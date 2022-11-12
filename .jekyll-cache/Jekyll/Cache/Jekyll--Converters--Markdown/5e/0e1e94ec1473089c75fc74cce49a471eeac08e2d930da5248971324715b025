@@ -1,4 +1,4 @@
-I"%<p><a href="www.github.com/zurutech/ashpy">AshPy</a> is a TensorFlow 2.0 library for (<strong>distributed</strong>) training, evaluation, model selection, and fast prototyping.
+I"8<p><a href="www.github.com/zurutech/ashpy">AshPy</a> is a TensorFlow 2.0 library for (<strong>distributed</strong>) training, evaluation, model selection, and fast prototyping.
 It is designed to ease the burden of setting up all the nuances of the architectures built to train complex custom deep learning models.</p>
 
 <h2 id="ashpy-why">AshPy, why?</h2>
@@ -15,7 +15,7 @@ In general <strong>AshPy</strong> aims to:</p>
 
 <h2 id="ashpy-where">AshPy, where?</h2>
 
-<p>The first version of AshPy is available on <a href="https://pypi.org/project/ashpy/">PyPi</a>, you can install it in your virtualenv with <code class="highlighter-rouge">pip install ashpy</code>.</p>
+<p>The first version of AshPy is available on <a href="https://pypi.org/project/ashpy/">PyPi</a>, you can install it in your virtualenv with <code class="language-plaintext highlighter-rouge">pip install ashpy</code>.</p>
 
 <p>Here some useful links:</p>
 

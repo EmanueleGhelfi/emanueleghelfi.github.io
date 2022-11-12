@@ -127,9 +127,9 @@
 
 
 <!-- seo -->
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Reinforcement Learning in Configurable Continuous Environments | Emanuele Ghelfi’s Blog</title>
-<meta name="generator" content="Jekyll v4.0.0" />
+<meta name="generator" content="Jekyll v4.2.1" />
 <meta property="og:title" content="Reinforcement Learning in Configurable Continuous Environments" />
 <meta name="author" content="manughelfi" />
 <meta property="og:locale" content="en_US" />
@@ -140,8 +140,10 @@
 <meta property="og:site_name" content="Emanuele Ghelfi’s Blog" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-05-22T08:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Reinforcement Learning in Configurable Continuous Environments" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://emanueleghelfi.github.io/blog/2019/05/22/rl-conf-mdp.html"},"url":"http://emanueleghelfi.github.io/blog/2019/05/22/rl-conf-mdp.html","headline":"Reinforcement Learning in Configurable Continuous Environments","dateModified":"2019-05-22T08:00:00+00:00","datePublished":"2019-05-22T08:00:00+00:00","description":"RL in Configurable Continuous Environments","author":{"@type":"Person","name":"manughelfi"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"description":"RL in Configurable Continuous Environments","headline":"Reinforcement Learning in Configurable Continuous Environments","dateModified":"2019-05-22T08:00:00+00:00","datePublished":"2019-05-22T08:00:00+00:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://emanueleghelfi.github.io/blog/2019/05/22/rl-conf-mdp.html"},"url":"http://emanueleghelfi.github.io/blog/2019/05/22/rl-conf-mdp.html","author":{"@type":"Person","name":"manughelfi"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -286,7 +288,7 @@
 </center>
 </div>
 
-<p>Most of the problems tackled by Reinforcement Learning are typically modeled as Markov Decision Processes in which the environment is considered a <strong>fixed</strong> entity and cannot be controlled. Nevertheless, there exist several real-world examples in which a <strong>partial control</strong> on the environment can be exercised by the agent itself or by an external <strong>supervisor</strong>. For instance, in a car race the driver can set up his/her vehicle to better suit his/her needs. With the phrase <strong>environment configuration</strong> we refer to the activity of altering some environmental parameters to improve the performance of the agent’s policy. This scenario has been recently formalized as a <strong>Configurable Markov Decision Process</strong> (<strong>CMDP</strong>) <a class="citation" href="#cmdp">(Metelli, Mutti, &amp; Restelli, 2018)</a>.
+<p>Most of the problems tackled by Reinforcement Learning are typically modeled as Markov Decision Processes in which the environment is considered a <strong>fixed</strong> entity and cannot be controlled. Nevertheless, there exist several real-world examples in which a <strong>partial control</strong> on the environment can be exercised by the agent itself or by an external <strong>supervisor</strong>. For instance, in a car race the driver can set up his/her vehicle to better suit his/her needs. With the phrase <strong>environment configuration</strong> we refer to the activity of altering some environmental parameters to improve the performance of the agent’s policy. This scenario has been recently formalized as a <strong>Configurable Markov Decision Process</strong> (<strong>CMDP</strong>) <a class="citation" href="#cmdp">(Metelli et al., 2018)</a>.
 Formula One engineers have to configure their cars (e.g. wings, tyres, engine, brakes) to minimize lap time. In industry, machines have to be configured to maximize the production rate. These are cases in which the goal of the configuration is to improve performance, however in the case of car race it is possible for the supervisor to improve the learning speed of the pilot by presenting tracks of different difficulty.</p>
 
 <center>
@@ -297,9 +299,9 @@ Formula One engineers have to configure their cars (e.g. wings, tyres, engine, b
 <p>In our <a href="http://proceedings.mlr.press/v80/metelli18a.html">paper</a> “Reinforcement Learning in Continuous Configurable Environments”, accepted at ICML 2019, we propose a trust-region method, <strong>Relative Entropy Model Policy Search</strong> (<strong>REMPS</strong>), able to learn both the policy and the MDP configuration in continuous domains without requiring the knowledge of the true model of the environment.</p>
 
 <h2 id="optimization-and-projection">Optimization and Projection</h2>
-<p>Relative Entropy Model Policy Search (<strong>REMPS</strong>), imports several ideas from the classic REPS <a class="citation" href="#reps">(Peters, Mülling, &amp; Altun, 2010)</a>; in particular, the use of a constraint to ensure that the resulting new stationary distribution is sufficiently close to the current one. REMPS consists of two subsequent phases: optimization and projection. 
+<p>Relative Entropy Model Policy Search (<strong>REMPS</strong>), imports several ideas from the classic REPS <a class="citation" href="#reps">(Peters et al., 2010)</a>; in particular, the use of a constraint to ensure that the resulting new stationary distribution is sufficiently close to the current one. REMPS consists of two subsequent phases: optimization and projection. 
 In the optimization phase we look for the stationary distribution that optimizes the performance. This search is limited to the space of distributions that are not too dissimilar from the current stationary distribution. The notion of dissimilarity is formalized in terms of a threshold (\( \kappa &gt; 0 )\) on the KL-divergence.
-The resulting distribution may not fall within the space of the representable stationary distributions given our parametrization. Therefore, similarly to <a class="citation" href="#daniel">(Daniel, Neumann, &amp; Peters, 2012)</a>, in the projection phase we need to retrieve a policy and a configuration inducing a stationary distribution as close as possible to the optimized distribution.</p>
+The resulting distribution may not fall within the space of the representable stationary distributions given our parametrization. Therefore, similarly to <a class="citation" href="#daniel">(Daniel et al., 2012)</a>, in the projection phase we need to retrieve a policy and a configuration inducing a stationary distribution as close as possible to the optimized distribution.</p>
 
 <center>
 <figure>
@@ -310,15 +312,15 @@ The resulting distribution may not fall within the space of the representable st
 
 <h2 id="model-approximation">Model Approximation</h2>
 <p>Our formulation of REMPS requires the access to the environment dynamics \(p_\omega\), depending on the vector of configurable parameters \( \omega \). The environment dynamics represents the distribution over the next states given the current state and action:
-<script type="math/tex">p: \mathcal{S} \times \mathcal{A} \rightarrow \mathcal{S}.</script>
+\(p: \mathcal{S} \times \mathcal{A} \rightarrow \mathcal{S}.\)
 In our cases the transition function depends also on some parameter:
-<script type="math/tex">p: \mathcal{S} \times \mathcal{A} \times {\Omega} \rightarrow \mathcal{S}.</script>
+\(p: \mathcal{S} \times \mathcal{A} \times {\Omega} \rightarrow \mathcal{S}.\)
 Although the parameters to be configured are usually known in real word cases, the environment dynamic is usually unkown in a model-free scenario.
 Our approach is based on a <strong>Maximum Likelihood</strong> estimation. Given a dataset of experience:
-<script type="math/tex">{ ( s_i, a_i, \omega_i, s'_i )}_{i=1}^{N},</script>
+\({ ( s_i, a_i, \omega_i, s'_i )}_{i=1}^{N},\)
 we solve the problem:</p>
 
-<script type="math/tex; mode=display">\max_{\widehat{p}} \frac{1}{N} \sum_{i=1}^{N} \log \widehat{p} (s_{i}' | s_i, a_i, \omega_i).</script>
+\[\max_{\widehat{p}} \frac{1}{N} \sum_{i=1}^{N} \log \widehat{p} (s_{i}' | s_i, a_i, \omega_i).\]
 
 <p>Once we have the model approximation \( \widehat{p} \) we can simply run REMPS replacing the true model \(p\) with the approximated model \( \widehat{p} \).</p>
 
@@ -352,10 +354,10 @@ we solve the problem:</p>
 
 <h2 id="references">References</h2>
 
-<ol class="bibliography"><li><abbr>[cmdp]</abbr> <span id="cmdp">Metelli, A. M., Mutti, M., &amp; Restelli, M. (2018). Configurable Markov Decision Processes. In <i>35th International Conference on Machine Learning</i> (Vol. 80, pp. 3491–3500). PMLR.</span></li>
-<li><abbr>[reps]</abbr> <span id="reps">Peters, J., Mülling, K., &amp; Altun, Y. (2010). Relative Entropy Policy Search. In <i>AAAI</i> (pp. 1607–1612). Atlanta.</span></li>
-<li><abbr>[daniel]</abbr> <span id="daniel">Daniel, C., Neumann, G., &amp; Peters, J. (2012). Hierarchical relative entropy policy search. In <i>Artificial Intelligence and Statistics</i> (pp. 273–281).</span></li>
-<li><abbr>[torcs]</abbr> <span id="torcs">Wymann, B., Espié, E., Guionneau, C., Dimitrakakis, C., Coulom, R., &amp; Sumner, A. (2000). Torcs, the open racing car simulator, <i>4</i>, 6.</span></li>
+<ol class="bibliography"><li><abbr>[cmdp]</abbr> <span id="cmdp">Metelli, A. M., Mutti, M., &amp; Restelli, M. (2018). Configurable Markov Decision Processes. <i>35th International Conference on Machine Learning</i>, <i>80</i>, 3491–3500.</span></li>
+<li><abbr>[reps]</abbr> <span id="reps">Peters, J., Mülling, K., &amp; Altun, Y. (2010). Relative Entropy Policy Search. <i>AAAI</i>, 1607–1612.</span></li>
+<li><abbr>[daniel]</abbr> <span id="daniel">Daniel, C., Neumann, G., &amp; Peters, J. (2012). Hierarchical relative entropy policy search. <i>Artificial Intelligence and Statistics</i>, 273–281.</span></li>
+<li><abbr>[torcs]</abbr> <span id="torcs">Wymann, B., Espié, E., Guionneau, C., Dimitrakakis, C., Coulom, R., &amp; Sumner, A. (2000). <i>Torcs, the open racing car simulator</i>. <i>4</i>, 6.</span></li>
 <li><abbr>[gpomdp]</abbr> <span id="gpomdp">Baxter, J., &amp; Bartlett, P. L. (2001). Infinite-horizon policy-gradient estimation. <i>Journal of Artificial Intelligence Research</i>, <i>15</i>, 319–350.</span></li></ol>
 
 </article>
@@ -519,7 +521,7 @@ we solve the problem:</p>
         <p class="copyright text-muted">
 		  Emanuele Ghelfi
 		  &nbsp;&bull;&nbsp;
-		  2021
+		  2022
 		  
 		  
 	    </p>

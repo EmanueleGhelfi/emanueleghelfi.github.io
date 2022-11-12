@@ -1,0 +1,82 @@
+I"�<div style="margin:20px;">
+<center>
+<a href="http://proceedings.mlr.press/v80/metelli18a.html"><button name="button" class="btn btn-primary" href="http://proceedings.mlr.press/v80/metelli18a.html">Paper</button></a>
+<a href="https://albertometelli.github.io/download/icml2019-remps/poster.pdf"><button name="button" class="btn btn-primary">Poster</button></a>
+<a href="https://albertometelli.github.io/download/icml2019-remps/slides.pdf"><button name="button" class="btn btn-primary">Slides</button></a>
+<a href="https://github.com/albertometelli/remps
+"><button name="button" class="btn btn-primary">Code</button></a>
+</center>
+</div>
+
+<p>Most of the problems tackled by Reinforcement Learning are typically modeled as Markov Decision Processes in which the environment is considered a <strong>fixed</strong> entity and cannot be controlled. Nevertheless, there exist several real-world examples in which a <strong>partial control</strong> on the environment can be exercised by the agent itself or by an external <strong>supervisor</strong>. For instance, in a car race the driver can set up his/her vehicle to better suit his/her needs. With the phrase <strong>environment configuration</strong> we refer to the activity of altering some environmental parameters to improve the performance of the agent’s policy. This scenario has been recently formalized as a <strong>Configurable Markov Decision Process</strong> (<strong>CMDP</strong>) <a class="citation" href="#cmdp">(Metelli et al., 2018)</a>.
+Formula One engineers have to configure their cars (e.g. wings, tyres, engine, brakes) to minimize lap time. In industry, machines have to be configured to maximize the production rate. These are cases in which the goal of the configuration is to improve performance, however in the case of car race it is possible for the supervisor to improve the learning speed of the pilot by presenting tracks of different difficulty.</p>
+
+<center>
+<a href="/blog/figs/remps/conf-env.jpg"> <img src="/blog/figs/remps/conf-env.jpg" style="width: 50%; float: left;" alt="Figure 1 - REMPS" /> </a>
+<a href="/blog/figs/remps/conf-env2.png"> <img src="/blog/figs/remps/conf-env2.png" style="width: 50%;" alt="Figure 2 - REMPS" /> </a>
+</center>
+
+<p>In our <a href="http://proceedings.mlr.press/v80/metelli18a.html">paper</a> “Reinforcement Learning in Continuous Configurable Environments”, accepted at ICML 2019, we propose a trust-region method, <strong>Relative Entropy Model Policy Search</strong> (<strong>REMPS</strong>), able to learn both the policy and the MDP configuration in continuous domains without requiring the knowledge of the true model of the environment.</p>
+
+<h2 id="optimization-and-projection">Optimization and Projection</h2>
+<p>Relative Entropy Model Policy Search (<strong>REMPS</strong>), imports several ideas from the classic REPS <a class="citation" href="#reps">(Peters et al., 2010)</a>; in particular, the use of a constraint to ensure that the resulting new stationary distribution is sufficiently close to the current one. REMPS consists of two subsequent phases: optimization and projection. 
+In the optimization phase we look for the stationary distribution that optimizes the performance. This search is limited to the space of distributions that are not too dissimilar from the current stationary distribution. The notion of dissimilarity is formalized in terms of a threshold (\( \kappa &gt; 0 )\) on the KL-divergence.
+The resulting distribution may not fall within the space of the representable stationary distributions given our parametrization. Therefore, similarly to <a class="citation" href="#daniel">(Daniel et al., 2012)</a>, in the projection phase we need to retrieve a policy and a configuration inducing a stationary distribution as close as possible to the optimized distribution.</p>
+
+<center>
+<figure>
+<a href="/blog/figs/remps/opt-proj.png"><img src="/blog/figs/remps/opt-proj.png" style="width: 80%" alt="Figure 2 - Optimization and Projection" /> </a>
+<figcaption>Illustration of Optimization and Projection</figcaption>
+</figure>
+</center>
+
+<h2 id="model-approximation">Model Approximation</h2>
+<p>Our formulation of REMPS requires the access to the environment dynamics \(p_\omega\), depending on the vector of configurable parameters \( \omega \). The environment dynamics represents the distribution over the next states given the current state and action:
+\(p: \mathcal{S} \times \mathcal{A} \rightarrow \mathcal{S}.\)
+In our cases the transition function depends also on some parameter:
+\(p: \mathcal{S} \times \mathcal{A} \times {\Omega} \rightarrow \mathcal{S}.\)
+Although the parameters to be configured are usually known in real word cases, the environment dynamic is usually unkown in a model-free scenario.
+Our approach is based on a <strong>Maximum Likelihood</strong> estimation. Given a dataset of experience:
+\({ ( s_i, a_i, \omega_i, s'_i )}_{i=1}^{N},\)
+we solve the problem:</p>
+
+\[\max_{\widehat{p}} \frac{1}{N} \sum_{i=1}^{N} \log \widehat{p} (s_{i}' | s_i, a_i, \omega_i).\]
+
+<p>Once we have the model approximation \( \widehat{p} \) we can simply run REMPS replacing the true model \(p\) with the approximated model \( \widehat{p} \).</p>
+
+<h2 id="results">Results</h2>
+
+<p>We evaluated REMPS on three domains: a simple chain domain, the classical cartpole and a more challenging car configuration task based on TORCS <a class="citation" href="#torcs">(Wymann et al., 2000)</a>. We compared REMPS with the extension of G(PO)MDP <a class="citation" href="#gpomdp">(Baxter &amp; Bartlett, 2001)</a> to the policy-configuration learning. For more details, please refer to the <a href="http://proceedings.mlr.press/v80/metelli18a.html">paper</a>.</p>
+
+<center>
+
+<figure>
+<a href="/blog/figs/remps/chain.png"> <img src="/blog/figs/remps/chain.png" style="width: 50%" alt="Performance on the Chain Problem" /> </a>
+<figcaption>Performance on the Chain Problem</figcaption>
+</figure>
+<figure>
+<a href="/blog/figs/remps/cartpole.png"> <img src="/blog/figs/remps/cartpole.png" style="width: 50%" alt="Cartpole" /> </a>
+<figcaption>Performance on the Cartpole Problem</figcaption>
+</figure>
+<figure>
+<a hfref="/blog/figs/remps/torcs.png"> <img src="/blog/figs/remps/torcs.png" style="width: 50%" alt="Torcs" /> </a>
+<figcaption>Performance on TORCS</figcaption>
+</figure>
+</center>
+
+<h2 id="authors">Authors</h2>
+
+<ul>
+  <li>Alberto Maria Metelli</li>
+  <li>Emanuele Ghelfi</li>
+  <li>Marcello Restelli</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><abbr>[cmdp]</abbr> <span id="cmdp">Metelli, A. M., Mutti, M., &amp; Restelli, M. (2018). Configurable Markov Decision Processes. <i>35th International Conference on Machine Learning</i>, <i>80</i>, 3491–3500.</span></li>
+<li><abbr>[reps]</abbr> <span id="reps">Peters, J., Mülling, K., &amp; Altun, Y. (2010). Relative Entropy Policy Search. <i>AAAI</i>, 1607–1612.</span></li>
+<li><abbr>[daniel]</abbr> <span id="daniel">Daniel, C., Neumann, G., &amp; Peters, J. (2012). Hierarchical relative entropy policy search. <i>Artificial Intelligence and Statistics</i>, 273–281.</span></li>
+<li><abbr>[torcs]</abbr> <span id="torcs">Wymann, B., Espié, E., Guionneau, C., Dimitrakakis, C., Coulom, R., &amp; Sumner, A. (2000). <i>Torcs, the open racing car simulator</i>. <i>4</i>, 6.</span></li>
+<li><abbr>[gpomdp]</abbr> <span id="gpomdp">Baxter, J., &amp; Bartlett, P. L. (2001). Infinite-horizon policy-gradient estimation. <i>Journal of Artificial Intelligence Research</i>, <i>15</i>, 319–350.</span></li></ol>
+:ET

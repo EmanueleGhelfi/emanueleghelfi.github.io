@@ -6,7 +6,9 @@ subtitle: Learning to Present Myself
 
 **Work**: 
 
-- **September 2020 - Present**: Machine Learning and Computer Vision Engineer at [Deep Vision Consulting]. 
+- **May 2021 - Present**: Senior Algorithm Engineer at [VisLab]. 
+
+- **September 2020 - May 2021**: Machine Learning and Computer Vision Engineer at [Deep Vision Consulting]. 
 
 - **November 2018 - September 2020**: Machine Learning and Computer Vision Engineer at [Zuru Tech Italy].
   I was involved in the following topics:
@@ -46,6 +48,7 @@ If your are interested, read the post about my thesis [here][thesis-post].
 
 [Zuru Tech Italy]: https://zuru.tech
 [Deep Vision Consulting]: https://www.deepvisionconsulting.com
+[VisLab]: https://vislab.it
 [Politecnico di Milano]: http://polimi.it/
 [Projects]: /portfolio.html
 [proj-research]: /portfolio.html

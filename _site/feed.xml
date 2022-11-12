@@ -7,6 +7,17 @@
     <atom:link href="http://emanueleghelfi.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Object Detection: A Review</title>
+        <description>
+          
+          Object Detection: A Review In this article, I review some 2D Object Detection papers. R-CNN R-CNN (Girshick et al., 2014) (Regions with CNN features) presents a first, preliminary, approach to Object Detection. Figure 1: R-CNN Pipeline: Extract around 2000 bottom up region proposals from the input image Warp regions to...
+        </description>
+        <pubDate>Sat, 29 Jan 2022 08:00:00 +0000</pubDate>
+        <link>http://emanueleghelfi.github.io/blog/2022/01/29/object_detection.html</link>
+        <guid isPermaLink="true">http://emanueleghelfi.github.io/blog/2022/01/29/object_detection.html</guid>
+      </item>
+    
+      <item>
         <title>The Reinforcement Learning Workshop</title>
         <description>
           
@@ -76,7 +87,7 @@
         <title>Paper Notes: Toward Multimodal Image-to-Image Translation</title>
         <description>
           
-          The paper Toward Multimodal Image-to-Image Translation (Zhu et al., 2017) faces the problem of multimodal image-to-image translation in a principled way. The same problem is faced in (Isola, Zhu, Zhou, &amp;amp; Efros, 2016) (pix2pix) but in a not-so-effective manner (enabling Dropout at inference time). In this paper, the authors encourage...
+          The paper Toward Multimodal Image-to-Image Translation (Zhu et al., 2017) faces the problem of multimodal image-to-image translation in a principled way. The same problem is faced in (Isola et al., 2016) (pix2pix) but in a not-so-effective manner (enabling Dropout at inference time). In this paper, the authors encourage a bijection...
         </description>
         <pubDate>Wed, 26 Jun 2019 08:00:00 +0000</pubDate>
         <link>http://emanueleghelfi.github.io/blog/2019/06/26/multimodal-image-to-image-translation.html</link>
