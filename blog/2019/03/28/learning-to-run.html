@@ -127,9 +127,9 @@
 
 
 <!-- seo -->
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+<!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Learning To Run | Emanuele Ghelfi’s Blog</title>
-<meta name="generator" content="Jekyll v4.0.0" />
+<meta name="generator" content="Jekyll v4.2.1" />
 <meta property="og:title" content="Learning To Run" />
 <meta name="author" content="manughelfi" />
 <meta property="og:locale" content="en_US" />
@@ -140,8 +140,10 @@
 <meta property="og:site_name" content="Emanuele Ghelfi’s Blog" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-03-28T08:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Learning To Run" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://emanueleghelfi.github.io/blog/2019/03/28/learning-to-run.html"},"url":"http://emanueleghelfi.github.io/blog/2019/03/28/learning-to-run.html","headline":"Learning To Run","dateModified":"2019-03-28T08:00:00+00:00","datePublished":"2019-03-28T08:00:00+00:00","description":"In this article we present our approach for the NIPS 2017 ‘Learning To Run’ challenge.","author":{"@type":"Person","name":"manughelfi"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"description":"In this article we present our approach for the NIPS 2017 ‘Learning To Run’ challenge.","headline":"Learning To Run","dateModified":"2019-03-28T08:00:00+00:00","datePublished":"2019-03-28T08:00:00+00:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://emanueleghelfi.github.io/blog/2019/03/28/learning-to-run.html"},"url":"http://emanueleghelfi.github.io/blog/2019/03/28/learning-to-run.html","author":{"@type":"Person","name":"manughelfi"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -307,14 +309,14 @@ The policy \( \pi \) is often encoded in a neural network.</p>
 
 <p>The RL goal is to maximize the expected discounted sum of rewards:</p>
 
-<script type="math/tex; mode=display">J_\pi = \mathbb{E}\left[\sum_{t=0}^H \gamma^t r(s_t,a_t) \right] \, .</script>
+\[J_\pi = \mathbb{E}\left[\sum_{t=0}^H \gamma^t r(s_t,a_t) \right] \, .\]
 
 <p>Where \( J \) represents the objective function, \( \gamma \) is the discount factor, \( r \) is the reward and \( H \) is the horizon length.</p>
 
 <h3 id="how-can-we-achieve-this-goal">How can we achieve this goal?</h3>
 <p>Gradient ascent over policy parameters:</p>
 
-<script type="math/tex; mode=display">\theta' = \theta + \eta \nabla_\theta J_\pi .</script>
+\[\theta' = \theta + \eta \nabla_\theta J_\pi .\]
 
 <p>Where the update of the policy parameters \( \theta \)  follows the gradient of the objective function \( \nabla J \). 
 A straightforward approach to accomplish this is presented in <a class="citation" href="#Williams1992">(Williams, 1992)</a> with REINFORCE algorithm, that uses Monte Carlo sampling to estimate the performance gradient considering a stochastic policy. Deterministic Policy Gradient (DPG) <a class="citation" href="#dpg">(Silver et al., 2014)</a> expands on this by considering deterministic policies only, for continuous action spaces. To ensure adequate exploration, an off-policy actor-critic algorithm is introduced to learn a deterministic target policy from an exploratory behavior policy. However, directly using neural networks as function approximators leads to unsatisfactory results due to two problems:</p>
@@ -349,26 +351,26 @@ Deep Deterministic Policy Gradient (DDPG) <a class="citation" href="#ddpg">(Lill
 
 <p>Critic is trained using off-policy data coming from the replay buffer, that is a FIFO queue containing tuples \( (s_t, a_t, r_t, s_{t+1}) \). Critic’s task is to minimize the Bellman error (notice that the policy is deterministic, so we can avoid the expectation over actions):</p>
 
-<script type="math/tex; mode=display">Q(s_t,a_t \mid \theta^Q ) = r(s_t,a_t) + \gamma Q(s_{t+1}, \pi (s_{t+1}  \mid \theta^\pi ) \mid \theta^Q ),</script>
+\[Q(s_t,a_t \mid \theta^Q ) = r(s_t,a_t) + \gamma Q(s_{t+1}, \pi (s_{t+1}  \mid \theta^\pi ) \mid \theta^Q ),\]
 
 <p>where \( \theta^Q \) are parameters of the critic network and \( \theta^\pi \) are actor’s parameters.
 It is evident in the equation above that the update step of the weights \( \theta^Q \) comprises \( Q(s_t, a_t \mid \theta^Q) \) in the target, resulting in an iterative update prone to divergence. DDPG solves this problem using <strong>target networks</strong>. Target networks are copies of the actor and critic networks that are only used for computing target values, and softly updated for improving stability:</p>
 
-<script type="math/tex; mode=display">\theta' = \tau \theta + (1-\tau)\theta' \qquad \tau \ll 1,</script>
+\[\theta' = \tau \theta + (1-\tau)\theta' \qquad \tau \ll 1,\]
 
 <p>where \( \theta \) are the weights of the original network and \( \theta’ \) the weights of the target networks.</p>
 
 <p>The resulting error for the critic network is:</p>
 
-<script type="math/tex; mode=display">L = \frac{1}{N} \sum_{i=1}^N (y_i - Q(s_i, a_i \mid \theta^Q))^2 \, ,</script>
+\[L = \frac{1}{N} \sum_{i=1}^N (y_i - Q(s_i, a_i \mid \theta^Q))^2 \, ,\]
 
 <p>with target:</p>
 
-<script type="math/tex; mode=display">y_i = r_i + \gamma Q(s_i, \pi(s_i \mid \theta'^\pi) \mid \theta'^{Q}).</script>
+\[y_i = r_i + \gamma Q(s_i, \pi(s_i \mid \theta'^\pi) \mid \theta'^{Q}).\]
 
 <p>The actor is updated using the estimated deterministic policy gradient, here reported for the sake of completeness:</p>
 
-<script type="math/tex; mode=display">\nabla_{\theta^\pi}J \approx \frac{1}{N} \sum_{i=1}^N \nabla_a Q(s, a \mid \theta^Q) \mid_{s = s_i, a = \pi(s_i)} \nabla_{\theta^\pi} \pi(s \mid \theta^\pi)\mid_{s_i}.</script>
+\[\nabla_{\theta^\pi}J \approx \frac{1}{N} \sum_{i=1}^N \nabla_a Q(s, a \mid \theta^Q) \mid_{s = s_i, a = \pi(s_i)} \nabla_{\theta^\pi} \pi(s \mid \theta^\pi)\mid_{s_i}.\]
 
 <p>Applying the vanilla DDPG algorithm to the learning to run task leads to unsatisfactory results as we can see from the initial video.</p>
 
@@ -394,7 +396,7 @@ Having multiple sampling threads running policies with different weights improve
 <p>To explore we used action noise and parameter noise <a class="citation" href="#param_noise">(Plappert et al., 2017)</a>  in an alternated way. At the beginning of an episode we selected between action noise and parameter noise with 0.7 and 0.3 probability respectively.
 Action noise is directly applied to the action selected by the actor network.
 We used an Ornstein-Uhlenbeck (OU) <a class="citation" href="#ou_noise">(Uhlenbeck &amp; Ornstein, 1930)</a> process to generate correlated noise for efficient exploration in physics based environments.
-Parameter noise perturbs actor network weights to obtain a state dependent exploration, thus more coherent with respect to action noise. The noise used in parameter noise is sampled at the beginning of an episode and it’s kept fixed for all the episode. Parameter noise works well with layer normalization <a class="citation" href="#layer_normalization">(Ba, Kiros, &amp; Hinton, 2016)</a>. 
+Parameter noise perturbs actor network weights to obtain a state dependent exploration, thus more coherent with respect to action noise. The noise used in parameter noise is sampled at the beginning of an episode and it’s kept fixed for all the episode. Parameter noise works well with layer normalization <a class="citation" href="#layer_normalization">(Ba et al., 2016)</a>. 
 Layer normalization, as the name says, normalizes the output of a selected layer.
 This technique, besides stabilizing training, makes possible to use the same perturbation scale across all network layers. We used layer normalization both for actor and critic networks applying it to all layer except the last one before the non linearity.</p>
 
@@ -485,12 +487,12 @@ It is also worth highlighting that the learned model with state-action flip achi
 
 <ol class="bibliography"><li><abbr>[Williams1992]</abbr> <span id="Williams1992">Williams, R. J. (1992). Simple statistical gradient-following algorithms for connectionist reinforcement learning. <i>Machine Learning</i>, <i>8</i>(3), 229–256. https://doi.org/10.1007/BF00992696</span></li>
 <li><abbr>[dpg]</abbr> <span id="dpg">Silver et al., D. (2014). Deterministic Policy Gradient Algorithms. <i>ICML</i>.</span></li>
-<li><abbr>[dqn]</abbr> <span id="dqn">Mnih, V., Kavukcuoglu, K., Silver, D., Graves, A., Antonoglou, I., Wierstra, D., &amp; Riedmiller, M. (2013). Playing Atari with Deep Reinforcement Learning. <i>ArXiv:1312.5602 [Cs]</i>. Retrieved from http://arxiv.org/abs/1312.5602</span></li>
-<li><abbr>[ddpg]</abbr> <span id="ddpg">Lillicrap et al., T. P. (2016). Continuous control with deep reinforcement learning. Retrieved from https://arxiv.org/abs/1509.02971</span></li>
-<li><abbr>[param_noise]</abbr> <span id="param_noise">Plappert, M., Houthooft, R., Dhariwal, P., Sidor, S., Chen, R. Y., Chen, X., … Andrychowicz, M. (2017). Parameter Space Noise for Exploration. <i>CoRR</i>, <i>abs/1706.01905</i>. Retrieved from http://arxiv.org/abs/1706.01905</span></li>
+<li><abbr>[dqn]</abbr> <span id="dqn">Mnih, V., Kavukcuoglu, K., Silver, D., Graves, A., Antonoglou, I., Wierstra, D., &amp; Riedmiller, M. (2013). Playing Atari with Deep Reinforcement Learning. <i>ArXiv:1312.5602 [Cs]</i>. http://arxiv.org/abs/1312.5602</span></li>
+<li><abbr>[ddpg]</abbr> <span id="ddpg">Lillicrap et al., T. P. (2016). <i>Continuous control with deep reinforcement learning</i>. https://arxiv.org/abs/1509.02971</span></li>
+<li><abbr>[param_noise]</abbr> <span id="param_noise">Plappert, M., Houthooft, R., Dhariwal, P., Sidor, S., Chen, R. Y., Chen, X., Asfour, T., Abbeel, P., &amp; Andrychowicz, M. (2017). Parameter Space Noise for Exploration. <i>CoRR</i>, <i>abs/1706.01905</i>. http://arxiv.org/abs/1706.01905</span></li>
 <li><abbr>[ou_noise]</abbr> <span id="ou_noise">Uhlenbeck, G. E., &amp; Ornstein, L. S. (1930). On the Theory of the Brownian Motion. <i>Phys. Rev.</i>, <i>36</i>(5), 823–841. https://doi.org/10.1103/PhysRev.36.823</span></li>
-<li><abbr>[layer_normalization]</abbr> <span id="layer_normalization">Ba, J. L., Kiros, J. R., &amp; Hinton, G. E. (2016). Layer Normalization. <i>ArXiv:1607.06450 [Cs, Stat]</i>. Retrieved from http://arxiv.org/abs/1607.06450</span></li>
-<li><abbr>[pmlr-v9-glorot10a]</abbr> <span id="pmlr-v9-glorot10a">Glorot, X., &amp; Bengio, Y. (2010). Understanding the difficulty of training deep feedforward neural networks. In Y. W. Teh &amp; M. Titterington (Eds.), <i>Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics</i> (Vol. 9, pp. 249–256). Chia Laguna Resort, Sardinia, Italy: PMLR. Retrieved from http://proceedings.mlr.press/v9/glorot10a.html</span></li></ol>
+<li><abbr>[layer_normalization]</abbr> <span id="layer_normalization">Ba, J. L., Kiros, J. R., &amp; Hinton, G. E. (2016). Layer Normalization. <i>ArXiv:1607.06450 [Cs, Stat]</i>. http://arxiv.org/abs/1607.06450</span></li>
+<li><abbr>[pmlr-v9-glorot10a]</abbr> <span id="pmlr-v9-glorot10a">Glorot, X., &amp; Bengio, Y. (2010). Understanding the difficulty of training deep feedforward neural networks. In Y. W. Teh &amp; M. Titterington (Eds.), <i>Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics</i> (Vol. 9, pp. 249–256). PMLR. http://proceedings.mlr.press/v9/glorot10a.html</span></li></ol>
 
 </article>
 
@@ -653,7 +655,7 @@ It is also worth highlighting that the learned model with state-action flip achi
         <p class="copyright text-muted">
 		  Emanuele Ghelfi
 		  &nbsp;&bull;&nbsp;
-		  2021
+		  2022
 		  
 		  
 	    </p>
