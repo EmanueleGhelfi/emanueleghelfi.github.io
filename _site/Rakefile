@@ -1,4 +1,4 @@
-require "reduce"
+# require "reduce"
 
 desc "Delete _site/"
 task :delete do
