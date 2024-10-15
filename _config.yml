@@ -30,6 +30,7 @@ navbar-links:
   Home: ""
   Portfolio: "portfolio.html"
   CV: "cv.html"
+  Hike: "hike.html"
   About Me: "aboutme.html"
 # Gallery: "photos.html"
 #  Contact: "contact.html"

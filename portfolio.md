@@ -4,6 +4,16 @@ title: Portfolio
 subtitle: Publications, Talks, Thesis, Projects.
 ---
 
+## Supervision of Master’s Students
+
+* 2024: Supervised the Msc Student Lorenzo Cipelli. Thesis title: **"Deep Learning-based Multi-Modal Sensor Calibration"**.
+
+## Summer Schools
+
+* 07-2024 [ICVSS](https://iplab.dmi.unict.it/icvss2024/): International Computer Vision Summer School.
+* 06-2020 [RegML](https://lcsl.unige.it/courses/regml/regml2020/): Regularization Methods for Machine Learning @ MaLGa.
+
+
 ## Publications
 
 * Reinforcement Learning in Configurable Continuous Environments. In Proceedings of the 36th International Conference on Machine Learning ([ICML](http://proceedings.mlr.press) 2019). 01-06-2019.  

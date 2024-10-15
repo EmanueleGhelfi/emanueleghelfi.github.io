@@ -1,5 +1,8 @@
 
 /* Styles the thumbnail */
+.fullwidth {
+  width: 100%;
+}
 
 a.lightbox img {
     height: 150px;

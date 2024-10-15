@@ -6,7 +6,9 @@ subtitle: Learning to Present Myself
 
 **Work**: 
 
-- **May 2021 - Present**: Senior Algorithm Engineer at [VisLab]. 
+- **May 2023 - Present**: Staff Algorithm Engineer at [VisLab]. 
+
+- **May 2021 - 2021**: Senior Algorithm Engineer at [VisLab]. 
 
 - **September 2020 - May 2021**: Machine Learning and Computer Vision Engineer at [Deep Vision Consulting]. 
 
