@@ -153,4 +153,9 @@ a.lightbox img {
     }
   }
     
+  .hike-page {
+    width: 100%;        /* make the container full width */
+    max-width: 100%;    /* prevent it from being constrained */
+    margin: 0 auto;     /* center if needed */
+  }
     
